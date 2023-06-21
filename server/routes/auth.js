@@ -15,8 +15,11 @@ Router.post(
         //for testing and dev
         /* res.json({ name: req.body.name, email: req.body.email, password: req.body.password}) */
 
+        //extracting user info from data object
+        const { firstName, lastName, email, password, profilePic, friendsList, location, status } = req.body.data
+
         //if email already exists, the route will respond with a 'failed' message which will trigger an alert on our frontend. 
-        const invalidEmail = await User.findOne({ email: req.body.email })
+        const invalidEmail = await User.findOne({ email })
         if(invalidEmail){
             res.send('failed')
         } else {
@@ -24,20 +27,26 @@ Router.post(
             //generating salt
             const salt = await bcrypt.genSalt(10)
             //hashing password
-            const hashedPassword = await bcrypt.hash(req.body.password, salt)
+            const hashedPassword = await bcrypt.hash(password, salt)
 
             //passing req info + hashed pasword into User model
             const newUser = new User({
-                name: req.body.name,
-                email: req.body.email,
-                password: hashedPassword
+                firstName,
+                lastName,
+                email,
+                password: hashedPassword,
+                profilePic,
+                friendsList,
+                location,
+                status,
+                profileViews: Math.floor(Math.random() * 100)
             })
 
             //saving newUser to db
             const user = await newUser.save()
 
             //if user account is successfully created, the route will send a success message that will trigger a bootstap alert on the frontend letting the user know an account was created.
-            res.send('success')  
+            res.status(201).json(user)  
         }
     })
 )
