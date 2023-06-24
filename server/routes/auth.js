@@ -2,14 +2,30 @@ const express = require('express')
 const asyncHandler = require('express-async-handler')
 const passport = require('passport')
 const bcrypt = require('bcrypt')
+const multer = require('multer')
 const Router = express.Router()
 
 //importing UserSchema
 const User = require('../models/Users')
 
+//multer setup for storing uploaded profile pictures
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    //storing all uploaded images in uploadedimages folder in our root directory 
+    cb(null, 'public/assets')
+  },
+  filename: function (req, file, cb) {
+    //selecting a randomized name for the file
+    cb(null, Date.now() + '-' + Math.round(Math.random() * 1E9)+ '.jpg')
+  }
+})
+
+const upload = multer({ storage: storage })
+
 //Register new users
 Router.post(
     '/register', 
+    upload.single('picture'),
     asyncHandler( async(req,res,next) => {
         
         //for testing and dev

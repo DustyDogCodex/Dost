@@ -25,6 +25,11 @@ function Login() {
                     {...register("password", { required: true })} 
                     type="password" 
                 />
+                <button
+                    className="bg-blue-400"
+                >
+                    Login
+                </button>
             </form>
         </div>
   )
