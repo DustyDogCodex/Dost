@@ -8,7 +8,7 @@ export default {
   theme: {
     extend: {
         fontFamily: {
-            'font-marker': ['Permanent Marker', "cursive"]
+            'marker': ['Permanent Marker', "cursive"]
         }
     },
   },

@@ -20,7 +20,7 @@ function Login() {
                 <h1
                     className="text-5xl"
                 >
-                    Welcome to <span className="text-7xl text-green-400 font-font-marker">Dost</span> 
+                    Welcome to <span className="text-7xl text-green-400 font-marker">Dost</span> 
                 </h1>
                 <p
                     className="text-xl"
