@@ -6,7 +6,11 @@ export default {
   ],
   mode: 'jit',
   theme: {
-    extend: {},
+    extend: {
+        fontFamily: {
+            'font-marker': ['Permanent Marker', "cursive"]
+        }
+    },
   },
   plugins: [],
 }
