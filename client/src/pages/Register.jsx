@@ -1,4 +1,5 @@
 import { useForm } from 'react-hook-form'
+import { Link } from 'react-router-dom'
 
 function Register() {
     //setting up react-hook-form
@@ -31,46 +32,98 @@ function Register() {
                 className="flex flex-col items-center justify-center p-10 m-10 bg-white rounded-lg"
             >
                 <form
-                    className="flex flex-col items-center justify-center"
+                    className="flex flex-col items-center justify-center border-b-2 pb-8"
                     onSubmit={handleSubmit(createAccount)}
                 >
                     <input
-                        {...register("firstName", { required: true })} 
+                        {...register("firstName", { required: 'Please enter your first name', min: 2, max: 50 })} 
                         type="text" 
                         placeholder='Enter your first name'
                         className="border border-blue-400 rounded-full p-2 m-2 text-lg"
                     />
+                    {errors.firstName?.message && (
+                        <span className='bg-red-300 text-red-700 text-sm p-1 rounded-lg'>{errors.firstName.message}</span>
+                    )}
+
                     <input
-                        {...register("lastName", { required: true })} 
+                        {...register("lastName", { required: "Please enter your last name", min: 2, max: 50 })} 
                         type="text" 
                         placeholder='Enter your last name'
                         className="border border-blue-400 rounded-full p-2 m-2 text-lg"
                     />
+                    {errors.lastName?.message && (
+                        <span className='bg-red-300 text-red-700 text-sm p-1 rounded-lg'>{errors.lastName.message}</span>
+                    )}
+
                     <input
-                        {...register("email", { required: true })} 
+                        {...register("email", 
+                            { 
+                                required: "Please enter an email address", 
+                                validate: {
+                                    maxLength: (v) => v.length <= 50 || "The email should have at most 50 characters",
+                                    matchPattern: (v) => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || "Email address must be a valid address",
+                                }
+                            }
+                        )} 
                         type="email" 
                         placeholder='Enter your email'
                         className="border border-blue-400 rounded-full p-2 m-2 text-lg"
                     />
+                    {errors.email?.message && (
+                        <span className='bg-red-300 text-red-700 text-sm p-1 rounded-lg'>{errors.email.message}</span>
+                    )}
+
                     <input
-                        {...register("password", { required: true })} 
+                        {...register("password", 
+                            { 
+                                required: "Please enter a password", 
+                                minLength:{ value: 6, message:"Password needs to be 6 characters or more" }
+                            }
+                        )} 
                         type="password" 
                         placeholder='Choose a password'
                         className="border border-blue-400 rounded-full p-2 m-2 text-lg"
                     />
+                    {errors.password?.message && (
+                        <span className='bg-red-300 text-red-700 text-sm p-1 rounded-lg'>{errors.password.message}</span>
+                    )}
+
                     <input
                         {...register("location")} 
                         type="text" 
                         placeholder='Enter location (optional)'
                         className="border border-blue-400 rounded-full p-2 m-2 text-lg"
                     />
+
                     <label>Add a profile picture (optional)</label>
                     <input
                         {...register("profilePic")} 
                         type="file"
                         className="border border-blue-400 rounded-full p-2 m-2 text-lg" 
-                    />                
+                    />
+                      
+                    <button
+                        type="submit"
+                        className="bg-blue-500 text-white text-xl py-3 px-8 mt-3 rounded-full"
+                    >
+                        Create account
+                    </button>           
                 </form>
+                <div
+                    className="mt-8 flex flex-col items-center"
+                >
+                    <p
+                        className="text-lg"
+                    >
+                        Already have an account?
+                    </p>
+                    <Link
+                        to={`/`}
+                        className="mt-3 bg-green-500 text-white  py-2 px-6 rounded-full"
+                    >
+                        Login
+                    </Link>
+                </div>
             </div>
         </div>
     )

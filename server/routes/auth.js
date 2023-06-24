@@ -61,7 +61,7 @@ Router.post(
             //saving newUser to db
             const user = await newUser.save()
 
-            //if user account is successfully created, the route will send a success message that will trigger a bootstap alert on the frontend letting the user know an account was created.
+            //send success status
             res.status(201).json(user)  
         }
     })
