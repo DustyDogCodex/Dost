@@ -1,13 +1,32 @@
+import axios from "axios"
+import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { Link } from "react-router-dom"
 
 function Login() {
     //setting up react-hook-form
-    const { register, handleSubmit, formState: { errors } } = useForm()
+    const { register, handleSubmit, watch, formState: { errors } } = useForm()
+
+    //using watch to track user inputs. Passport expects email and password to be the fieldnames used for authentication so i'll be setting those equal to their corresponding watch variables
+    const watchEmail = watch('email')
+    const watchPassword = watch('password')
+
+    //state variables for toggling incorrect credentials alerts
+    const [ incorrectLogin, setIncorrectLogin ] = useState(false)
 
     //function to submit login data
-    async function submitLogin(data){
-        console.log(data)
+    async function submitLogin(){
+        axios.post("http://localhost:5000/auth/login",
+            { email: watchEmail, password: watchPassword }
+        ).then(res => console.log(res))
+        .catch(err => {
+            console.log(err)
+            //this will toggle an alert and then remove the alert after 4seconds
+            setIncorrectLogin(true)
+            setTimeout(() => {
+                setIncorrectLogin(false)
+            }, 4000)
+        })
     }
 
     return (
@@ -27,6 +46,13 @@ function Login() {
                 >
                     Connect with old friends and make some new ones!
                 </p>
+                {incorrectLogin && 
+                    <div
+                        className='bg-amber-300 text-red-600 p-3 w-96 mt-5 text-center rounded-lg'
+                    >
+                        Incorrect credentials. Please try again.
+                    </div>
+                }
             </div>
             <div
                 className="flex flex-col items-center justify-center p-10 m-10 bg-white rounded-lg"
