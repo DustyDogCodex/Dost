@@ -1,7 +1,7 @@
 {
   "name": "dost",
   "version": "1.0.0",
-  "description": "Full stack Facebbok clone built using the MERN stack",
+  "description": "Full stack Facebook clone built using the MERN stack",
   "main": "index.js",
   "scripts": {
     "devstart": "nodemon server/index.js",
@@ -23,6 +23,7 @@
     "tailwindcss": "^3.3.2"
   },
   "dependencies": {
+    "axios": "^1.4.0",
     "bcrypt": "^5.1.0",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",

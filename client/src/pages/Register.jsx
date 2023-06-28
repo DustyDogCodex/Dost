@@ -1,13 +1,34 @@
+import axios from 'axios'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 
 function Register() {
     //setting up react-hook-form
-    const { register, handleSubmit, formState: { errors } } = useForm()
+    const { register, handleSubmit, formState: { errors } } = useForm({
+        defaultValues: {
+            profilePic: ''
+        }
+    })
+
+    //if user email is already in our database, an alert will popup and ask the user to use a new email
+    const [ invalidEmail, setInvalidEmail ] = useState(false)
 
     //function to submit login data
     async function createAccount(data){
-        console.log(data)
+        axios.post('http://localhost:5000/auth/register',
+            { data }
+        )
+        .then(res => {
+            if(res.data == 'success'){
+                window.location.replace('/')
+            } else if (res.data == "failed"){
+                setTimeout(() => {
+                    setInvalidEmail(true)
+                }, 5000) 
+            }
+        })
+        .catch(err => console.log(err))
     }
 
     return (
@@ -27,6 +48,13 @@ function Register() {
                 >
                     Create an account to connect with old and new friends!
                 </p>
+                {invalidEmail && 
+                    <div
+                        className='bg-amber-300 text-red-600 p-3 w-96 mt-5 text-center rounded-lg'
+                    >
+                        This email is already associated with a user account. Please choose a different email or login.
+                    </div>
+                }
             </div>
             <div
                 className="flex flex-col items-center justify-center p-10 m-10 bg-white rounded-lg"
@@ -95,13 +123,6 @@ function Register() {
                         className="border border-blue-400 rounded-full p-2 m-2 text-lg"
                     />
 
-                    <label>Add a profile picture (optional)</label>
-                    <input
-                        {...register("profilePic")} 
-                        type="file"
-                        className="border border-blue-400 rounded-full p-2 m-2 text-lg" 
-                    />
-                      
                     <button
                         type="submit"
                         className="bg-blue-500 text-white text-xl py-3 px-8 mt-3 rounded-full"

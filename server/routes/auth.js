@@ -8,36 +8,18 @@ const Router = express.Router()
 //importing UserSchema
 const User = require('../models/Users')
 
-//multer setup for storing uploaded profile pictures
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    //storing all uploaded images in uploadedimages folder in our root directory 
-    cb(null, 'public/assets')
-  },
-  filename: function (req, file, cb) {
-    //selecting a randomized name for the file
-    cb(null, Date.now() + '-' + Math.round(Math.random() * 1E9)+ '.jpg')
-  }
-})
-
-const upload = multer({ storage: storage })
-
 //Register new users
 Router.post(
-    '/register', 
-    upload.single('picture'),
+    '/register',
     asyncHandler( async(req,res,next) => {
-        
-        //for testing and dev
-        /* res.json({ name: req.body.name, email: req.body.email, password: req.body.password}) */
 
         //extracting user info from data object
-        const { firstName, lastName, email, password, profilePic, friendsList, location, status } = req.body.data
+        const { firstName, lastName, email, password, location } = req.body.data
 
         //if email already exists, the route will respond with a 'failed' message which will trigger an alert on our frontend. 
         const invalidEmail = await User.findOne({ email })
         if(invalidEmail){
-            res.send('failed')
+            res.status(418).send('failed')
         } else {
             //email is unique, we can proceed with saving user information
             //generating salt
@@ -51,18 +33,18 @@ Router.post(
                 lastName,
                 email,
                 password: hashedPassword,
-                profilePic,
-                friendsList,
+                profilePic: '',
+                friendsList: [],
                 location,
-                status,
+                status: '',
                 profileViews: Math.floor(Math.random() * 100)
             })
-
+            
             //saving newUser to db
             const user = await newUser.save()
 
             //send success status
-            res.status(201).json(user)  
+            res.status(201).send('success') 
         }
     })
 )
@@ -71,7 +53,7 @@ Router.post(
 //app is small enough to justify not using passport
 Router.post(
     '/login', 
-    passport.authenticate('local', { failureRedirect: "/" }),
+    passport.authenticate('local'),
     function(req, res) {
         res.send('ok')
     }

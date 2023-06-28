@@ -36,19 +36,40 @@ function Login() {
                     onSubmit={handleSubmit(submitLogin)}
                 >
                     <input
-                        {...register("email", { required: true })} 
+                        {...register("email", 
+                            { 
+                                required: "Please enter an email address", 
+                                validate: {
+                                    maxLength: (v) => v.length <= 50 || "The email should have at most 50 characters",
+                                    matchPattern: (v) => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || "Email address must be a valid address",
+                                }
+                            }
+                        )} 
                         type="email" 
                         placeholder="Enter your email"
                         className="border border-blue-400 rounded-full p-2 m-2 text-lg"
                     />
+                    {errors.email?.message && (
+                        <span className='bg-red-300 text-red-700 text-sm p-1 rounded-lg'>{errors.email.message}</span>
+                    )}
+
                     <input
-                        {...register("password", { required: true })} 
+                        {...register("password", 
+                            { 
+                                required: "Please enter a password", 
+                                minLength:{ value: 6, message:"Password needs to be 6 characters or more" }
+                            }
+                        )} 
                         type="password"
                         placeholder="Enter your password" 
                         className="border border-blue-400 rounded-full p-2 m-2 text-lg"
                     />
+                    {errors.password?.message && (
+                        <span className='bg-red-300 text-red-700 text-sm p-1 rounded-lg'>{errors.password.message}</span>
+                    )}
+
                     <button
-                        type="button"
+                        type="submit"
                         className="bg-blue-500 text-white text-xl py-3 px-8 mt-3 rounded-full"
                     >
                         Login
