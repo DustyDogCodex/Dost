@@ -22,13 +22,17 @@ function Register() {
         .then(res => {
             if(res.data == 'success'){
                 window.location.replace('/')
-            } else if (res.data == "failed"){
+            }
+        })
+        .catch(err => { 
+            if (err.response.data == "failed"){
+                setInvalidEmail(true)
+                console.log(err)
                 setTimeout(() => {
-                    setInvalidEmail(true)
+                    setInvalidEmail(false)
                 }, 5000) 
             }
         })
-        .catch(err => console.log(err))
     }
 
     return (
