@@ -7,6 +7,8 @@ const passport = require('passport')
 /* all imported files/routes */
 const passportConfig = require('./passportConfig')
 const authRouter = require('./routes/auth')
+const userRouter = require('./routes/users')
+const postsRouter = require('./routes/posts')
 
 //setup dotenv
 dotenv.config()
@@ -48,6 +50,8 @@ app.use(function(req, res, next) {
 
 /* setting up routes */
 app.use('/auth', authRouter)
+app.use('/user', userRouter)
+app.use('/posts', postsRouter)
 
 const port = process.env.PORT || 5000
 
