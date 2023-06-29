@@ -12,7 +12,7 @@ Router.get("/:id",
         const { id } = req.params
 
         //find user in database
-        const user = User.findById({ id })
+        const user = await User.findById({ id })
 
         //send info to front-end
         res.status(200).json(user)
@@ -26,7 +26,7 @@ Router.get("/:id/friends",
         const { id } = req.params
 
         //find user in database
-        const user = User.findById({ id })
+        const user = await User.findById({ id })
 
         //use user's friendlist to identify other users who are user's friends
         //using Promise.all() to send multiple api calls to grab all info for all associated user id's in this user's friendlist
