@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faUser } from "@fortawesome/free-solid-svg-icons"
+import { faUser, faImage } from "@fortawesome/free-solid-svg-icons"
 import { useForm } from "react-hook-form"
 import axios from "axios"
 import { useState } from "react"
@@ -17,7 +17,7 @@ function CreatePost() {
             className="m-3 border rounded-xl"
         >   
             <div
-                className="flex items-center m-3"
+                className="flex items-center m-3 pb-3 border-b border-sky-400"
             >
                 <FontAwesomeIcon 
                     icon={faUser} 
@@ -38,11 +38,35 @@ function CreatePost() {
                 />  
             </div>
             {addImage && 
-                <input 
-                    { ...register("postPicture")}
-                    type="file" 
-                />    
+                <div
+                    className="flex items-center justify-center"
+                >
+                    <input 
+                        { ...register("postPicture")}
+                        type="file"
+                        className="m-3 border border-fuchsia-300 p-2 rounded-full self-center" 
+                    /> 
+                </div>   
             }
+            <div
+                className="flex items-center justify-center"
+            >
+                <div
+                    className="flex items-center justify-center cursor-pointer"
+                    onClick={() => setAddImage(!addImage)}
+                >
+                    <FontAwesomeIcon 
+                        icon={faImage} 
+                        style={{color: "#a8a29e", height:'25px', width:'25px', marginRight:'10px'}} 
+                    />
+                    <p className="text-stone-400">Image</p>
+                </div>
+                <button
+                    className="bg-sky-400 text-white text-lg py-1 px-6 m-3 rounded-full ml-10"
+                >
+                    Post
+                </button>
+            </div>
         </div>
     )
 }

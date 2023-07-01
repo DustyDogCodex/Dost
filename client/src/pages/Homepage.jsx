@@ -10,7 +10,11 @@ function Homepage() {
                 className="flex"
             >
                 <UserProfileWidget />
-                <CreatePost />
+                <div
+                    className="w-1/2"
+                >
+                    <CreatePost />
+                </div>
             </div>
         </div>
     )
