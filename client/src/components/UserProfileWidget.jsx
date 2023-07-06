@@ -18,7 +18,7 @@ function UserProfileWidget() {
         >
             {/* top of widget: username + profilePic + friends */}
             <div
-                className="flex items-center gap-2 pb-5 border-b-2 border-fuchsia-400"
+                className="flex items-center gap-2 pb-5 border-b border-fuchsia-400"
                 onClick={() => Navigate(`/profile/${user}`)}
             >
                 {/* will change this to a conditional rendering statement later. Using a basic user icon for now. It will be this icon if user doesn't have an uploaded profilePic or the user's profilePic if it exists*/}
@@ -42,7 +42,7 @@ function UserProfileWidget() {
 
             {/* Second row: location and status */}
             <div
-                className="gap-2 py-3 border-b-2 border-fuchsia-400"
+                className="gap-2 py-3 border-b border-fuchsia-400"
             >
                 <div
                     className="flex items-center justify-start m-2"
@@ -66,7 +66,7 @@ function UserProfileWidget() {
 
             {/* Third row: Profile views and maybe links to other social media accounts? */}
             <div
-                className="gap-2 py-3 border-b-2 border-fuchsia-400"
+                className="gap-2 py-3 border-b border-fuchsia-400"
             >
                 <div
                     className="flex items-center justify-between m-2"
