@@ -31,9 +31,9 @@ function Navbar() {
                 <IconButton>
                     <Notifications />
                 </IconButton>
-                Varun Malaviya
+                Varun
                 <button
-                    className="bg-red-500 py-2 px-6 rounded-lg text-white ml-3"
+                    className="bg-red-500 py-1 px-3 rounded-lg text-white ml-3"
                 >
                     Logout
                 </button>
