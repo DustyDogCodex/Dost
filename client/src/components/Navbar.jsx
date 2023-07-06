@@ -1,16 +1,18 @@
 import { Search, DarkMode, LightMode, Notifications, Menu, Close } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
+import { Link } from "react-router-dom";
 
 function Navbar() {
     return (
         <div
             className="flex items-center justify-between py-3 px-10"
         >
-            <div
+            <Link
+                to={'/homepage'}
                 className="font-marker text-4xl"
             >
                 Dost
-            </div>
+            </Link>
             <div>
                 <input 
                     type="text" 
