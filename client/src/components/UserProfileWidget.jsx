@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { Navigate } from "react-router-dom"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faUser } from "@fortawesome/free-solid-svg-icons"
+import { faUser, faLocationPin, faPaperPlane } from "@fortawesome/free-solid-svg-icons"
 
 function UserProfileWidget() {
     //state variable for storing user info gtom context
@@ -37,6 +37,30 @@ function UserProfileWidget() {
                     >
                         1234 friends
                     </p>
+                </div>
+            </div>
+
+            {/* Secong row: location and status */}
+            <div
+                className="gap-2 py-3 border-b-2 border-fuchsia-400"
+            >
+                <div
+                    className="flex items-center justify-start m-2"
+                >
+                    <FontAwesomeIcon 
+                        icon={faLocationPin} 
+                        style={{color: "#0ab6ff", height:'25px', width:'25px', marginRight: '20px'}} 
+                    />
+                    Location
+                </div>
+                <div
+                    className="flex items-center justify-start m-2"
+                >
+                    <FontAwesomeIcon 
+                        icon={faPaperPlane} 
+                        style={{color: "#0ab6ff", height:'25px', width:'25px',marginRight: '20px'}}
+                    />
+                    User status
                 </div>
             </div>
         </div>
