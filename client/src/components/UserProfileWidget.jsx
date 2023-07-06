@@ -14,7 +14,7 @@ function UserProfileWidget() {
 
     return (
         <div
-            className="border p-5 w-1/4 m-3"
+            className="border p-5 w-1/4 m-3 rounded-lg"
         >
             {/* top of widget: username + profilePic + friends */}
             <div
@@ -40,7 +40,7 @@ function UserProfileWidget() {
                 </div>
             </div>
 
-            {/* Secong row: location and status */}
+            {/* Second row: location and status */}
             <div
                 className="gap-2 py-3 border-b-2 border-fuchsia-400"
             >
@@ -61,6 +61,20 @@ function UserProfileWidget() {
                         style={{color: "#0ab6ff", height:'25px', width:'25px',marginRight: '20px'}}
                     />
                     User status
+                </div>
+            </div>
+
+            {/* Third row: Profile views and maybe links to other social media accounts? */}
+            <div
+                className="gap-2 py-3 border-b-2 border-fuchsia-400"
+            >
+                <div
+                    className="flex items-center justify-between m-2"
+                >
+                    <p
+                        className="text-slate-400"
+                    >Profile Views</p>
+                    <p>42069 views</p>
                 </div>
             </div>
         </div>
