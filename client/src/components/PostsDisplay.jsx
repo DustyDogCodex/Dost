@@ -4,10 +4,15 @@ import axios from "axios"
 import { useState } from "react"
 import { useEffect } from "react"
 import Post from "./Post"
+import { useLocation } from "react-router-dom"
 
 function PostsDisplay() {
     //state variable for storing all fetched posts to display on userfeed
     const [ posts, setPosts ] = useState([])
+
+    //isUserProfile will check if postsDisplay is being used on users homepage or on user's profile page using location
+    const isProfile = useLocation()
+    console.log(isProfile)
     
     //function to fetch all posts from our server
     useEffect(() => {
