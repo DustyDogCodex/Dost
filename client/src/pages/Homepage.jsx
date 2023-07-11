@@ -4,7 +4,9 @@ import UserProfileWidget from "../components/UserProfileWidget"
 
 function Homepage() {
     return (
-        <div>
+        <div
+            className="h-screen bg-slate-200"
+        >
             <Navbar/>
             <div
                 className="flex"

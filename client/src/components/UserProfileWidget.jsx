@@ -14,7 +14,7 @@ function UserProfileWidget() {
 
     return (
         <div
-            className="border p-5 w-1/4 m-3 rounded-lg"
+            className="border p-5 w-1/4 m-3 rounded-lg bg-white"
         >
             {/* top of widget: username + profilePic + friends */}
             <div

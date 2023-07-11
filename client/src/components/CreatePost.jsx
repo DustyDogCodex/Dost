@@ -14,7 +14,7 @@ function CreatePost() {
 
     return (
         <div
-            className="m-3 border rounded-xl"
+            className="m-3 border rounded-xl bg-white"
         >   
             <div
                 className="flex items-center m-3 pb-3 border-b border-sky-400"

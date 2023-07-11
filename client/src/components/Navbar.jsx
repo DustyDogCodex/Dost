@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 function Navbar() {
     return (
         <div
-            className="flex items-center justify-between py-3 px-10"
+            className="flex items-center justify-between py-3 px-10 bg-white"
         >
             <Link
                 to={'/homepage'}
