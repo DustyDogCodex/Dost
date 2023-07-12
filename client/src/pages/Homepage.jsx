@@ -26,7 +26,7 @@ function Homepage() {
                 <div
                     className="w-1/2"
                 >
-                    <CreatePost />
+                    <CreatePost userId={loggedInUser._id}/>
                 </div>
             </div>
         </div>

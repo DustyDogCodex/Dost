@@ -4,13 +4,43 @@ import { useForm } from "react-hook-form"
 import axios from "axios"
 import { useState } from "react"
 
-function CreatePost() {
+function CreatePost({ userId }) {
     //using react-hook-form for tracking and sending user inputs to backend
-    const { register, handleSubmit, formState: { errors } } = useForm()
+    const { register, handleSubmit, formState: { errors }, watch } = useForm()
+
+    //watching postText using watch hook from useForm
+    const watchPostText = watch('postText')
 
     //state variable to toggle input field for adding image
     //by default, this input is hidden till user clicks on it to add an image
     const [ addImage, setAddImage ] = useState(false)
+
+    //variable for tracking user uploaded images to the post
+    const [ image, setImage ] = useState(null)
+
+    //function for submitting post
+    async function submitPost(){
+        //setting up formdata for submitting user info
+        const formData = new FormData()
+        formData.append("userId", userId)
+        formData.append("postText", watchPostText)
+        console.log(image)
+        console.log(image.name)
+        if(image){
+            formData.append("picture", image);
+            formData.append("picturePath", image.name);
+        }
+
+        //axios post request to create a new post
+        axios.post('http://localhost:5000/posts/new',
+            { userId, formData },
+            { withCredentials: true }
+        ).then(res => {
+            setImage(null)
+            setAddImage(false)
+        })
+        .catch(err => console.log(err))
+    }
 
     return (
         <div
@@ -22,9 +52,12 @@ function CreatePost() {
             >
                 <FontAwesomeIcon 
                     icon={faUser} 
-                    style={{ color: "#00bfff", height:'40px', width:'40px', marginRight:'10px' }} 
+                    style={{ color: "#00bfff", height:'40px', width:'40px', marginRight:'20px' }} 
                 />
-                <input
+                <div
+                    className="w-full"
+                >
+                    <textarea
                     { ...register("postText", 
                         { 
                             required: "Please enter a caption",
@@ -34,9 +67,17 @@ function CreatePost() {
                             }
                         })}
                     type="text" 
-                    className="border w-full bg-slate-200 rounded-full p-2"
+                    className="w-full bg-slate-200 rounded-lg p-2 dark:text-black"
                     placeholder="What's on your mind?"
                 />  
+                {errors.postText?.message && (
+                    <div
+                        className="w-full flex items-center justify-center"
+                    >
+                        <span className='bg-red-300 text-red-700 text-sm p-1 rounded-lg align-center'>{errors.postText.message}</span>
+                    </div>
+                )}
+                </div>
             </div>
 
             {/* area to add an image. This will only pop-up once the user clicks on the image icon or text to toggle it. User can then add an image to their post here */}
@@ -45,9 +86,10 @@ function CreatePost() {
                     className="flex items-center justify-center"
                 >
                     <input 
-                        { ...register("postPicture")}
+                        name="picture"
                         type="file"
                         className="m-3 border border-fuchsia-300 p-2 rounded-lg self-center" 
+                        onChange={(e) => setImage(e.target.files[0])}
                     /> 
                 </div>   
             }
@@ -67,7 +109,9 @@ function CreatePost() {
                     <p className="text-stone-400">Image</p>
                 </div>
                 <button
+                    type="submit"
                     className="bg-sky-400 text-white text-lg py-1 px-6 m-3 rounded-full ml-10"
+                    onClick={handleSubmit(submitPost)}
                 >
                     Post
                 </button>

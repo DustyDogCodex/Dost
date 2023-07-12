@@ -4,11 +4,13 @@ const cors = require('cors')
 const dotenv = require('dotenv')
 const session = require('express-session')
 const passport = require('passport')
+const multer = require('multer')
 /* all imported files/routes */
 const passportConfig = require('./passportConfig')
 const authRouter = require('./routes/auth')
 const userRouter = require('./routes/users')
 const postsRouter = require('./routes/posts')
+const postController = require('./controllers/posts')
 
 //setup dotenv
 dotenv.config()
@@ -47,6 +49,24 @@ app.use(function(req, res, next) {
   res.locals.currentUser = req.user;
   next();
 });
+
+/* ----------- Routes involving image upload with multer ---------- */
+/* placing these routes here together to avoid rewriting multer config */
+
+//FILE STORAGE / MULTER setup
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "uploads");
+  },
+  filename: function (req, file, cb) {
+    //randomizing file name generation and adding .jpg extension
+    cb(null, file.originalname);
+  },
+});
+const upload = multer({ storage });
+
+//ROUTES INVOLVING FILES
+app.post("/posts/new", upload.single('picture'), postController.createNewPost)
 
 /* setting up routes */
 app.use('/auth', authRouter)
