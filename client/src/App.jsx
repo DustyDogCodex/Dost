@@ -13,7 +13,7 @@ function App() {
     console.log('logged in user',loggedInUser)
     
     return (
-        <>
+        <div>
             <BrowserRouter>
                 <Routes>
                     <Route 
@@ -34,7 +34,7 @@ function App() {
                     />
                 </Routes>
             </BrowserRouter>
-        </>
+        </div>
     )
 }
 

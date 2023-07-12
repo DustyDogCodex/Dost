@@ -1,26 +1,13 @@
 import { Search, DarkMode, LightMode, Notifications, Menu, Close } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { UserContext } from "../LoggedInUserContext";
 
-function Navbar({ firstName, userId }) {
-
-    //checking for darkmode settings
-    const [ darkMode, setDarkMode ] = useState(false)
-
-    //checking for previously stored darkMode preference
-    useEffect(() => {
-        const darkMode = JSON.parse(localStorage.getItem(`${userId} darkMode`));
-        setDarkMode(darkMode)
-    }, []);
-
-    //changing darkmode settings in localStorage
-    //this only happens when user toggles darkmode settings
-    useEffect(() => {
-        localStorage.setItem(`${userId} darkMode`, JSON.stringify(darkMode));
-        console.log('darkmode',JSON.parse(localStorage.getItem(`${userId} darkMode`)))
-    }, [darkMode]);
+function Navbar({ firstName }) {
+    //grabbing darkMode settings from context
+    const { darkMode, toggleDarkMode } = useContext(UserContext)
 
     //API call to logout user
     const logoutUser = async() => {
@@ -37,7 +24,7 @@ function Navbar({ firstName, userId }) {
 
     return (
         <div
-            className="flex items-center justify-between py-3 px-10 bg-white"
+            className="flex items-center justify-between py-3 px-10 bg-white dark:bg-black"
         >
             <Link
                 to={'/homepage'}
@@ -58,12 +45,12 @@ function Navbar({ firstName, userId }) {
             >
                 {darkMode 
                     ?
-                        <IconButton onClick={() => setDarkMode(!darkMode)}>
-                            <DarkMode />
+                        <IconButton onClick={toggleDarkMode}>
+                            <LightMode />
                         </IconButton>
                     :
-                        <IconButton onClick={() => setDarkMode(!darkMode)}>
-                            <LightMode />
+                        <IconButton onClick={toggleDarkMode}>
+                            <DarkMode />
                         </IconButton>
                 }
                 <IconButton>
