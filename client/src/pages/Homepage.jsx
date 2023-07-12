@@ -12,7 +12,7 @@ function Homepage() {
         <div
             className="h-screen bg-slate-200"
         >
-            <Navbar firstName={loggedInUser.firstName}/>
+            <Navbar firstName={loggedInUser.firstName} userId={loggedInUser._id} />
             <div
                 className="flex"
             >

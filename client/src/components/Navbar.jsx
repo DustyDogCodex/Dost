@@ -1,9 +1,26 @@
 import { Search, DarkMode, LightMode, Notifications, Menu, Close } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
 import axios from "axios";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-function Navbar({ firstName }) {
+function Navbar({ firstName, userId }) {
+
+    //checking for darkmode settings
+    const [ darkMode, setDarkMode ] = useState(false)
+
+    //checking for previously stored darkMode preference
+    useEffect(() => {
+        const darkMode = JSON.parse(localStorage.getItem(`${userId} darkMode`));
+        setDarkMode(darkMode)
+    }, []);
+
+    //changing darkmode settings in localStorage
+    //this only happens when user toggles darkmode settings
+    useEffect(() => {
+        localStorage.setItem(`${userId} darkMode`, JSON.stringify(darkMode));
+        console.log('darkmode',JSON.parse(localStorage.getItem(`${userId} darkMode`)))
+    }, [darkMode]);
 
     //API call to logout user
     const logoutUser = async() => {
@@ -39,12 +56,16 @@ function Navbar({ firstName }) {
             <div 
                 className="flex items-center"
             >
-                <IconButton>
-                    <DarkMode />
-                </IconButton>
-                <IconButton>
-                    <LightMode />
-                </IconButton>
+                {darkMode 
+                    ?
+                        <IconButton onClick={() => setDarkMode(!darkMode)}>
+                            <DarkMode />
+                        </IconButton>
+                    :
+                        <IconButton onClick={() => setDarkMode(!darkMode)}>
+                            <LightMode />
+                        </IconButton>
+                }
                 <IconButton>
                     <Notifications />
                 </IconButton>
