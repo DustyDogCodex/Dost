@@ -11,6 +11,7 @@ function App() {
     //using context to check for a loggedIn user
     const { loggedInUser } = useContext(UserContext) 
     console.log('logged in user',loggedInUser)
+    
     return (
         <>
             <BrowserRouter>

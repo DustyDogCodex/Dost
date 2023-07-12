@@ -1,8 +1,23 @@
 import { Search, DarkMode, LightMode, Notifications, Menu, Close } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
+import axios from "axios";
 import { Link } from "react-router-dom";
 
-function Navbar() {
+function Navbar({ firstName }) {
+
+    //API call to logout user
+    const logoutUser = async() => {
+        axios.get('http://localhost:5000/auth/logout',
+            { withCredentials: true }
+        )
+        .then(res => {
+            if(res.data == 'success'){
+                window.location.replace('/')
+            }
+        })
+        .catch(err => console.log(err))
+    }
+
     return (
         <div
             className="flex items-center justify-between py-3 px-10 bg-white"
@@ -21,7 +36,9 @@ function Navbar() {
                 />
                 <Search />
             </div>
-            <div>
+            <div 
+                className="flex items-center"
+            >
                 <IconButton>
                     <DarkMode />
                 </IconButton>
@@ -31,9 +48,10 @@ function Navbar() {
                 <IconButton>
                     <Notifications />
                 </IconButton>
-                Varun
+                <p>{firstName}</p>
                 <button
                     className="bg-red-500 py-1 px-3 rounded-lg text-white ml-3"
+                    onClick={logoutUser}
                 >
                     Logout
                 </button>
