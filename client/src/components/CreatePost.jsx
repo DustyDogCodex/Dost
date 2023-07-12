@@ -14,10 +14,11 @@ function CreatePost() {
 
     return (
         <div
-            className="m-3 border rounded-xl bg-white"
+            className="m-3 rounded-xl bg-white dark:bg-slate-500 dark:text-white"
         >   
+            {/* top part with usrr image and create post input */}
             <div
-                className="flex items-center m-3 pb-3 border-b border-sky-400"
+                className="flex items-center m-3 py-3 border-b border-sky-400"
             >
                 <FontAwesomeIcon 
                     icon={faUser} 
@@ -37,6 +38,8 @@ function CreatePost() {
                     placeholder="What's on your mind?"
                 />  
             </div>
+
+            {/* area to add an image. This will only pop-up once the user clicks on the image icon or text to toggle it. User can then add an image to their post here */}
             {addImage && 
                 <div
                     className="flex items-center justify-center"
@@ -48,6 +51,8 @@ function CreatePost() {
                     /> 
                 </div>   
             }
+
+            {/* bottom of the component. Includes Image icon + text and post button */}
             <div
                 className="flex items-center justify-center"
             >

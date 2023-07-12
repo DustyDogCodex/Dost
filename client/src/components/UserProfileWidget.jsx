@@ -1,20 +1,11 @@
-import { useState } from "react"
 import { Navigate } from "react-router-dom"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faUser, faLocationPin, faPaperPlane } from "@fortawesome/free-solid-svg-icons"
 
-function UserProfileWidget() {
-    //state variable for storing user info gtom context
-    const [ user, SetUser ] = useState({})
-    
-    //adding a loading spinner/animation while waiting on user info to load
-    if(!user){
-        return null
-    }
-
+function UserProfileWidget({ name, numFriends, location, status, views }) {    
     return (
         <div
-            className="border p-5 w-1/4 m-3 rounded-lg bg-white"
+            className="p-5 w-1/4 m-3 rounded-lg bg-white dark:bg-slate-500 dark:text-white"
         >
             {/* top of widget: username + profilePic + friends */}
             <div
@@ -30,12 +21,12 @@ function UserProfileWidget() {
                     <h2
                         className="text-xl"
                     >
-                        User Name
+                        {name}
                     </h2>
                     <p
                         className="text-sm"
                     >
-                        1234 friends
+                        {numFriends} {numFriends == 1 ? 'friend' : 'friends'}
                     </p>
                 </div>
             </div>
@@ -51,7 +42,7 @@ function UserProfileWidget() {
                         icon={faLocationPin} 
                         style={{color: "#0ab6ff", height:'25px', width:'25px', marginRight: '20px'}} 
                     />
-                    Location
+                    {location ? location : 'Off the grid'}
                 </div>
                 <div
                     className="flex items-center justify-start m-2"
@@ -60,7 +51,7 @@ function UserProfileWidget() {
                         icon={faPaperPlane} 
                         style={{color: "#0ab6ff", height:'25px', width:'25px',marginRight: '20px'}}
                     />
-                    User status
+                    {status ? status : 'Set status in user settings'}
                 </div>
             </div>
 
@@ -72,9 +63,11 @@ function UserProfileWidget() {
                     className="flex items-center justify-between m-2"
                 >
                     <p
-                        className="text-slate-400"
-                    >Profile Views</p>
-                    <p>42069 views</p>
+                        className="text-slate-400 dark:text-white"
+                    >
+                        Profile Views
+                    </p>
+                    <p>{views} views</p>
                 </div>
             </div>
         </div>

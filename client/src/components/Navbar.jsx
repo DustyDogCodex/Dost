@@ -28,7 +28,7 @@ function Navbar({ firstName }) {
         >
             <Link
                 to={'/homepage'}
-                className="font-marker text-4xl"
+                className="font-marker text-4xl dark:text-sky-400"
             >
                 Dost
             </Link>
@@ -38,25 +38,25 @@ function Navbar({ firstName }) {
                     placeholder="Search..." 
                     className="bg-slate-200 text-gray-500 py-2 px-8 rounded-lg mx-3"
                 />
-                <Search />
+                <Search className="dark:text-slate-200"/>
             </div>
             <div 
                 className="flex items-center"
             >
                 {darkMode 
                     ?
-                        <IconButton onClick={toggleDarkMode}>
-                            <LightMode />
+                        <IconButton onClick={toggleDarkMode} >
+                            <LightMode className="dark:text-slate-200"/>
                         </IconButton>
                     :
-                        <IconButton onClick={toggleDarkMode}>
-                            <DarkMode />
+                        <IconButton onClick={toggleDarkMode} >
+                            <DarkMode className="dark:text-slate-200"/>
                         </IconButton>
                 }
                 <IconButton>
-                    <Notifications />
+                    <Notifications className="dark:text-slate-200"/>
                 </IconButton>
-                <p>{firstName}</p>
+                <p className="dark:text-sky-400">{firstName}</p>
                 <button
                     className="bg-red-500 py-1 px-3 rounded-lg text-white ml-3"
                     onClick={logoutUser}

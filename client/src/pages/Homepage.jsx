@@ -10,13 +10,19 @@ function Homepage() {
 
     return (
         <div
-            className="h-screen bg-slate-200"
+            className="h-screen bg-slate-200 dark:bg-gray-900"
         >
-            <Navbar firstName={loggedInUser.firstName} userId={loggedInUser._id} />
+            <Navbar firstName={loggedInUser.firstName} />
             <div
                 className="flex"
             >
-                <UserProfileWidget />
+                <UserProfileWidget 
+                    name={`${loggedInUser.firstName} ${loggedInUser.lastName}`}
+                    numFriends={loggedInUser.friendsList.length}
+                    location={loggedInUser.location}
+                    status={loggedInUser.status}
+                    views={loggedInUser.profileViews}
+                />
                 <div
                     className="w-1/2"
                 >
