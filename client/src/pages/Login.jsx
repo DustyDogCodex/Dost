@@ -17,8 +17,13 @@ function Login() {
     //function to submit login data
     async function submitLogin(){
         axios.post("http://localhost:5000/auth/login",
-            { email: watchEmail, password: watchPassword }
-        ).then(res => console.log(res))
+            { email: watchEmail, password: watchPassword },
+            { withCredentials: true }
+        ).then(res => {
+            if(res.data == 'ok'){
+                window.location.assign('/homepage')
+            }
+        })
         .catch(err => {
             console.log(err)
             //this will toggle an alert and then remove the alert after 4seconds

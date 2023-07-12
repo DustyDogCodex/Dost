@@ -44,7 +44,7 @@ function CreatePost() {
                     <input 
                         { ...register("postPicture")}
                         type="file"
-                        className="m-3 border border-fuchsia-300 p-2 rounded-full self-center" 
+                        className="m-3 border border-fuchsia-300 p-2 rounded-lg self-center" 
                     /> 
                 </div>   
             }

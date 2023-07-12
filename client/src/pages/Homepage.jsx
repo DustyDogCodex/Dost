@@ -3,6 +3,8 @@ import Navbar from "../components/Navbar"
 import UserProfileWidget from "../components/UserProfileWidget"
 
 function Homepage() {
+    
+
     return (
         <div
             className="h-screen bg-slate-200"

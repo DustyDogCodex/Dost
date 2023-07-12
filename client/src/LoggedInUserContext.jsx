@@ -11,7 +11,7 @@ export const ContextProvider = ({ children }) => {
     const [ loggedInUser, setLoggedInUser ] = useState(null)
 
     //function to get user information after user logs in
-    //then the user info is passed into our context using setUserInfo
+    //then the user info is passed into our context using setLoggedInUser
     useEffect(() => {
         const getLoggedInUser = async() => {
             await axios.get(

@@ -4,9 +4,13 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import UserProfile from './pages/UserProfile'
+import { useContext } from 'react'
+import { UserContext } from './LoggedInUserContext'
 
 function App() {
-
+    //using context to check for a loggedIn user
+    const { loggedInUser } = useContext(UserContext) 
+    console.log('logged in user',loggedInUser)
     return (
         <>
             <BrowserRouter>
@@ -16,15 +20,15 @@ function App() {
                         element={<Login />}
                     />
                     <Route 
-                        path='/register'
+                        path='register'
                         element={<Register />}
                     />
                     <Route 
-                        path='/homepage'
-                        element={<Homepage />}
+                        path='homepage'
+                        element={loggedInUser ? <Homepage /> : <Login />}
                     />
                     <Route 
-                        path='/profile/:userId'
+                        path='profile/:userId'
                         element={<UserProfile />}
                     />
                 </Routes>
