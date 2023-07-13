@@ -22,24 +22,26 @@ function CreatePost({ userId }) {
     async function submitPost(){
         //setting up formdata for submitting user info
         const formData = new FormData()
-        formData.append("userId", userId)
-        formData.append("postText", watchPostText)
-        console.log(image)
-        console.log(image.name)
+        formData.append("userId", userId);
+        formData.append("postText", watchPostText);
+
         if(image){
-            formData.append("picture", image);
-            formData.append("picturePath", image.name);
+            formData.append("image", image);
         }
 
         //axios post request to create a new post
         axios.post('http://localhost:5000/posts/new',
-            { userId, formData },
+            formData,
+            {
+                headers: { "Content-Type": "multipart/form-data" }
+            },
             { withCredentials: true }
-        ).then(res => {
-            setImage(null)
-            setAddImage(false)
+        )
+        .then(res => {
+            console.log("response",res)
         })
-        .catch(err => console.log(err))
+        /* .catch(err => console.log(err)) */
+        console.log('post info',image,watchPostText)
     }
 
     return (
@@ -48,7 +50,7 @@ function CreatePost({ userId }) {
         >   
             {/* top part with usrr image and create post input */}
             <div
-                className="flex items-center m-3 py-3 border-b border-sky-400"
+                className="flex items-center m-2 py-3 border-b border-sky-400"
             >
                 <FontAwesomeIcon 
                     icon={faUser} 
@@ -86,17 +88,17 @@ function CreatePost({ userId }) {
                     className="flex items-center justify-center"
                 >
                     <input 
-                        name="picture"
+                        name="image"
                         type="file"
-                        className="m-3 border border-fuchsia-300 p-2 rounded-lg self-center" 
-                        onChange={(e) => setImage(e.target.files[0])}
+                        className="m-2 border border-fuchsia-300 p-1 rounded-lg self-center" 
+                        onChange={e => setImage(e.target.files[0])}
                     /> 
                 </div>   
             }
 
             {/* bottom of the component. Includes Image icon + text and post button */}
             <div
-                className="flex items-center justify-center"
+                className="flex items-center justify-center py-3"
             >
                 <div
                     className="flex items-center justify-center cursor-pointer"
@@ -110,7 +112,7 @@ function CreatePost({ userId }) {
                 </div>
                 <button
                     type="submit"
-                    className="bg-sky-400 text-white text-lg py-1 px-6 m-3 rounded-full ml-10"
+                    className="bg-sky-400 text-white text-lg py-1 px-6 rounded-full ml-10"
                     onClick={handleSubmit(submitPost)}
                 >
                     Post

@@ -56,17 +56,16 @@ app.use(function(req, res, next) {
 //FILE STORAGE / MULTER setup
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "uploads");
+    cb(null, "uploadedImages/");
   },
   filename: function (req, file, cb) {
-    //randomizing file name generation and adding .jpg extension
-    cb(null, file.originalname);
+    cb(null, Date.now() + "-" + Math.round((Math.random() * 1E9)) + ".jpg");
   },
 });
 const upload = multer({ storage });
 
 //ROUTES INVOLVING FILES
-app.post("/posts/new", upload.single('picture'), postController.createNewPost)
+app.post("/posts/new", upload.single('image'), postController.createNewPost)
 
 /* setting up routes */
 app.use('/auth', authRouter)

@@ -7,13 +7,13 @@ const asyncHandler = require('express-async-handler')
 
 const createNewPost = asyncHandler(
     async(req,res) => {
-        const { userId, postText, picturePath } = req.body
+        const { userId, postText } = req.body
 
         //find user using userId
-        const user = await User.findById(userId)
+        /* const user = await User.findById(userId) */
 
         //creating a new post with information from req
-        const newPost = new Post({
+      /*   const newPost = new Post({
             userId,
             firstName: user.firstName,
             lastName: user.lastName,
@@ -23,14 +23,15 @@ const createNewPost = asyncHandler(
             picturePath,
             likes: {},
             comments: []
-        })
+        }) */
 
         //saving new post
-        await newPost.save()
+       /*  await newPost.save() */
 
-        console.log("uploaded file path", picturePath)
+        console.log("uploaded file", req.file.filename)
+        console.log("formdata info", userId, postText)
 
-        res.json(userId, postText, picturePath)
+        res.send(req.file)
     }
 )
 
