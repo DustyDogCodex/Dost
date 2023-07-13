@@ -1,12 +1,12 @@
 /* this component will display information about the user that created a post. This component will allow a user to add or remove another user depending on whether or not they are already in the user's friendsList */
 import axios from "axios"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faUserMinus, faUserPlus } from "@fortawesome/free-solid-svg-icons"
+import { faUserMinus, faUserPlus, faUser } from "@fortawesome/free-solid-svg-icons"
 
 function FriendBox({ friendId, userName, userProfilePic, status }) {
     
     //checking if user is already in friendsList
-    const friendOrNah = true /* friendsList.find(friend => friend._id === friendId) */
+    const friendOrNah = false /* friendsList.find(friend => friend._id === friendId) */
 
     //adding or removing friend from friendsList depending on whether user is already a friend or not
     const addFriend = async() =>{
@@ -15,28 +15,64 @@ function FriendBox({ friendId, userName, userProfilePic, status }) {
 
     return (
         <div
-            className="flex items-center"
+            className="flex items-center justify-between"
         >
-            <img 
-                src={`${userProfilePic}`}
-                alt="user profile picture" 
-                className=""
-            />
-            <div>
-                <h5>{userName}</h5>
-                <p className="text-sm">{status}</p>
+            <div 
+                className="flex items-center"
+            >   
+                {/* left side of the component that contains userProfilePic, username and status/location */}
+                {
+                    userProfilePic 
+                    ?   
+                        <img 
+                            src={`http://localhost:5000/uploads/${userProfilePic}`}
+                            alt="user profile picture" 
+                            className=""
+                        />
+                    :
+                        <FontAwesomeIcon 
+                            icon={faUser} 
+                            style={{color: "#4dd2ff", height:"40px", width:"40px"}} 
+                        />
+                }
+                <div
+                    className="ml-3"
+                >
+                    <h5 
+                        className="text-xl dark:text-white"
+                    >
+                        {userName}
+                    </h5>
+                    <p 
+                        className="text-sm"
+                    >
+                        {status}
+                    </p>
+                </div>
             </div>
+
+            {/* depending on whether or not this person's userid is in our friendsList we will display an add user or remove user icon */}
             {friendOrNah 
-                ?   <FontAwesomeIcon 
-                        icon={faUserMinus} 
-                        style={{color: "#06b0f9",}}
-                        onClick={() => addFriend}
-                    />
-                :   <FontAwesomeIcon 
-                        icon={faUserPlus} 
-                        style={{color: "#06b0f9",}} 
-                        onClick={() => addFriend}
-                    /> 
+                ?   
+                    <div
+                        className="flex items-center justify-center bg-slate-950 p-2 rounded-full"
+                    >
+                        <FontAwesomeIcon 
+                            icon={faUserMinus} 
+                            style={{color: "#06b0f9", height:"30px", width:"30px"}}
+                            onClick={() => addFriend}
+                        />
+                    </div>
+                :   
+                    <div
+                        className="flex items-center justify-center bg-slate-950 p-2 rounded-full"
+                    >
+                        <FontAwesomeIcon 
+                            icon={faUserPlus} 
+                            style={{color: "#06b0f9", height:"30px", width:"30px"}} 
+                            onClick={() => addFriend}
+                        /> 
+                    </div>
             }
         </div>
     )

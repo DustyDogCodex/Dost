@@ -27,7 +27,7 @@ function PostsDisplay() {
 
     return (
         <div
-            className="border p-2 m-2"
+            className="border border-fuchsia-800 p-2 m-2 flex flex-col items-center justify-center"
         >
             {posts && posts.map(post => 
                 <Post 

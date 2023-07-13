@@ -11,6 +11,13 @@ export default {
             'marker': ['Permanent Marker', "cursive"]
         }
     },
+    screens: {
+      xs: "480px",
+      sm: "780px",
+      md: "1060px",
+      lg: "1200px",
+      xl: "1700px"
+    }
   },
   plugins: [],
   darkMode: 'class'

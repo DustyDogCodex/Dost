@@ -15,7 +15,7 @@ function Homepage() {
         >
             <Navbar firstName={loggedInUser.firstName} />
             <div
-                className="flex"
+                className="flex justify-center lg:w-4/5"
             >
                 <UserProfileWidget 
                     name={`${loggedInUser.firstName} ${loggedInUser.lastName}`}
