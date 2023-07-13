@@ -12,48 +12,36 @@ function PostsDisplay() {
 
     //isUserProfile will check if postsDisplay is being used on users homepage or on user's profile page using location
     const isProfile = useLocation()
-    console.log(isProfile)
+    console.log(isProfile.pathname)
     
     //function to fetch all posts from our server
     useEffect(() => {
         const getPosts = async() => {
             axios.get('http://localhost:5000/posts/')
-            .then(res => setPosts(res.data))
+            .then(res => setPosts([ ...res.data ]))
             .catch(err => console.log(err))
         } 
         getPosts()
+        console.log('posts', posts)
     }, [])
 
     return (
-        <div>
-            {posts.map(
-                (
-                    { 
-                        _id, 
-                        userId, 
-                        firstName, 
-                        lastName, 
-                        location, 
-                        description, 
-                        imagePath, 
-                        userProfilePic, 
-                        likes, 
-                        comments 
-                    }
-                ) => {
-                    <Post 
-                        key={_id}
-                        postId={_id} 
-                        postUserId={userId} 
-                        userName={`${firstName} ${lastName}`} 
-                        location={location} 
-                        description={description} 
-                        imagePath={imagePath} 
-                        userProfilePic={userProfilePic} 
-                        likes={likes} 
-                        comments={comments}   
-                    />
-                }
+        <div
+            className="border p-2 m-2"
+        >
+            {posts && posts.map(post => 
+                <Post 
+                    key={post._id}
+                    postId={post._id} 
+                    postUserId={post.userId} 
+                    userName={`${post.firstName} ${post.lastName}`} 
+                    location={post.location} 
+                    description={post.description} 
+                    imagePath={post.imagePath} 
+                    userProfilePic={post.userProfilePic} 
+                    likes={post.likes} 
+                    comments={post.comments}   
+                />
             )}
         </div>
     )

@@ -10,7 +10,7 @@ Router.get("/",
     asyncHandler(async(req,res) => {
         //grab all post from database and send it to front-end
         const userFeed = await Post.find()
-        res.status(200).json(userFeed)
+        res.status(200).send(userFeed)
     })
 )
 

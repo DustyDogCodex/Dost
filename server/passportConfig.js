@@ -35,17 +35,14 @@ passport.use(
 /*-------------------- SERIALISE AND DESERIALISE USERS ------------------------- */
 
 passport.serializeUser((user, cb) => {
-  console.log('serialise',user._id)
   return cb(null, user._id)
 });
 
 passport.deserializeUser(async(id, cb) => {
  try {
     const user = await User.findById(id);
-    console.log('deserialize', user)
     //omitting password otherwise we will make a big OOPSIE
     const { password, ...userInfo } = user._doc
-    console.log('userInfo', userInfo)
     cb(null, userInfo);
   } catch(err) {
     cb(err);

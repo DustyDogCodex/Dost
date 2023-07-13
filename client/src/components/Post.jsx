@@ -10,12 +10,16 @@ function Post({ postId, postUserId, userName, location, description, imagePath, 
                 status={location}
                 userProfilePic={userProfilePic}
             />
-            <p>{description}</p>
+            <p
+                className="text-white"
+            >
+                {description}
+            </p>
             {imagePath && (
                 <img 
-                    src={`${imagePath}`} 
+                    src={`http://localhost:5000/uploads/${imagePath}`} 
                     alt="post image"
-                    className="w-full h-auto" 
+                    className="max-w-[700px] max-h-[600px]" 
                 />
             )}
         </div>

@@ -6,7 +6,7 @@ import { faUserMinus, faUserPlus } from "@fortawesome/free-solid-svg-icons"
 function FriendBox({ friendId, userName, userProfilePic, status }) {
     
     //checking if user is already in friendsList
-    const friendOrNah = friendsList.find(friend => friend._id === friendId)
+    const friendOrNah = true /* friendsList.find(friend => friend._id === friendId) */
 
     //adding or removing friend from friendsList depending on whether user is already a friend or not
     const addFriend = async() =>{

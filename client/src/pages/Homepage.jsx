@@ -1,6 +1,7 @@
 import CreatePost from "../components/CreatePost"
 import Navbar from "../components/Navbar"
 import UserProfileWidget from "../components/UserProfileWidget"
+import PostsDisplay from "../components/PostsDisplay"
 import { useContext } from "react"
 import { UserContext } from "../LoggedInUserContext"
 
@@ -27,6 +28,7 @@ function Homepage() {
                     className="w-1/2"
                 >
                     <CreatePost userId={loggedInUser._id}/>
+                    <PostsDisplay />
                 </div>
             </div>
         </div>

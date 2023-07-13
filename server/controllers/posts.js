@@ -6,7 +6,7 @@ const asyncHandler = require('express-async-handler')
 
 const createNewPost = asyncHandler(
     async(req,res) => {
-        const { userId, postText } = req.body
+        const { userId, description } = req.body
 
         //find user using userId
         const user = await User.findById(userId)
@@ -17,7 +17,7 @@ const createNewPost = asyncHandler(
             firstName: user.firstName,
             lastName: user.lastName,
             location: user.location,
-            postText,
+            description,
             userProfilePic: user.profilePic,
             imagePath: req.file.filename,
             likes: {},

@@ -23,7 +23,7 @@ function CreatePost({ userId }) {
         //setting up formdata for submitting user info
         const formData = new FormData()
         formData.append("userId", userId);
-        formData.append("postText", watchPostText);
+        formData.append("description", watchPostText);
 
         if(image){
             formData.append("image", image);
@@ -38,10 +38,11 @@ function CreatePost({ userId }) {
             { withCredentials: true }
         )
         .then(res => {
-            console.log("response",res)
+            if(res){
+                window.location.replace('/homepage')
+            }
         })
-        /* .catch(err => console.log(err)) */
-        console.log('post info',image,watchPostText)
+        .catch(err => console.log(err))
     }
 
     return (
