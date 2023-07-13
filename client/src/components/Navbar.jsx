@@ -24,7 +24,7 @@ function Navbar({ firstName }) {
 
     return (
         <div
-            className="flex items-center justify-between py-3 px-10 bg-white dark:bg-black"
+            className="flex items-center justify-between py-3 px-10 bg-white dark:bg-slate-800"
         >
             <Link
                 to={'/homepage'}

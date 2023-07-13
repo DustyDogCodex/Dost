@@ -44,7 +44,7 @@ function CreatePost({ userId }) {
 
     return (
         <div
-            className="m-3 rounded-xl bg-white dark:bg-slate-500 dark:text-white"
+            className="m-3 rounded-xl bg-white dark:bg-slate-800 dark:text-white"
         >   
             {/* top part with usrr image and create post input */}
             <div

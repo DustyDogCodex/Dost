@@ -10,7 +10,7 @@ function Homepage() {
 
     return (
         <div
-            className="h-screen bg-slate-200 dark:bg-gray-900"
+            className="h-screen bg-slate-200 dark:bg-black"
         >
             <Navbar firstName={loggedInUser.firstName} />
             <div
