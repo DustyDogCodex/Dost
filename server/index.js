@@ -29,6 +29,8 @@ app.use(cors({
 ))
 app.use(express.json())
 
+/* ----------------------- PASSPORT INITIALISATION ---------------------- */
+
 //setting up express sessions and initializing passportjs
 app.use(session({ 
   secret: process.env.SESSION_SECRET,
@@ -50,8 +52,9 @@ app.use(function(req, res, next) {
   next();
 });
 
-/* ----------- Routes involving image upload with multer ---------- */
-/* placing these routes here together to avoid rewriting multer config */
+/* ------------------------------------------------------------------------ */
+
+/* ----------- Routes involving image upload with multer ------------------ */
 
 //FILE STORAGE / MULTER setup
 const storage = multer.diskStorage({
@@ -59,6 +62,7 @@ const storage = multer.diskStorage({
     cb(null, "uploadedImages/");
   },
   filename: function (req, file, cb) {
+    //randomizing file name to avoid filename conflicts
     cb(null, Date.now() + "-" + Math.round((Math.random() * 1E9)) + ".jpg");
   },
 });
@@ -66,6 +70,22 @@ const upload = multer({ storage });
 
 //ROUTES INVOLVING FILES
 app.post("/posts/new", upload.single('image'), postController.createNewPost)
+
+/* ------------------------------------------------------------------------ */
+
+/* -------- SETTING UP A STATIC FOLDER FOR UPLOADED IMAGES --------- */
+
+//storing a route to the root directory for the project
+//this is used to specify a route to /uploadedImages folder 
+const dirnameSplit = __dirname.split('\\')
+dirnameSplit.splice(-1,1)
+const rootDirectory = dirnameSplit.join('/')
+
+//setting up uploads folder as a static asset
+//now if we access //localhost:5000/uploads/image-file-name.jpg we can view uploaded images
+app.use('/uploads', express.static(rootDirectory + '/uploadedImages'))
+
+/* ----------------------------------------------------------------- */
 
 /* setting up routes */
 app.use('/auth', authRouter)
