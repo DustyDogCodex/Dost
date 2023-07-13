@@ -3,15 +3,21 @@
 import axios from "axios"
 import { useState } from "react"
 import FriendBox from "./FriendBox"
+import { useEffect } from "react"
 
 function FriendsList() {
     //state variable to store friendsList
     const [ friends, setFriends ] = useState([])
 
     //get request to get an up-to date friendsList including any recent additions/deletions by the user
-    axios.get(`http://localhost:5000/user/${userId}/friends`)
-    .then(res => setFriends(res.data))
-    .catch(err => console.log(err))
+    useEffect(() => {
+        const getFriends = async() => {
+            axios.get(`http://localhost:5000/user/${userId}/friends`)
+            .then(res => setFriends(res.data))
+            .catch(err => console.log(err))
+        }
+        getFriends()
+    })
 
     return (
         <div>
