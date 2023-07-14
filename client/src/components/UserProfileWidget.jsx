@@ -5,7 +5,7 @@ import { faUser, faLocationPin, faPaperPlane } from "@fortawesome/free-solid-svg
 function UserProfileWidget({ name, numFriends, location, status, views }) {    
     return (
         <div
-            className="p-5 max-w-[400px] h-1/4 m-3 rounded-lg bg-white dark:bg-slate-800 dark:text-white"
+            className="p-5 w-1/4 h-1/4 m-3 rounded-lg bg-white dark:bg-slate-800 dark:text-white"
         >
             {/* top of widget: username + profilePic + friends */}
             <div

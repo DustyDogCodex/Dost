@@ -24,25 +24,33 @@ function Navbar({ firstName }) {
 
     return (
         <div
-            className="flex items-center justify-between py-3 px-10 bg-white dark:bg-slate-800"
+            className="flex items-center justify-between py-3 px-10 bg-white dark:bg-slate-800 lg:px-72"
         >
+            {/* app brand */}
             <Link
                 to={'/homepage'}
                 className="font-marker text-4xl dark:text-sky-400"
             >
                 Dost
             </Link>
-            <div>
+
+            {/* search bar */}
+            <div
+                className=""
+            >
                 <input 
                     type="text" 
                     placeholder="Search..." 
-                    className="bg-slate-200 text-gray-500 py-2 px-8 rounded-lg mx-3"
+                    className="bg-slate-200 text-gray-500 py-2 px-8 rounded-lg mx-3 w-[400px]"
                 />
                 <Search className="dark:text-slate-200"/>
             </div>
+
+            {/* dark modee toggle, user settings, logout */}
             <div 
                 className="flex items-center"
             >
+                {/* conditionally rendering light or dark mode icon depending on whether or not darkMode is on */}
                 {darkMode 
                     ?
                         <IconButton onClick={toggleDarkMode} >
@@ -56,7 +64,11 @@ function Navbar({ firstName }) {
                 <IconButton>
                     <Notifications className="dark:text-slate-200"/>
                 </IconButton>
-                <p className="dark:text-sky-400">{firstName}</p>
+                <p 
+                    className="dark:text-sky-400"
+                >
+                    {firstName}
+                </p>
                 <button
                     className="bg-red-500 py-1 px-3 rounded-lg text-white ml-3"
                     onClick={logoutUser}

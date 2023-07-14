@@ -4,34 +4,44 @@ import UserProfileWidget from "../components/UserProfileWidget"
 import PostsDisplay from "../components/PostsDisplay"
 import { useContext } from "react"
 import { UserContext } from "../LoggedInUserContext"
+import FriendsList from "../components/FriendsList"
+import Advert from "../components/Advert"
 
 function Homepage() {
     //using context to get loggedInUser's info. This will be passed as props to the components on this page
     const { loggedInUser } = useContext(UserContext)
 
     return (
-        <div
-            className="h-screen bg-slate-200 dark:bg-black"
-        >
+        <>
             <Navbar firstName={loggedInUser.firstName} />
             <div
-                className="flex justify-center lg:w-4/5"
+                className="h-screen flex flex-col items-center bg-slate-200 dark:bg-black"
             >
-                <UserProfileWidget 
-                    name={`${loggedInUser.firstName} ${loggedInUser.lastName}`}
-                    numFriends={loggedInUser.friendsList.length}
-                    location={loggedInUser.location}
-                    status={loggedInUser.status}
-                    views={loggedInUser.profileViews}
-                />
                 <div
-                    className="w-1/2"
+                    className="flex justify-center lg:w-4/5"
                 >
-                    <CreatePost userId={loggedInUser._id}/>
-                    <PostsDisplay />
+                    <UserProfileWidget 
+                        name={`${loggedInUser.firstName} ${loggedInUser.lastName}`}
+                        numFriends={loggedInUser.friendsList.length}
+                        location={loggedInUser.location}
+                        status={loggedInUser.status}
+                        views={loggedInUser.profileViews}
+                    />
+                    <div
+                        className="w-1/2"
+                    >
+                        <CreatePost userId={loggedInUser._id}/>
+                        <PostsDisplay />
+                    </div>
+                    <div 
+                        className="max-w-[400px]"
+                    >
+                        <Advert />
+                        <FriendsList userId={loggedInUser._id} />
+                    </div>
                 </div>
             </div>
-        </div>
+        </>
     )
 }
 

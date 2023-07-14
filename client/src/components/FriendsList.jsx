@@ -5,33 +5,51 @@ import { useState } from "react"
 import FriendBox from "./FriendBox"
 import { useEffect } from "react"
 
-function FriendsList() {
+function FriendsList({ userId }) {
     //state variable to store friendsList
     const [ friends, setFriends ] = useState([])
 
     //get request to get an up-to date friendsList including any recent additions/deletions by the user
     useEffect(() => {
         const getFriends = async() => {
-            axios.get(`http://localhost:5000/user/${userId}/friends`)
+            axios.get(`http://localhost:5000/user/friends/${userId}`)
             .then(res => setFriends(res.data))
             .catch(err => console.log(err))
         }
         getFriends()
-    })
+    },[])
 
     return (
-        <div>
-            <h3>Friend's List</h3>
+        <div
+            className="w-full m-3 p-3 rounded-lg bg-white dark:bg-slate-800"
+        >
+            <h3
+                className="text-2xl dark:text-white text-center"
+            >
+                Friends List
+            </h3>
             <div>
-                {friends.map(friend => {
-                    <FriendBox 
-                        key={friend._id}
-                        friendId={friend._id}
-                        userName={`${firstName} ${lastName}`}
-                        status={friend.status}
-                        userProfilePic={friend.userProfilePic}                    
-                    />
-                })}
+                {
+                    friends.length 
+                    ? 
+                        friends.map(friend => {
+                            <FriendBox 
+                                key={friend._id}
+                                friendId={friend._id}
+                                userName={`${firstName} ${lastName}`}
+                                status={friend.status}
+                                userProfilePic={friend.userProfilePic}                    
+                            />
+                        })
+                    : 
+                        <div>
+                            <p
+                                className="text-center dark:text-white"
+                            >
+                                No friends currently in your friend's list. Explore Dost to make some friends and add them to your list!
+                            </p>      
+                        </div>                  
+                }
             </div>
         </div>
     )

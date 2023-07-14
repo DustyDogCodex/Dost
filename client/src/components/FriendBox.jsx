@@ -55,7 +55,7 @@ function FriendBox({ friendId, userName, userProfilePic, status }) {
             {friendOrNah 
                 ?   
                     <div
-                        className="flex items-center justify-center bg-slate-950 p-2 rounded-full"
+                        className="flex items-center justify-center p-2 rounded-full bg-slate-300 dark:bg-slate-950"
                     >
                         <FontAwesomeIcon 
                             icon={faUserMinus} 
@@ -65,7 +65,7 @@ function FriendBox({ friendId, userName, userProfilePic, status }) {
                     </div>
                 :   
                     <div
-                        className="flex items-center justify-center bg-slate-950 p-2 rounded-full"
+                        className="flex items-center justify-cente p-2 rounded-full bg-slate-300 dark:bg-slate-950"
                     >
                         <FontAwesomeIcon 
                             icon={faUserPlus} 
