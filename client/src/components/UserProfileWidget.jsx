@@ -1,16 +1,14 @@
-import { Navigate } from "react-router-dom"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faUser, faLocationPin, faPaperPlane } from "@fortawesome/free-solid-svg-icons"
 
 function UserProfileWidget({ name, numFriends, location, status, views }) {    
     return (
         <div
-            className="p-5 w-1/4 h-1/4 m-3 rounded-lg bg-white dark:bg-slate-800 dark:text-white"
+            className="p-5 max-w-[400px] h-1/4 m-3 rounded-lg bg-white dark:bg-slate-800 dark:text-white"
         >
             {/* top of widget: username + profilePic + friends */}
             <div
                 className="flex items-center gap-2 pb-5 border-b border-fuchsia-400"
-                onClick={() => Navigate(`/profile/${user}`)}
             >
                 {/* will change this to a conditional rendering statement later. Using a basic user icon for now. It will be this icon if user doesn't have an uploaded profilePic or the user's profilePic if it exists*/}
                 <FontAwesomeIcon 
