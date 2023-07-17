@@ -61,7 +61,10 @@ function UserProfile() {
                     <div
                         className="w-1/2"
                     >
-                        <PostsDisplay />
+                        <PostsDisplay 
+                            profile={true}
+                            userId={userId}
+                        />
                     </div>
                 </div>
             </div>

@@ -15,7 +15,7 @@ Router.get("/",
 )
 
 //route for getting posts created by a particular user
-Router.get("/:userId/posts",
+Router.get("/:userId",
     asyncHandler(async(req,res) => {
         //grab userId from query params
         const { userId } = req.params

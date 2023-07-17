@@ -32,7 +32,7 @@ function Homepage() {
                         className="w-1/2"
                     >
                         <CreatePost userId={loggedInUser._id}/>
-                        <PostsDisplay />
+                        <PostsDisplay profile={false}/>
                     </div>
                     <div 
                         className="max-w-[400px]"
