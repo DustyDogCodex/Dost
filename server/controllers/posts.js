@@ -20,14 +20,12 @@ const createNewPost = asyncHandler(
             description,
             userProfilePic: user.profilePic,
             imagePath: req.file.filename,
-            likes: {},
+            likes: [],
             comments: []
         })
 
         //saving new post
         await newPost.save()
-
-        console.log("uploaded file", req.file.filename)
 
         res.status(200).send(newPost)
     }

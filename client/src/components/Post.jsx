@@ -1,9 +1,17 @@
 import FriendBox from "./FriendBox"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faHeart } from "@fortawesome/free-solid-svg-icons"
-import { faComments } from "@fortawesome/free-solid-svg-icons"
+import { faHeart, faComments } from "@fortawesome/free-solid-svg-icons"
+import axios from "axios"
 
-function Post({ postId, postUserId, userName, location, description, imagePath, userProfilePic, likes, comments }) {
+function Post({ postId, postUserId, userId, userName, location, description, imagePath, userProfilePic, likes, comments }) {
+    //making a patch request to update post when a user likes/unlikes the post
+    const likeUnlikePost = async() => {
+        axios.patch(`http://localhost:5000/posts/${postId}/like`,
+            userId,
+            { withCredentials: true }
+        )
+    }
+
     return (
         <div
             className="w-fit bg-white rounded-lg p-4 mb-3 flex flex-col dark:bg-slate-800"
@@ -32,23 +40,35 @@ function Post({ postId, postUserId, userName, location, description, imagePath, 
             <div 
                 className="flex"
             >
-                <div
-                    className="my-2 mr-2"
-                >
-                    <FontAwesomeIcon icon={faHeart} style={{color: "#b3bccc",}} /> 
-                    <span className="dark:text-white">{ likes.size ? likes.size : 0 } likes</span>
-                </div>
-                <div
-                    className="my-2 mr-2"
-                >
-                    <FontAwesomeIcon icon={faHeart} style={{color: "#f70258",}} />
-                    <span className="dark:text-white">{ likes.size ? likes.size : 0 } likes</span>
-                </div>
+                {
+                    likes.includes(userId)
+                        ?
+                            <div
+                                className="my-2 mr-2"
+                            >
+                                <FontAwesomeIcon 
+                                    icon={faHeart} 
+                                    style={{color: "#f70258", cursor:'pointer'}} 
+                                />
+                                <span className="ml-2 dark:text-white">{ likes.size ? likes.size : 0 } likes</span>
+                            </div>
+                        :
+                            <div
+                                className="my-2 mr-2"
+                            >
+                                <FontAwesomeIcon 
+                                    icon={faHeart} 
+                                    style={{color: "#b3bccc", cursor:'pointer'}} 
+                                /> 
+                                <span className="ml-2 dark:text-white">{ likes.size ? likes.size : 0 } likes</span>
+                            </div>
+                }
+                
                 <div
                     className="my-2 mr-2"
                 >
                     <FontAwesomeIcon icon={faComments} style={{color: "#a1aab5",}} />
-                    <span className="dark:text-white">{ comments.length } comments</span>
+                    <span className="ml-2 dark:text-white">{ comments.length } comments</span>
                 </div>
             </div>
         </div>

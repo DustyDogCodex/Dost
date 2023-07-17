@@ -19,8 +19,8 @@ const PostSchema = new Schema({
     imagePath: String,
     userProfilePic: String,
     likes: {
-        type: Map,
-        of: Boolean
+        type: Array,
+        default: []
     },
     comments: {
         type: Array,

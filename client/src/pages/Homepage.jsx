@@ -15,7 +15,7 @@ function Homepage() {
         <>
             <Navbar firstName={loggedInUser.firstName} />
             <div
-                className="h-full flex flex-col items-center bg-slate-200 dark:bg-black"
+                className="min-h-screen h-full flex flex-col items-center bg-slate-200 dark:bg-black"
             >
                 <div
                     className="flex justify-center lg:w-4/5"
