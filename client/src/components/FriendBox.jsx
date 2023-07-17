@@ -2,8 +2,13 @@
 import axios from "axios"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faUserMinus, faUserPlus, faUser } from "@fortawesome/free-solid-svg-icons"
+import { Link } from "react-router-dom"
+import { useContext } from "react"
+import { UserContext } from "../LoggedInUserContext"
 
 function FriendBox({ friendId, userName, userProfilePic, status }) {
+    //checking to see if loggedIn user's ID matches friendId. If so, the add friends button will not be displayed.
+    const { loggedInUser } = useContext(UserContext)
     
     //checking if user is already in friendsList
     const friendOrNah = false /* friendsList.find(friend => friend._id === friendId) */
@@ -27,7 +32,7 @@ function FriendBox({ friendId, userName, userProfilePic, status }) {
                         <img 
                             src={`http://localhost:5000/uploads/${userProfilePic}`}
                             alt="user profile picture" 
-                            className=""
+                            className="w-14 h-14 rounded-full"
                         />
                     :
                         <FontAwesomeIcon 
@@ -38,13 +43,17 @@ function FriendBox({ friendId, userName, userProfilePic, status }) {
                 <div
                     className="ml-3"
                 >
-                    <h5 
-                        className="text-xl dark:text-white"
+                    <Link
+                        to={`/profile/${friendId}`}
                     >
-                        {userName}
-                    </h5>
+                        <h5 
+                            className="text-xl dark:text-white"
+                        >
+                            {userName}
+                        </h5>
+                    </Link>
                     <p 
-                        className="text-sm"
+                        className="text-sm dark:text-white"
                     >
                         {status}
                     </p>

@@ -75,8 +75,8 @@ function CreatePost({ userId, profilePic }) {
                             { 
                                 required: "Please enter a caption",
                                 maxLength: {
-                                    value: 250,
-                                    message: "Caption cannot be more than 250 characters"
+                                    value: 1000,
+                                    message: "Caption cannot be more than 1000 characters"
                                 }
                             })}
                         type="text" 

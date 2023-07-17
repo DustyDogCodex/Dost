@@ -57,7 +57,7 @@ function PostsDisplay({ userId, profile }) {
                             likes={post.likes} 
                             comments={post.comments}   
                         />
-                    )
+                    ).reverse()
             }
         </div>
     )

@@ -25,7 +25,7 @@ function Post({ postId, postUserId, userName, location, description, imagePath, 
                 <img 
                     src={`http://localhost:5000/uploads/${imagePath}`} 
                     alt="post image"
-                    className="max-h-[800px]" 
+                    className="max-h-[600px] rounded-lg" 
                 />
             )}
             
