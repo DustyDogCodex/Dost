@@ -21,6 +21,7 @@ function Homepage() {
                     className="flex justify-center lg:w-4/5"
                 >
                     <UserProfileWidget 
+                        userId={loggedInUser._id}
                         name={`${loggedInUser.firstName} ${loggedInUser.lastName}`}
                         numFriends={loggedInUser.friendsList.length}
                         location={loggedInUser.location}

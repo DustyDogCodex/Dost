@@ -5,7 +5,7 @@ import { useState } from "react"
 import FriendBox from "./FriendBox"
 import { useEffect } from "react"
 
-function FriendsList({ userId }) {
+function FriendsList({ userId, profile }) {
     //state variable to store friendsList
     const [ friends, setFriends ] = useState([])
 
@@ -21,7 +21,7 @@ function FriendsList({ userId }) {
 
     return (
         <div
-            className="w-full m-3 p-3 rounded-lg bg-white dark:bg-slate-800"
+            className="w-[350px] m-3 p-3 rounded-lg bg-white dark:bg-slate-800"
         >
             <h3
                 className="text-2xl dark:text-white text-center"
@@ -36,7 +36,7 @@ function FriendsList({ userId }) {
                             <FriendBox 
                                 key={friend._id}
                                 friendId={friend._id}
-                                userName={`${firstName} ${lastName}`}
+                                userName={`${friend.firstName} ${friend.lastName}`}
                                 status={friend.status}
                                 userProfilePic={friend.userProfilePic}                    
                             />
@@ -46,7 +46,7 @@ function FriendsList({ userId }) {
                             <p
                                 className="text-center dark:text-white"
                             >
-                                No friends currently in your friend's list. Explore Dost to make some friends and add them to your list!
+                                {profile ? "User has not added any friends. Add them to your friend's list to be their friend!" : 'No friends currently in your friend\'s list. Explore Dost to make some friends and add them to your list!'}
                             </p>      
                         </div>                  
                 }

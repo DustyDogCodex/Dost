@@ -1,13 +1,15 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faUser, faLocationPin, faPaperPlane } from "@fortawesome/free-solid-svg-icons"
+import { Link } from "react-router-dom"
 
-function UserProfileWidget({ name, numFriends, location, status, views }) {    
+function UserProfileWidget({ userId, name, numFriends, location, status, views, profile }) {    
     return (
         <div
-            className="p-5 max-w-[400px] h-1/4 m-3 rounded-lg bg-white dark:bg-slate-800 dark:text-white"
+            className="p-5 w-[350px] h-[400px] m-3 rounded-lg bg-white dark:bg-slate-800 dark:text-white"
         >
             {/* top of widget: username + profilePic + friends */}
-            <div
+            <Link
+                to={`/profile/${userId}`}
                 className="flex items-center gap-2 pb-5 border-b border-fuchsia-400"
             >
                 {/* will change this to a conditional rendering statement later. Using a basic user icon for now. It will be this icon if user doesn't have an uploaded profilePic or the user's profilePic if it exists*/}
@@ -27,7 +29,7 @@ function UserProfileWidget({ name, numFriends, location, status, views }) {
                         {numFriends} {numFriends == 1 ? 'friend' : 'friends'}
                     </p>
                 </div>
-            </div>
+            </Link>
 
             {/* Second row: location and status */}
             <div
@@ -49,7 +51,7 @@ function UserProfileWidget({ name, numFriends, location, status, views }) {
                         icon={faPaperPlane} 
                         style={{color: "#0ab6ff", height:'25px', width:'25px',marginRight: '20px'}}
                     />
-                    {status ? status : 'Set status in user settings'}
+                    {status ? status : (profile ? 'No status' : 'Set status in user settings')}
                 </div>
             </div>
 

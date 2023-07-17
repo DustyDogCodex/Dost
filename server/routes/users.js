@@ -12,7 +12,7 @@ Router.get("/:id",
         const { id } = req.params
 
         //find user in database
-        const user = await User.findById({ id })
+        const user = await User.findById(id)
 
         //send info to front-end
         res.status(200).json(user)
