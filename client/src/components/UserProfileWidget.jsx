@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faUser, faLocationPin, faPaperPlane } from "@fortawesome/free-solid-svg-icons"
 import { Link } from "react-router-dom"
 
-function UserProfileWidget({ userId, name, numFriends, location, status, views, profile }) {    
+function UserProfileWidget({ userId, name, profilePic, numFriends, location, status, views, profile }) {    
     return (
         <div
             className="p-5 w-[350px] h-[400px] m-3 rounded-lg bg-white dark:bg-slate-800 dark:text-white"
@@ -13,10 +13,19 @@ function UserProfileWidget({ userId, name, numFriends, location, status, views, 
                 className="flex items-center gap-2 pb-5 border-b border-fuchsia-400"
             >
                 {/* will change this to a conditional rendering statement later. Using a basic user icon for now. It will be this icon if user doesn't have an uploaded profilePic or the user's profilePic if it exists*/}
-                <FontAwesomeIcon 
-                    icon={faUser} 
-                    style={{color:'black', height:'40px', width:'40px', borderRadius:'100%'}}
-                />
+                {profilePic 
+                    ? 
+                        <img 
+                            src={`http://localhost:5000/uploads/${profilePic}`} 
+                            alt={`${name}'s profile picture`} 
+                            className="w-16 h-16 rounded-full"
+                        />
+                    :
+                        <FontAwesomeIcon 
+                            icon={faUser} 
+                            style={{color:'skyblue', height:'40px', width:'40px', borderRadius:'100%'}}
+                        />
+                }
                 <div>
                     <h2
                         className="text-xl"

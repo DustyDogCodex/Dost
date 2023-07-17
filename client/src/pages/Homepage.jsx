@@ -23,6 +23,7 @@ function Homepage() {
                     <UserProfileWidget 
                         userId={loggedInUser._id}
                         name={`${loggedInUser.firstName} ${loggedInUser.lastName}`}
+                        profilePic={loggedInUser.profilePic}
                         numFriends={loggedInUser.friendsList.length}
                         location={loggedInUser.location}
                         status={loggedInUser.status}

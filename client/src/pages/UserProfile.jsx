@@ -47,6 +47,7 @@ function UserProfile() {
                         <UserProfileWidget 
                             userId={userId}
                             name={`${user.firstName} ${user.lastName}`}
+                            profilePic={user.profilePic}
                             numFriends={user.friendsList.length}
                             location={user.location}
                             status={user.status}

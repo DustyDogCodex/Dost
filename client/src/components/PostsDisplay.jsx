@@ -28,27 +28,37 @@ function PostsDisplay({ userId, profile }) {
     useEffect(() => {
         //depending on whether user profile or homepage is being rendered, a different function is called to fetch posts. 
         profile ? getUserPosts() : getAllPosts()
-        console.log('posts', posts)
     }, [])
 
     return (
         <div
             className="border border-fuchsia-800 p-2 m-2 flex flex-col items-center justify-center"
         >
-            {posts && posts.map(post => 
-                <Post 
-                    key={post._id}
-                    postId={post._id} 
-                    postUserId={post.userId} 
-                    userName={`${post.firstName} ${post.lastName}`} 
-                    location={post.location} 
-                    description={post.description} 
-                    imagePath={post.imagePath} 
-                    userProfilePic={post.userProfilePic} 
-                    likes={post.likes} 
-                    comments={post.comments}   
-                />
-            )}
+            {posts.length == 0 
+                ? 
+                    <div>
+                        <p
+                            className="dark:text-white"
+                        >
+                            User has not created any posts yet.
+                        </p>
+                    </div>
+                : 
+                    posts.map(post => 
+                        <Post 
+                            key={post._id}
+                            postId={post._id} 
+                            postUserId={post.userId} 
+                            userName={`${post.firstName} ${post.lastName}`} 
+                            location={post.location} 
+                            description={post.description} 
+                            imagePath={post.imagePath} 
+                            userProfilePic={post.userProfilePic} 
+                            likes={post.likes} 
+                            comments={post.comments}   
+                        />
+                    )
+            }
         </div>
     )
 }
