@@ -10,7 +10,8 @@ const passportConfig = require('./passportConfig')
 const authRouter = require('./routes/auth')
 const userRouter = require('./routes/users')
 const postsRouter = require('./routes/posts')
-const postController = require('./controllers/posts')
+const { createNewPost } = require('./controllers/posts')
+const { createAccount } = require('./controllers/auth')
 
 //setup dotenv
 dotenv.config()
@@ -54,6 +55,20 @@ app.use(function(req, res, next) {
 
 /* ------------------------------------------------------------------------ */
 
+/* -------- SETTING UP A STATIC FOLDER FOR UPLOADED IMAGES --------- */
+
+//storing a route to the root directory for the project
+//this is used to specify a route to /uploadedImages folder 
+const dirnameSplit = __dirname.split('\\')
+dirnameSplit.splice(-1,1)
+const rootDirectory = dirnameSplit.join('/')
+
+//setting up uploads folder as a static asset
+//now if we access //localhost:5000/uploads/image-file-name.jpg we can view uploaded images
+app.use('/uploads', express.static(rootDirectory + '/uploadedImages'))
+
+/* ----------------------------------------------------------------- */
+
 /* ----------- Routes involving image upload with multer ------------------ */
 
 //FILE STORAGE / MULTER setup
@@ -69,23 +84,10 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 //ROUTES INVOLVING FILES
-app.post("/posts/new", upload.single('image'), postController.createNewPost)
+app.post("/posts/new", upload.single('image'), createNewPost)
+app.post("/auth/register", upload.single('image'), createAccount)
 
 /* ------------------------------------------------------------------------ */
-
-/* -------- SETTING UP A STATIC FOLDER FOR UPLOADED IMAGES --------- */
-
-//storing a route to the root directory for the project
-//this is used to specify a route to /uploadedImages folder 
-const dirnameSplit = __dirname.split('\\')
-dirnameSplit.splice(-1,1)
-const rootDirectory = dirnameSplit.join('/')
-
-//setting up uploads folder as a static asset
-//now if we access //localhost:5000/uploads/image-file-name.jpg we can view uploaded images
-app.use('/uploads', express.static(rootDirectory + '/uploadedImages'))
-
-/* ----------------------------------------------------------------- */
 
 /* setting up routes */
 app.use('/auth', authRouter)
