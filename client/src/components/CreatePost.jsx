@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form"
 import axios from "axios"
 import { useState } from "react"
 
-function CreatePost({ userId }) {
+function CreatePost({ userId, profilePic }) {
     //using react-hook-form for tracking and sending user inputs to backend
     const { register, handleSubmit, formState: { errors }, watch } = useForm()
 
@@ -51,35 +51,49 @@ function CreatePost({ userId }) {
         >   
             {/* top part with usrr image and create post input */}
             <div
-                className="flex items-center m-2 py-3 border-b border-sky-400"
+                className="flex flex-col items-center m-2 px-2 py-3 border-b border-sky-400"
             >
-                <FontAwesomeIcon 
-                    icon={faUser} 
-                    style={{ color: "#00bfff", height:'40px', width:'40px', marginRight:'20px' }} 
-                />
                 <div
-                    className="w-full"
+                    className="flex items-center w-full"
                 >
+                    {/* Conditional rendering: if user profilePic exists then display profile pic else display font awesome user icon */}
+                    {profilePic 
+                        ? 
+                            <img 
+                                src={`http://localhost:5000/uploads/${profilePic}`} 
+                                alt={'profile picture'} 
+                                className="w-14 h-14 rounded-full"
+                            />
+                        :
+                            <FontAwesomeIcon 
+                                icon={faUser} 
+                                style={{color:'skyblue', height:'40px', width:'40px', borderRadius:'100%'}}
+                            />
+                    }
                     <textarea
-                    { ...register("postText", 
-                        { 
-                            required: "Please enter a caption",
-                            maxLength: {
-                                value: 250,
-                                message: "Caption cannot be more than 250 characters"
-                            }
-                        })}
-                    type="text" 
-                    className="w-full bg-slate-200 rounded-lg p-2 dark:text-black"
-                    placeholder="What's on your mind?"
-                />  
-                {errors.postText?.message && (
-                    <div
-                        className="w-full flex items-center justify-center"
-                    >
-                        <span className='bg-red-300 text-red-700 text-sm p-1 rounded-lg align-center'>{errors.postText.message}</span>
-                    </div>
-                )}
+                        { ...register("postText", 
+                            { 
+                                required: "Please enter a caption",
+                                maxLength: {
+                                    value: 250,
+                                    message: "Caption cannot be more than 250 characters"
+                                }
+                            })}
+                        type="text" 
+                        className="w-full bg-slate-200 rounded-lg p-2 mx-5 dark:text-black"
+                        placeholder="What's on your mind?"
+                    />  
+                </div>
+                
+                {/* div for displaying error if user exceeds 250 character limit */}
+                <div>
+                    {errors.postText?.message && (
+                        <div
+                            className="w-full flex items-center justify-center mt-2"
+                        >
+                            <span className='bg-red-300 text-red-700 text-sm p-1 rounded-lg align-center'>{errors.postText.message}</span>
+                        </div>
+                    )}
                 </div>
             </div>
 
@@ -91,7 +105,7 @@ function CreatePost({ userId }) {
                     <input 
                         name="image"
                         type="file"
-                        className="m-2 border border-fuchsia-300 p-1 rounded-lg self-center" 
+                        className="m-2 border border-fuchsia-300 rounded-lg self-center" 
                         onChange={e => setImage(e.target.files[0])}
                     /> 
                 </div>   
@@ -99,7 +113,7 @@ function CreatePost({ userId }) {
 
             {/* bottom of the component. Includes Image icon + text and post button */}
             <div
-                className="flex items-center justify-center py-3"
+                className="flex items-center justify-center pb-2"
             >
                 <div
                     className="flex items-center justify-center cursor-pointer"
@@ -113,7 +127,7 @@ function CreatePost({ userId }) {
                 </div>
                 <button
                     type="submit"
-                    className="bg-sky-400 text-white text-lg py-1 px-6 rounded-full ml-10"
+                    className="bg-sky-400 text-white text-lg px-6 rounded-full ml-10"
                     onClick={handleSubmit(submitPost)}
                 >
                     Post

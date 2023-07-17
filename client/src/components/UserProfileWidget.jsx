@@ -12,7 +12,7 @@ function UserProfileWidget({ userId, name, profilePic, numFriends, location, sta
                 to={`/profile/${userId}`}
                 className="flex items-center gap-2 pb-5 border-b border-fuchsia-400"
             >
-                {/* will change this to a conditional rendering statement later. Using a basic user icon for now. It will be this icon if user doesn't have an uploaded profilePic or the user's profilePic if it exists*/}
+                {/* Conditional rendering: if user profilePic exists then display profile pic else display font awesome user icon */}
                 {profilePic 
                     ? 
                         <img 

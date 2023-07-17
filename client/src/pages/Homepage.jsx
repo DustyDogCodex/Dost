@@ -32,7 +32,10 @@ function Homepage() {
                     <div
                         className="w-1/2"
                     >
-                        <CreatePost userId={loggedInUser._id}/>
+                        <CreatePost 
+                            userId={loggedInUser._id} 
+                            profilePic={loggedInUser.profilePic}
+                        />
                         <PostsDisplay profile={false}/>
                     </div>
                     <div 
