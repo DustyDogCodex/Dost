@@ -28,8 +28,44 @@ Router.get("/:userId",
     })
 )
 
-//maybe a basic like/unlike functionality?
+//route for liking/unliking a post
 Router.patch("/:id/like",
+    asyncHandler(async(req,res) => {
+        //grab post id from query params
+        const { id } = req.params
+
+        //grab userId from req body
+        const { userId } = req.body
+        
+        //find relevant post in our database
+        const post = await Post.findById(id)
+
+        //if user has previously liked the post, their userId will exist inside the likes array
+        const likedOrNaw = post.likes.includes(userId) 
+
+        //if userId exists in the array, delete userId from array or else add it to array
+        //this is equivalent to unliking the post if already liked, else like the post
+        if(likedOrNaw){
+            //filtering likes array to remove userId
+            post.likes = post.likes.filter(id => id !== userId)            
+        } else {
+            //if userId does not exist in likes array, userId is pushed into the array 
+            post.likes.push(userId)
+        }
+
+        //update selected post
+        const updatedPost = await Post.findByIdAndUpdate(
+            id,
+            { likes: post.likes },
+            { new: true}
+        )
+        
+        res.status(200).json(updatedPost)
+    })
+)
+
+//route for adding a comment to a post
+Router.post("/:id/comment",
     asyncHandler(async(req,res) => {
         //grab post id from query params
         const { id } = req.params

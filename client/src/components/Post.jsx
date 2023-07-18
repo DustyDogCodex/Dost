@@ -21,8 +21,16 @@ function Post({ postId, postUserId, userName, location, description, imagePath, 
             { userId : loggedInUser._id }
         )
         .then(res => setPostLikes([ ...res.data.likes ]))
-        //maybe turn comments and likes into their own state variables? That way they can update instantly once user clicks on them
-        //or I can make them update instantly by setting setLikes and setComments to res.data
+        .catch(err => console.log(err))
+    }
+
+    //making a post request to add new comments on a post
+    const addComment = async() => {
+        await axios.post(`http://localhost:5000/posts/${postId}/comment`,
+            { author: `${loggedInUser.firstName} ${loggedInUser.lastName}`, text: data.text }
+        )
+        .then(res => setPostComments([ ...res.data.comments ]))
+        .catch(err => console.log(err))
     }
 
     return (
@@ -88,13 +96,16 @@ function Post({ postId, postUserId, userName, location, description, imagePath, 
                     <FontAwesomeIcon 
                         icon={faComments} 
                         style={{color: "#a1aab5", cursor:'pointer'}} 
+                        onClick={() => setShowComments(!showComments)}
                     />
                     <span className="ml-2 dark:text-white">{ comments.length }</span>
                 </div>
             </div>
 
             {/* comments section. This is hidden by default until user clicks on the comments icon above to toggle its display. */}
-            <div>
+            <div
+                className={`${showComments ? '' : 'hidden'}`}
+            >
                 {
                     postComments.length == 0 
                         ?
@@ -113,10 +124,21 @@ function Post({ postId, postUserId, userName, location, description, imagePath, 
                 }
 
                 {/* input to add comment to a post */}
-                <input 
-                    
-                    type="text" 
-                />
+                <div
+                    className='flex items-center mt-3'
+                >
+                    <input 
+                        
+                        type="text" 
+                        placeholder="Add a comment..."
+                        className="w-full p-1 rounded-lg dark:bg-slate-300"
+                    />
+                    <button
+                        className="bg-blue-400 text-white py-1 px-2 mx-2 rounded-xl"
+                    >
+                        Add
+                    </button>
+                </div>
             </div>
         </div>
     )
