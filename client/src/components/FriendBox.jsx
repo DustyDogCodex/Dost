@@ -11,16 +11,17 @@ function FriendBox({ friendId, userName, userProfilePic, status }) {
     const { loggedInUser } = useContext(UserContext)
     
     //checking if user is already in friendsList
-    const friendOrNah = false /* friendsList.find(friend => friend._id === friendId) */
+    const friendOrNah = loggedInUser.friendsList.find(friend => friend._id === friendId)
 
     //adding or removing friend from friendsList depending on whether user is already a friend or not
     const addFriend = async() =>{
-        axios.patch(`http://localhost:5000/user/${userId}/${friendId}`)
+        axios.patch(`http://localhost:5000/user/${loggedInUser._id}/${friendId}`)
+        .then(res => console.log(res.data))
     }
 
     return (
         <div
-            className="flex items-center justify-between"
+            className="flex items-center justify-between my-1"
         >
             <div 
                 className="flex items-center"
@@ -61,27 +62,30 @@ function FriendBox({ friendId, userName, userProfilePic, status }) {
             </div>
 
             {/* depending on whether or not this person's userid is in our friendsList we will display an add user or remove user icon */}
-            {friendOrNah 
-                ?   
-                    <div
-                        className="flex items-center justify-center p-2 rounded-full bg-slate-300 dark:bg-slate-950"
-                    >
-                        <FontAwesomeIcon 
-                            icon={faUserMinus} 
-                            style={{color: "#06b0f9", height:"30px", width:"30px"}}
-                            onClick={() => addFriend}
-                        />
-                    </div>
-                :   
-                    <div
-                        className="flex items-center justify-cente p-2 rounded-full bg-slate-300 dark:bg-slate-950"
-                    >
-                        <FontAwesomeIcon 
-                            icon={faUserPlus} 
-                            style={{color: "#06b0f9", height:"30px", width:"30px"}} 
-                            onClick={() => addFriend}
-                        /> 
-                    </div>
+            {/* additionally, if the loggedInUser is the same as the user who created this post, the add friend button will be hidden */}
+            {loggedInUser._id !== friendId &&
+                (friendOrNah 
+                    ?   
+                        <div
+                            className="flex items-center justify-center p-2 rounded-full bg-slate-300 dark:bg-slate-950"
+                        >
+                            <FontAwesomeIcon 
+                                icon={faUserMinus} 
+                                style={{color: "#06b0f9", height:"30px", width:"30px", cursor:'pointer'}}
+                                onClick={addFriend}
+                            />
+                        </div>
+                    :   
+                        <div
+                            className="flex items-center justify-cente p-2 rounded-full bg-slate-300 dark:bg-slate-950"
+                        >
+                            <FontAwesomeIcon 
+                                icon={faUserPlus} 
+                                style={{color: "#06b0f9", height:"30px", width:"30px", cursor:'pointer'}} 
+                                onClick={addFriend}
+                            /> 
+                        </div>
+                )
             }
         </div>
     )

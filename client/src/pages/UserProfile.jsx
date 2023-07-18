@@ -25,7 +25,6 @@ function UserProfile() {
             .catch(err => console.log(err))
         }
         getUserInfo()
-        console.log("profile user", user)
     }, [])
 
     if(!user){

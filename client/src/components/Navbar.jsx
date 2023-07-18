@@ -24,7 +24,7 @@ function Navbar({ firstName }) {
 
     return (
         <div
-            className="flex items-center justify-between py-3 px-10 bg-white dark:bg-slate-800 lg:px-72"
+            className="sticky top-0 flex items-center justify-between py-3 px-10 bg-white dark:bg-slate-800 lg:px-72"
         >
             {/* app brand */}
             <Link

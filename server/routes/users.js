@@ -35,7 +35,7 @@ Router.get("/friends/:id",
         )
 
         //each user object in friends is now destructured to extract only the relevant information we need to display in the friends widget on the user's homepage
-        const relevantFriendsInfo = friends.map(friend => {
+        const relevantFriendsInfo = friends.map(({ _id, firstName, lastName, location, profilePic }) => {
                 return { _id, firstName, lastName, profilePic, location }
             }
         )
@@ -52,13 +52,13 @@ Router.patch("/:id/:friendId",
         const { id, friendId } = req.params
 
         //finding our user and friend by using respective ids from params
-        const user = User.findById(id)
-        const friend = User.findById(friendId)
-
+        const user = await User.findById(id)
+        const friend = await User.findById(friendId)
+        
         //checking to see if user and friend are already friends
         //if already friends, both are removed from each other's friendsList
         //if not friends, both are added to each other's friendsList
-        if(user.friendsList.includes(friend)){
+        if(user.friendsList.includes(friendId)){
             //since friendsList is an array containing the userIds of a user's friends, we can just filter the required id's out and set friendsList to the filtered array.
             user.friendsList = user.friendsList.filter((id) => id !== friendId)
             friend.friendsList = friend.friendsList.filter((id) => id !== id)
