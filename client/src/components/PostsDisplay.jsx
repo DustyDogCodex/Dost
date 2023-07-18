@@ -47,7 +47,6 @@ function PostsDisplay({ userId, profile }) {
                     posts.map(post => 
                         <Post 
                             key={post._id}
-                            userId={userId}
                             postId={post._id} 
                             postUserId={post.userId} 
                             userName={`${post.firstName} ${post.lastName}`} 

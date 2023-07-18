@@ -36,7 +36,7 @@ Router.patch("/:id/like",
 
         //grab userId from req body
         const { userId } = req.body
-
+        
         //find relevant post in our database
         const post = await Post.findById(id)
 
