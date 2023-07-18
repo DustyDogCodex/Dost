@@ -21,7 +21,7 @@ const createNewPost = asyncHandler(
             userProfilePic: user.profilePic,
             imagePath: req.file.filename,
             likes: [],
-            comments: []
+            comments: {}
         })
 
         //saving new post

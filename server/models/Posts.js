@@ -23,8 +23,8 @@ const PostSchema = new Schema({
         default: []
     },
     comments: {
-        type: Array,
-        default: []
+        type: Object,
+        default: {}
     }
 }, { timestamps: true })
 

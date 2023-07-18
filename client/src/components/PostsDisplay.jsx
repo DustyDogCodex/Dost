@@ -32,7 +32,7 @@ function PostsDisplay({ userId, profile }) {
 
     return (
         <div
-            className="border border-fuchsia-800 p-2 m-2 flex flex-col items-center justify-center"
+            className="p-2 m-2 flex flex-col items-center justify-center"
         >
             {posts.length == 0 
                 ? 
