@@ -70,33 +70,25 @@ Router.post("/:id/comment",
         //grab post id from query params
         const { id } = req.params
 
-        //grab userId from req body
-        const { userId } = req.body
-        
+        //grab author for the comment from req body and comment text from data object
+        const { author } = req.body
+        const { comment } = req.body.data
+             
         //find relevant post in our database
         const post = await Post.findById(id)
 
-        //if user has previously liked the post, their userId will exist inside the likes array
-        const likedOrNaw = post.likes.includes(userId) 
-
-        //if userId exists in the array, delete userId from array or else add it to array
-        //this is equivalent to unliking the post if already liked, else like the post
-        if(likedOrNaw){
-            //filtering likes array to remove userId
-            post.likes = post.likes.filter(id => id !== userId)            
-        } else {
-            //if userId does not exist in likes array, userId is pushed into the array 
-            post.likes.push(userId)
-        }
-
-        //update selected post
+        //updating comments object for the post
+        const updatedComments = [ ...post.comments, { author, comment }]
+        
+        //update selected post with updateComments
         const updatedPost = await Post.findByIdAndUpdate(
             id,
-            { likes: post.likes },
+            { comments: updatedComments },
             { new: true}
         )
         
-        res.status(200).json(updatedPost)
+        //respond with updatedPosts.comments so frontend can use res.data to update comments being displayed
+        res.status(200).json(updatedPost.comments)
     })
 )
 
