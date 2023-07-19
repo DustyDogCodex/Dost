@@ -87,28 +87,28 @@ function Post({ postId, postUserId, userName, location, description, imagePath, 
             
             {/* row containing like and comments icon */}
             <div 
-                className="flex"
+                className="flex px-5"
             >
                 {
                     postLikes.includes(loggedInUser._id)
                         ?
                             <div
-                                className="my-2 mr-2"
+                                className="my-2 mr-2 flex items-center"
                             >
                                 <FontAwesomeIcon 
                                     icon={faHeart} 
-                                    style={{color: "#f70258", cursor:'pointer'}} 
+                                    style={{color: "#f70258", cursor:'pointer', height:'25px', width:'25px'}} 
                                     onClick={() => likeUnlikePost()}
                                 />
                                 <span className="ml-2 dark:text-white">{ postLikes.length ? postLikes.length : 0 }</span>
                             </div>
                         :
                             <div
-                                className="my-2 mr-2"
+                                className="my-2 mr-2 flex items-center"
                             >
                                 <FontAwesomeIcon 
                                     icon={faHeart} 
-                                    style={{color: "#b3bccc", cursor:'pointer'}} 
+                                    style={{color: "#b3bccc", cursor:'pointer', height:'25px', width:'25px'}} 
                                     onClick={() => likeUnlikePost()}
                                 /> 
                                 <span className="ml-2 dark:text-white">{ postLikes.length ? postLikes.length : 0 }</span>
@@ -117,11 +117,11 @@ function Post({ postId, postUserId, userName, location, description, imagePath, 
                 
                 {/* comments icon used to toggle comments section display */}
                 <div
-                    className="my-2 mr-2"
+                    className="my-2 mr-2 flex items-center"
                 >
                     <FontAwesomeIcon 
                         icon={faComments} 
-                        style={{color: "#a1aab5", cursor:'pointer'}} 
+                        style={{color: "#a1aab5", cursor:'pointer', height:'25px', width:'25px'}} 
                         onClick={() => setShowComments(!showComments)}
                     />
                     <span className="ml-2 dark:text-white">{ postComments.length }</span>

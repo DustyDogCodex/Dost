@@ -11,8 +11,8 @@ function FriendBox({ friendId, userName, userProfilePic, status }) {
     const { loggedInUser } = useContext(UserContext)
     
     //checking if user is already in friendsList
-    const friendOrNah = loggedInUser.friendsList.find(friend => friend._id === friendId)
-
+    const friendOrNah = loggedInUser.friendsList.find(id => id === friendId)
+    
     //adding or removing friend from friendsList depending on whether user is already a friend or not
     const addFriend = async() =>{
         axios.patch(`http://localhost:5000/user/${loggedInUser._id}/${friendId}`)
