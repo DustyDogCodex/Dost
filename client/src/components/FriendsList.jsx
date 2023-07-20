@@ -11,6 +11,7 @@ function FriendsList({ userId, profile }) {
     const { friends } = useContext(UserContext)
 
     //get request to get an up-to date friendsList including any recent additions/deletions by the user
+    //added friends from context into dependency array so friendsList refreshes everytime a new friend is added/removed to fetch the relevant friends user info to populate the FriendBox component
     useEffect(() => {
         const getFriends = async() => {
             axios.get(`http://localhost:5000/user/friends/${userId}`)
@@ -38,7 +39,7 @@ function FriendsList({ userId, profile }) {
                                 key={friend._id}
                                 friendId={friend._id}
                                 userName={`${friend.firstName} ${friend.lastName}`}
-                                status={friend.status}
+                                status={friend.location}
                                 userProfilePic={friend.userProfilePic}                    
                             />
                         )

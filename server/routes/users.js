@@ -36,7 +36,7 @@ Router.get("/friends/:id",
 
         //each user object in friends is now destructured to extract only the relevant information we need to display in the friends widget on the user's homepage
         const relevantFriendsInfo = friends.map(({ _id, firstName, lastName, location, profilePic }) => {
-                return { _id, firstName, lastName, profilePic, location }
+                return { _id, firstName, lastName, userProfilePic: profilePic, location }
             }
         )
 
@@ -77,15 +77,15 @@ Router.patch("/:id/:friendId",
             user.friendsList.map(id => User.findById(id))
         )
 
-        //editing userFriends to extract relevant info to send to the front-end
-        const relevantFriendInfo = userFriends.map(
-            ({ _id, firstName, lastName, location, profilePic }) => {
-                return { _id, firstName, lastName, location, profilePic };
+        //editing userFriends to extract their ids to send to the front-end
+        const relevantFriendIds = userFriends.map(
+            ({ _id }) => {
+                return  _id 
             }
         )
 
-        //sending new friendsList with editted info to the client front-end
-        res.status(200).json(relevantFriendInfo)
+        //sending new friendsList with friend's ids to the client front-end
+        res.status(200).json(relevantFriendIds)
     })
 )
 
