@@ -1,7 +1,6 @@
 import { useContext } from "react"
 import Navbar from "../components/Navbar"
 import { UserContext } from "../LoggedInUserContext"
-import { useForm } from "react-hook-form"
 import axios from "axios"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPenToSquare, faCheck, faXmark } from "@fortawesome/free-solid-svg-icons"
@@ -11,13 +10,10 @@ function UserSettings() {
     //grabbing user info from context
     const { loggedInUser } = useContext(UserContext)
 
-    //react-hook-form
-    const { register, handleSubmit, formState: { errors} } = useForm({
-        defaultValues: {
-            location: loggedInUser.location,
-            status: loggedInUser.status,
-        }
-    })
+    //variables to track user input
+    const [ location, setLocation ] = useState(loggedInUser.location)
+    const [ status, setStatus ] = useState(loggedInUser.status)
+    const [ profilePic, setProfilePic ] = useState(loggedInUser.profilePic)
 
     //toggle inputs to enter new user info
     const [ editLocation, setEditLocation ] = useState(false)
@@ -66,8 +62,8 @@ function UserSettings() {
                             className={`${editLocation ? '' : 'hidden'}`}
                         >
                             <input 
-                                {...register('location')}
-                                type="text" 
+                                type="text"
+                                value={location} 
                                 className="rounded-lg p-1"
                             />
                         </div>
@@ -93,8 +89,8 @@ function UserSettings() {
                             className={`${editStatus ? '' : 'hidden'}`}
                         >
                             <input 
-                                {...register('status')}
-                                type="text" 
+                                type="text"
+                                value={status} 
                                 className="rounded-lg p-1"
                             />
                         </div>
@@ -122,15 +118,15 @@ function UserSettings() {
                             className={`${editPicture ? '' : 'hidden'}`}
                         >
                             <input 
-                                {...register('profilePic')}
-                                type="file" 
+                                type="file"
+                                value={profilePic} 
                                 className="rounded-lg p-1"
                             />
                         </div>
                     </div>
 
                     <button
-                        className="bg-sky-400 mt-5 py-1 px-5 w-fit rounded-lg"
+                        className="bg-sky-400 mt-5 py-1 px-5 w-fit rounded-lg text-white"
                         onClick={handleSubmit(saveSettings)}
                     >
                         Save Settings
