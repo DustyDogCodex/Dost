@@ -38,7 +38,7 @@ function UserSettings() {
                 className="h-screen p-2 flex justify-center bg-slate-200 dark:bg-black"
             >
                 <div
-                    className='h-fit mt-5 p-5 flex flex-col rounded-lg dark:text-white dark:bg-slate-800'
+                    className='h-fit mt-5 p-5 flex flex-col rounded-lg bg-white dark:text-white dark:bg-slate-800'
                 >
                     <h1
                         className="text-3xl text-center"
@@ -116,7 +116,7 @@ function UserSettings() {
                         />
                         <FontAwesomeIcon icon={faCheck} style={{color: "#05fa2e",}} />
                         <FontAwesomeIcon icon={faXmark} style={{color: "#ff0000",}} />
-                        
+
                         {/* this section will be displayed after user clicks the edit button first */}
                         <div
                             className={`${editPicture ? '' : 'hidden'}`}
