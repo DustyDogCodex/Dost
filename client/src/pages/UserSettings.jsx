@@ -3,6 +3,9 @@ import Navbar from "../components/Navbar"
 import { UserContext } from "../LoggedInUserContext"
 import { useForm } from "react-hook-form"
 import axios from "axios"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faPenToSquare, faCheck, faXmark } from "@fortawesome/free-solid-svg-icons"
+import { useState } from "react"
 
 function UserSettings() {
     //grabbing user info from context
@@ -15,6 +18,11 @@ function UserSettings() {
             status: loggedInUser.status,
         }
     })
+
+    //toggle inputs to enter new user info
+    const [ editLocation, setEditLocation ] = useState(false)
+    const [ editStatus, setEditStatus ] = useState(false)
+    const [ editPicture, setEditPicture ] = useState(false)
 
     //save user settings function
     function saveSettings(){
@@ -41,33 +49,84 @@ function UserSettings() {
                     <div
                         className="mt-5 flex items-center justify-between"
                     >
-                        <label>Location</label>
-                        <input 
-                            {...register('location')}
-                            type="text" 
-                            className="w-4/5 rounded-lg p-1"
+                        <label className="font-bold text-xl">Location</label>
+                        <p 
+                            className="dark:text-white"
+                        >
+                            {loggedInUser.location ? loggedInUser.location : 'Off the grid'}
+                        </p>
+                        <FontAwesomeIcon 
+                            icon={faPenToSquare} 
+                            style={{color: "#00e9fa", cursor:'pointer'}} 
+                            onClick={() => setEditLocation(!editLocation)}
                         />
+
+                        {/* this section will be displayed after user clicks the edit button first */}
+                        <div
+                            className={`${editLocation ? '' : 'hidden'}`}
+                        >
+                            <input 
+                                {...register('location')}
+                                type="text" 
+                                className="rounded-lg p-1"
+                            />
+                        </div>
                     </div>
 
                     <div
                         className="mt-5 flex items-center justify-between"
                     >
-                        <label>Status</label>
-                        <input 
-                            {...register('status')}
-                            type="text" 
-                            className="w-4/5 rounded-lg p-1"
+                        <label className="font-bold text-xl">Status</label>
+                        <p 
+                            className="dark:text-white"
+                        >
+                            {loggedInUser.status ? loggedInUser.status : 'No status'}
+                        </p>
+                        <FontAwesomeIcon 
+                            icon={faPenToSquare} 
+                            style={{color: "#00e9fa", cursor:'pointer'}} 
+                            onClick={() => setEditStatus(!editStatus)}
                         />
+
+                        {/* this section will be displayed after user clicks the edit button first */}
+                       <div
+                            className={`${editStatus ? '' : 'hidden'}`}
+                        >
+                            <input 
+                                {...register('status')}
+                                type="text" 
+                                className="rounded-lg p-1"
+                            />
+                        </div>
                     </div>
 
                     <div
                         className="mt-5 flex items-center justify-between"
                     >
-                        <label>Profile Picture</label>
-                        <input 
-                            type="file" 
-                            className="border border-sky-400"
+                        <label className="font-bold text-xl">Profile Picture</label>
+                        <img 
+                            src={`http://localhost:5000/uploads/${loggedInUser.profilePic}`} 
+                            alt="user profile picture" 
+                            className="w-48 h-48 rounded-lg ml-10"
                         />
+                        <FontAwesomeIcon 
+                            icon={faPenToSquare} 
+                            style={{color: "#00e9fa", cursor:'pointer'}}
+                            onClick={() => setEditPicture(!editPicture)}
+                        />
+                        <FontAwesomeIcon icon={faCheck} style={{color: "#05fa2e",}} />
+                        <FontAwesomeIcon icon={faXmark} style={{color: "#ff0000",}} />
+                        
+                        {/* this section will be displayed after user clicks the edit button first */}
+                        <div
+                            className={`${editPicture ? '' : 'hidden'}`}
+                        >
+                            <input 
+                                {...register('profilePic')}
+                                type="file" 
+                                className="rounded-lg p-1"
+                            />
+                        </div>
                     </div>
 
                     <button

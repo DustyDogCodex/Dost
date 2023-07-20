@@ -103,7 +103,8 @@ Router.patch('/settings/:userId',
                 { location, status, profilePic },
                 { new: true }
             ) */
-
+        
+        res.send(userid)
     })
 )
 
