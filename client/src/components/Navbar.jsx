@@ -1,5 +1,6 @@
-import { Search, DarkMode, LightMode, Notifications, Menu, Close } from "@mui/icons-material";
-import { IconButton } from "@mui/material";
+import { Search, DarkMode, LightMode } from "@mui/icons-material";
+import SettingsIcon from '@mui/icons-material/Settings';
+import { Icon, IconButton } from "@mui/material";
 import axios from "axios";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
@@ -50,6 +51,12 @@ function Navbar({ firstName }) {
             <div 
                 className="flex items-center"
             >
+                <p 
+                    className="dark:text-sky-400"
+                >
+                   Hi, {firstName}
+                </p>
+                
                 {/* conditionally rendering light or dark mode icon depending on whether or not darkMode is on */}
                 {darkMode 
                     ?
@@ -61,14 +68,16 @@ function Navbar({ firstName }) {
                             <DarkMode className="dark:text-slate-200"/>
                         </IconButton>
                 }
+
                 <IconButton>
-                    <Notifications className="dark:text-slate-200"/>
+                    <Link
+                        to={'/settings'}
+                        className="flex items-center"
+                    >
+                        <SettingsIcon className="dark:text-slate-200"/>
+                    </Link>
                 </IconButton>
-                <p 
-                    className="dark:text-sky-400"
-                >
-                    {firstName}
-                </p>
+
                 <button
                     className="bg-red-500 py-1 px-3 rounded-lg text-white ml-3"
                     onClick={logoutUser}

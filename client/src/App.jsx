@@ -4,6 +4,7 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import UserProfile from './pages/UserProfile'
+import UserSettings from './pages/UserSettings'
 import { useContext } from 'react'
 import { UserContext } from './LoggedInUserContext'
 
@@ -28,6 +29,10 @@ function App() {
                     <Route 
                         path='homepage'
                         element={loggedInUser ? <Homepage /> : <Login />}
+                    />
+                    <Route 
+                        path='settings'
+                        element={loggedInUser ? <UserSettings /> : <Login />}
                     />
                     <Route 
                         path='profile/:userId'
