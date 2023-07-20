@@ -8,15 +8,16 @@ import { UserContext } from "../LoggedInUserContext"
 
 function FriendBox({ friendId, userName, userProfilePic, status }) {
     //checking to see if loggedIn user's ID matches friendId. If so, the add friends button will not be displayed.
-    const { loggedInUser } = useContext(UserContext)
+    const { loggedInUser, friends, dispatch } = useContext(UserContext)
     
     //checking if user is already in friendsList
-    const friendOrNah = loggedInUser.friendsList.find(id => id === friendId)
+    const friendOrNah = friends.find(id => id === friendId)
     
     //adding or removing friend from friendsList depending on whether user is already a friend or not
     const addFriend = async() =>{
         axios.patch(`http://localhost:5000/user/${loggedInUser._id}/${friendId}`)
-        .then(res => console.log(res.data))
+        .then(res => dispatch({ type: 'REFRESH_FRIENDSLIST', payload: res.data }))
+        .catch(err => console.log(err))
     }
 
     return (

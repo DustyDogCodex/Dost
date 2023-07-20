@@ -1,22 +1,24 @@
 /* small widget that will display a list of the user's friends */
 
 import axios from "axios"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 import FriendBox from "./FriendBox"
+import { UserContext } from "../LoggedInUserContext"
 
 function FriendsList({ userId, profile }) {
     //state variable to store friendsList
-    const [ friends, setFriends ] = useState([])
+    const [ friendsList, setFriendsList ] = useState([])
+    const { friends } = useContext(UserContext)
 
     //get request to get an up-to date friendsList including any recent additions/deletions by the user
     useEffect(() => {
         const getFriends = async() => {
             axios.get(`http://localhost:5000/user/friends/${userId}`)
-            .then(res => setFriends([ ...res.data ]))
+            .then(res => setFriendsList([ ...res.data ]))
             .catch(err => console.log(err))
         }
         getFriends()
-    },[])
+    },[ friends ])
 
     return (
         <div
@@ -29,9 +31,9 @@ function FriendsList({ userId, profile }) {
             </h3>
             <div>
                 {
-                    friends.length 
+                    friendsList.length 
                     ? 
-                        friends.map(friend => 
+                        friendsList.map(friend => 
                             <FriendBox 
                                 key={friend._id}
                                 friendId={friend._id}

@@ -9,8 +9,9 @@ import { UserContext } from './LoggedInUserContext'
 
 function App() {
     //using context to check for a loggedIn user
-    const { loggedInUser } = useContext(UserContext) 
+    const { loggedInUser, friends } = useContext(UserContext) 
     console.log('logged in user',loggedInUser)
+    console.log('friends list', friends)
     
     return (
         <div>
