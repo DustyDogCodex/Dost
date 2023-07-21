@@ -18,7 +18,7 @@ function Homepage() {
                 className="min-h-screen h-full flex flex-col items-center bg-slate-200 dark:bg-black"
             >
                 <div
-                    className="flex justify-center lg:w-4/5"
+                    className="flex justify-center xl:w-4/5"
                 >
                     <UserProfileWidget 
                         userId={loggedInUser._id}

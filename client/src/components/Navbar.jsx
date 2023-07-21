@@ -5,6 +5,7 @@ import axios from "axios";
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../LoggedInUserContext";
+import useMediaQuery from "../hooks/useMediaQuery"
 
 function Navbar({ firstName }) {
     //grabbing darkMode settings from context
@@ -32,7 +33,7 @@ function Navbar({ firstName }) {
 
     return (
         <div
-            className="sticky top-0 flex items-center justify-between py-3 px-10 bg-white dark:bg-slate-800 lg:px-72"
+            className="sticky top-0 flex items-center justify-between py-3 px-10 bg-white dark:bg-slate-800 xl:px-72"
         >
             {/* app brand */}
             <Link
@@ -49,7 +50,7 @@ function Navbar({ firstName }) {
                 <input 
                     type="text" 
                     placeholder="Search..." 
-                    className="bg-slate-200 text-gray-500 py-2 px-8 rounded-lg mx-3 w-[400px]"
+                    className="bg-slate-200 text-gray-500 py-2 px-8 rounded-lg mx-3 w-48 lg:w-80"
                 />
                 <Search className="dark:text-slate-200"/>
             </div>

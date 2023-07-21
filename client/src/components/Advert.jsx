@@ -24,7 +24,7 @@ function Advert() {
 
     return (
         <div
-            className="m-3 p-3 bg-white rounded-lg w-[350px] dark:bg-slate-800 dark:text-white"
+            className="m-3 p-3 bg-white rounded-lg w-80 dark:bg-slate-800 dark:text-white"
         >
             <h5
                 className="text-center text-sm text-gray-500"
@@ -33,7 +33,7 @@ function Advert() {
             </h5>
             <a href="https://www.theuncomfortable.com/" target="_blank">
                 <img 
-                    src={`./public/${selectedAdvert.image}`} 
+                    src={`./${selectedAdvert.image}`} 
                     alt={selectedAdvert.image} 
                     className="rounded-lg my-2"
                 />

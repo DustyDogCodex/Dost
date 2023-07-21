@@ -23,7 +23,7 @@ function FriendsList({ userId, profile }) {
 
     return (
         <div
-            className="w-[350px] m-3 p-3 rounded-lg bg-white dark:bg-slate-800"
+            className="w-80 m-3 p-3 rounded-lg bg-white dark:bg-slate-800"
         >
             <h3
                 className="text-2xl dark:text-white text-center"
