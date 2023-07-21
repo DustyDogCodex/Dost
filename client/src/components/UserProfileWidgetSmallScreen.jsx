@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faUser, faLocationPin, faPaperPlane } from "@fortawesome/free-solid-svg-icons"
 import { Link } from "react-router-dom"
 
-function UserProfileWidget({ userId, name, profilePic, numFriends, location, status, views, profile }) {    
+function UserProfileWidgetSmallScreen({ userId, name, profilePic, numFriends, location, status, views, profile }) {    
     return (
         <div
             className="p-5 w-80 h-72 m-3 rounded-lg bg-white dark:bg-slate-800 dark:text-white"
@@ -83,4 +83,4 @@ function UserProfileWidget({ userId, name, profilePic, numFriends, location, sta
     )
 }
 
-export default UserProfileWidget
+export default UserProfileWidgetSmallScreen

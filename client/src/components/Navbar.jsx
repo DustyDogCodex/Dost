@@ -17,7 +17,7 @@ function Navbar({ firstName }) {
     const [ menuToggled, setMenuToggled ] = useState(false)
 
     //checking to see if window is above a small screen with custom hook
-    const aboveSmallScreens = useMediaQuery("(min-width: 768px)")
+    const aboveSmallScreens = useMediaQuery("(min-width: 780px)")
 
     //API call to logout user
     const logoutUser = async() => {
