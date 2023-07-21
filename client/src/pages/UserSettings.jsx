@@ -119,7 +119,7 @@ function UserSettings() {
                         >
                             <input 
                                 type="file"
-                                value={profilePic} 
+                                onChange={(e) => setProfilePic(e.target.files[0])}
                                 className="rounded-lg p-1"
                             />
                         </div>
@@ -127,7 +127,7 @@ function UserSettings() {
 
                     <button
                         className="bg-sky-400 mt-5 py-1 px-5 w-fit rounded-lg text-white"
-                        onClick={handleSubmit(saveSettings)}
+                        onClick={saveSettings}
                     >
                         Save Settings
                     </button>

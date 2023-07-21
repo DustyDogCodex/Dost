@@ -127,7 +127,7 @@ function CreatePost({ userId, profilePic }) {
                 </div>
                 <button
                     type="submit"
-                    className="bg-sky-400 text-white text-lg px-6 rounded-full ml-10"
+                    className="bg-sky-400 text-white text-lg px-6 rounded-full ml-10 dark:bg-blue-800"
                     onClick={handleSubmit(submitPost)}
                 >
                     Post
