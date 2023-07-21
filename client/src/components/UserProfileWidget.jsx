@@ -5,12 +5,12 @@ import { Link } from "react-router-dom"
 function UserProfileWidget({ userId, name, profilePic, numFriends, location, status, views, profile }) {    
     return (
         <div
-            className="p-5 w-80 h-72 m-3 rounded-lg bg-white dark:bg-slate-800 dark:text-white"
+            className="p-5 md:w-80 md:h-72 m-3 rounded-lg bg-white dark:bg-slate-800 dark:text-white"
         >
             {/* top of widget: username + profilePic + friends */}
             <Link
                 to={`/profile/${userId}`}
-                className="flex items-center gap-2 pb-5 border-b border-fuchsia-400"
+                className="flex flex-col md:flex-row items-center gap-2 pb-5 border-b border-fuchsia-400"
             >
                 {/* Conditional rendering: if user profilePic exists then display profile pic else display font awesome user icon */}
                 {profilePic 
@@ -33,7 +33,7 @@ function UserProfileWidget({ userId, name, profilePic, numFriends, location, sta
                         {name}
                     </h2>
                     <p
-                        className="text-sm"
+                        className="text-sm text-center md:text-left"
                     >
                         {numFriends} {numFriends == 1 ? 'friend' : 'friends'}
                     </p>
@@ -58,7 +58,7 @@ function UserProfileWidget({ userId, name, profilePic, numFriends, location, sta
                 >
                     <FontAwesomeIcon 
                         icon={faPaperPlane} 
-                        style={{color: "#0ab6ff", height:'25px', width:'25px',marginRight: '20px'}}
+                        style={{color: "#0ab6ff", height:'25px', width:'25px', marginRight: '20px'}}
                     />
                     {status ? status : (profile ? 'No status' : 'Set status in user settings')}
                 </div>

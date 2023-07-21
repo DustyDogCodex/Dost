@@ -24,25 +24,29 @@ function Advert() {
 
     return (
         <div
-            className="m-3 p-3 bg-white rounded-lg w-80 dark:bg-slate-800 dark:text-white"
+            className="m-3 p-3 bg-white rounded-lg lg:w-80 dark:bg-slate-800 dark:text-white"
         >
             <h5
                 className="text-center text-sm text-gray-500"
             >
                 Advertisement
             </h5>
-            <a href="https://www.theuncomfortable.com/" target="_blank">
-                <img 
-                    src={`./${selectedAdvert.image}`} 
-                    alt={selectedAdvert.image} 
-                    className="rounded-lg my-2"
-                />
-            </a>
-            <p
-                className="text-sm text-center"
+            <div
+                className="flex md:flex-col items-center"
             >
-                {selectedAdvert.description}
-            </p>
+                <a href="https://www.theuncomfortable.com/" target="_blank">
+                    <img 
+                        src={`./${selectedAdvert.image}`} 
+                        alt={selectedAdvert.image} 
+                        className="rounded-lg my-2 max-h-80"
+                    />
+                </a>
+                <p
+                    className="text-sm text-center"
+                >
+                    {selectedAdvert.description}
+                </p>
+            </div>
         </div>
     )
 }

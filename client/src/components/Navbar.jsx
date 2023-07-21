@@ -65,7 +65,7 @@ function Navbar({ firstName }) {
                         className="flex items-center"
                     >
                         <p 
-                            className="dark:text-sky-400"
+                            className="dark:text-blue-500"
                         >
                             Hi, {firstName}
                         </p>

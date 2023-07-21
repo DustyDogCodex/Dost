@@ -7,14 +7,13 @@ import { UserContext } from "../LoggedInUserContext"
 import FriendsList from "../components/FriendsList"
 import Advert from "../components/Advert"
 import useMediaQuery from "../hooks/useMediaQuery"
-import UserProfileWidgetSmallScreen from "../components/UserProfileWidgetSmallScreen"
 
 function Homepage() {
     //using context to get loggedInUser's info. This will be passed as props to the components on this page
     const { loggedInUser } = useContext(UserContext)
 
-    //checking to see if window is above a small screen with custom hook
-    const aboveSmallScreens = useMediaQuery("(min-width: 780px)")
+    //checking to see if window is above a medium screen with custom hook
+    const aboveMedScreens = useMediaQuery("(min-width: 1060px)")
 
     return (
         <>
@@ -22,7 +21,7 @@ function Homepage() {
             <div
                 className="min-h-screen h-full bg-slate-200 dark:bg-black"
             >
-                {aboveSmallScreens 
+                {aboveMedScreens 
                 ?
                     (
                         <div
@@ -63,9 +62,9 @@ function Homepage() {
                 : 
                     (
                         <div
-                            className="p-3 bg-slate-200 dark:bg-black"
+                            className="p-5 bg-slate-200 dark:bg-black"
                         >
-                            <UserProfileWidgetSmallScreen 
+                            <UserProfileWidget
                                 userId={loggedInUser._id}
                                 name={`${loggedInUser.firstName} ${loggedInUser.lastName}`}
                                 profilePic={loggedInUser.profilePic}
@@ -74,11 +73,11 @@ function Homepage() {
                                 status={loggedInUser.status}
                                 views={loggedInUser.profileViews}
                             />
-                            <Advert />
                             <CreatePost 
                                 userId={loggedInUser._id} 
                                 profilePic={loggedInUser.profilePic}
                             />
+                            <Advert />
                             <PostsDisplay profile={false}/>
                         </div>
                     )
