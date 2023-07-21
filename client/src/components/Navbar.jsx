@@ -1,8 +1,8 @@
 import { Search, DarkMode, LightMode } from "@mui/icons-material";
 import SettingsIcon from '@mui/icons-material/Settings';
-import { Icon, IconButton } from "@mui/material";
+import { IconButton } from "@mui/material";
 import axios from "axios";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../LoggedInUserContext";
 
@@ -10,12 +10,19 @@ function Navbar({ firstName }) {
     //grabbing darkMode settings from context
     const { darkMode, toggleDarkMode } = useContext(UserContext)
 
+    //using state to toggle navbar menu
+    const [ menuToggled, setMenuToggled ] = useState(false)
+
+    //checking to see if window is above a small screen with custom hook
+    const aboveSmallScreens = useMediaQuery("(min-width: 768px)")
+
     //API call to logout user
     const logoutUser = async() => {
         axios.get('http://localhost:5000/auth/logout',
             { withCredentials: true }
         )
         .then(res => {
+            /* upon successful logout, redirect user to home page */
             if(res.data == 'success'){
                 window.location.replace('/')
             }
@@ -47,7 +54,7 @@ function Navbar({ firstName }) {
                 <Search className="dark:text-slate-200"/>
             </div>
 
-            {/* dark modee toggle, user settings, logout */}
+            {/* dark mode toggle, user settings, logout */}
             <div 
                 className="flex items-center"
             >
