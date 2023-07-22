@@ -110,4 +110,18 @@ Router.get("/edit/:postId",
     })
 )
 
+//route for deleting a post
+Router.delete("/delete/:postId",
+    asyncHandler(async(req,res) => {
+        //get postId from params
+        const { postId } = req.params
+        
+        //find relevant post
+        const post = await Post.findByIdAndDelete(postId)
+
+        //send description and image path from post to front end
+        res.status(200).send('success')
+    })
+)
+
 module.exports = Router

@@ -18,6 +18,9 @@ function EditPost() {
     const [ editImagePath, setEditImagePath ] = useState(null)
     const [ newImage, setNewImage ] = useState(false)
 
+    //delete post modal toggle
+    const [ deletePostConfirm, setDeletePostConfirm ] = useState(false)
+
     //api call to get post info
     useEffect(() => {
         const getPostInfo = async() => {
@@ -64,7 +67,7 @@ function EditPost() {
 
     //api call to delete entire post from database
     async function deletePost(){
-        axios.delete(`http://localhost:5000/posts/update/${postId}`)
+        axios.delete(`http://localhost:5000/posts/delete/${postId}`)
         .then(res => {
             if(res){
                 window.location.replace('/homepage')
@@ -142,16 +145,45 @@ function EditPost() {
                             
                             <button
                                 className="bg-sky-400 px-3 py-1 rounded-full mt-3 text-white"
+                                onClick={() => window.location.replace('/homepage')}
                             >
                                 Cancel
                             </button>
 
                             <button
                                 className="bg-red-700 px-3 py-1 rounded-full mt-3 text-white"
+                                onClick={() => setDeletePostConfirm(!deletePostConfirm)}
                             >
                                 Delete Post
                             </button>
                         </div>
+
+                        {/* small modal to confirm deleting post */}
+                        {deletePostConfirm && 
+                            (
+                                <div
+                                    className="flex flex-col p-5 mt-5 bg-white rounded-lg"
+                                >
+                                    <p>Are you sure you want to delete your post?</p>
+                                    <div
+                                        className="flex items-center justify-center"
+                                    >
+                                        <button
+                                            className="bg-red-700 px-3 py-1 rounded-full mt-3 text-white"
+                                        >
+                                            Yes
+                                        </button>
+
+                                        <button
+                                            className="bg-green-700 px-3 py-1 rounded-full mt-3 text-white"
+                                            onClick={() => setDeletePostConfirm(!deletePostConfirm)}
+                                        >
+                                            No
+                                        </button>
+                                    </div>
+                                </div>
+                            )
+                        }
                     </div>
                 </div>
             </div>

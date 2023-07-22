@@ -58,7 +58,7 @@ function Post({ postId, postUserId, userName, location, description, createdAt, 
 
     return (
         <div
-            className="relative w-full bg-white rounded-lg p-4 mb-3 flex flex-col dark:bg-slate-800"
+            className="w-full bg-white rounded-lg p-4 mb-3 flex flex-col dark:bg-slate-800"
         >
             {/* top of post component which includes friendBox component. FriendBox component has info on the user who created the post and can be used to add them to a user's friendlist. */}
             <FriendBox 
@@ -78,7 +78,7 @@ function Post({ postId, postUserId, userName, location, description, createdAt, 
 
             {imagePath && (
                 <div
-                    className="flex items-center justify-center"
+                    className="flex items-center justify-center rounded-lg bg-slate-500 dark:bg-slate-900"
                 >
                     <img 
                         src={`http://localhost:5000/uploads/${imagePath}`} 
