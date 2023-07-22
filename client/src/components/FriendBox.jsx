@@ -1,4 +1,5 @@
 /* this component will display information about the user that created a post. This component will allow a user to add or remove another user depending on whether or not they are already in the user's friendsList */
+/* this component is used on the top of a post and in user's friendList to display a friend's information */
 import axios from "axios"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faUserMinus, faUserPlus, faUser } from "@fortawesome/free-solid-svg-icons"
@@ -78,7 +79,7 @@ function FriendBox({ friendId, userName, userProfilePic, status }) {
                         </div>
                     :   
                         <div
-                            className="flex items-center justify-cente p-2 rounded-full bg-slate-300 dark:bg-slate-950"
+                            className="flex items-center justify-center p-2 rounded-full bg-slate-300 dark:bg-slate-950"
                         >
                             <FontAwesomeIcon 
                                 icon={faUserPlus} 

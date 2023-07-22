@@ -1,20 +1,22 @@
 import FriendBox from "./FriendBox"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faHeart, faComments } from "@fortawesome/free-solid-svg-icons"
+import { faHeart, faComments, faPenToSquare, faCircleXmark, faTrash } from "@fortawesome/free-solid-svg-icons"
 import axios from "axios"
 import { useContext, useState, useEffect } from "react"
 import { UserContext } from "../LoggedInUserContext"
 import { useForm } from "react-hook-form"
+import { Link } from "react-router-dom"
 
 function Post({ postId, postUserId, userName, location, description, createdAt, imagePath, userProfilePic, likes, comments }) {
 
     //using context to grab userID for logged in user
     const { loggedInUser } = useContext(UserContext)
 
-    //variables for tracking likes and comments for a post
+    //variables for tracking likes & comments for a post, toggle comments and toggle editting modal.
     const [ postLikes, setPostLikes ] = useState(likes)
     const [ postComments, setPostComments ] = useState(comments)
     const [ showComments, setShowComments ] = useState(false)
+    const [ showModal, setShowModal ] = useState(false)
 
     //variable for tracking when to reset input to empty after submission
     const [ resetReady, setResetReady ] = useState(false) 
@@ -57,7 +59,7 @@ function Post({ postId, postUserId, userName, location, description, createdAt, 
 
     return (
         <div
-            className="w-full bg-white rounded-lg p-4 mb-3 flex flex-col dark:bg-slate-800"
+            className="relative w-full bg-white rounded-lg p-4 mb-3 flex flex-col dark:bg-slate-800"
         >
             {/* top of post component which includes friendBox component. FriendBox component has info on the user who created the post and can be used to add them to a user's friendlist. */}
             <FriendBox 
@@ -87,11 +89,14 @@ function Post({ postId, postUserId, userName, location, description, createdAt, 
                 </div>                
             )}
             
-            {/* row containing like and comments icon */}
+            {/* row containing like, comments and edit icons */}
             <div 
-                className="flex px-5"
+                className="flex justify-between px-5"
             >
-                {
+                <div
+                    className="flex"
+                >
+                    {
                     postLikes.includes(loggedInUser._id)
                         ?
                             <div
@@ -115,19 +120,36 @@ function Post({ postId, postUserId, userName, location, description, createdAt, 
                                 /> 
                                 <span className="ml-2 dark:text-white">{ postLikes.length ? postLikes.length : 0 }</span>
                             </div>
-                }
+                    }
                 
-                {/* comments icon used to toggle comments section display */}
-                <div
-                    className="my-2 mr-2 flex items-center"
-                >
-                    <FontAwesomeIcon 
-                        icon={faComments} 
-                        style={{color: "#a1aab5", cursor:'pointer', height:'25px', width:'25px'}} 
-                        onClick={() => setShowComments(!showComments)}
-                    />
-                    <span className="ml-2 dark:text-white">{ postComments.length }</span>
+                    {/* comments icon used to toggle comments section display */}
+                    <div
+                        className="my-2 mr-2 flex items-center"
+                    >
+                        <FontAwesomeIcon 
+                            icon={faComments} 
+                            style={{color: "#a1aab5", cursor:'pointer', height:'25px', width:'25px'}} 
+                            onClick={() => setShowComments(!showComments)}
+                        />
+                        <span className="ml-2 dark:text-white">{ postComments.length }</span>
+                    </div>
                 </div>
+
+                {/* if loggedInUser id is the same as the friendId (meaning the loggedInUser is the same as the user who created this post), an icon to edit the post will be displayed */}
+                {/* after clicking the edit icon, the user can edit or delete their post. */}
+                {loggedInUser._id === postUserId &&
+                    (
+                        <Link
+                            to={`/edit/${postId}`}
+                            className="flex items-center justify-center p-2 rounded-full bg-slate-300 dark:bg-slate-950"
+                        >
+                            <FontAwesomeIcon 
+                                icon={faPenToSquare} 
+                                style={{color: "#25bb07", height:'25px', width:'25px', cursor:'pointer'}} 
+                            /> 
+                        </Link>
+                    )
+                }
             </div>
 
             {/* comments section. This is hidden by default until user clicks on the comments icon above to toggle its display. */}
