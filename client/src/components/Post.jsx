@@ -6,7 +6,7 @@ import { useContext, useState, useEffect } from "react"
 import { UserContext } from "../LoggedInUserContext"
 import { useForm } from "react-hook-form"
 
-function Post({ postId, postUserId, userName, location, description, imagePath, userProfilePic, likes, comments }) {
+function Post({ postId, postUserId, userName, location, description, createdAt, imagePath, userProfilePic, likes, comments }) {
 
     //using context to grab userID for logged in user
     const { loggedInUser } = useContext(UserContext)
@@ -72,6 +72,8 @@ function Post({ postId, postUserId, userName, location, description, imagePath, 
             >
                 {description}
             </p>
+
+            <span className="text-xs mx-3 mb-2 dark:text-white">{new Date(createdAt).toLocaleDateString()}</span>
 
             {imagePath && (
                 <div

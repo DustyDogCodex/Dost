@@ -52,6 +52,7 @@ function PostsDisplay({ userId, profile }) {
                             userName={`${post.firstName} ${post.lastName}`} 
                             location={post.location} 
                             description={post.description} 
+                            createdAt={post.createdAt}
                             imagePath={post.imagePath} 
                             userProfilePic={post.userProfilePic} 
                             likes={post.likes} 
