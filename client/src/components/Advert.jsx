@@ -24,9 +24,12 @@ function Advert() {
 
     return (
         <div
-            className="m-3 p-3 bg-white rounded-lg lg:w-80 dark:bg-slate-800 dark:text-white"
+            className="m-3 p-3 md:w-80 bg-white rounded-lg dark:bg-slate-800 dark:text-white"
         >
-            <h5
+            <div
+                className="flex flex-col items-center justify-center"
+            >
+                <h5
                 className="text-center text-sm text-gray-500"
             >
                 Advertisement
@@ -38,14 +41,15 @@ function Advert() {
                     <img 
                         src={`./${selectedAdvert.image}`} 
                         alt={selectedAdvert.image} 
-                        className="rounded-lg my-2 max-h-80"
+                        className="rounded-lg max-h-80"
                     />
                 </a>
                 <p
-                    className="text-sm text-center"
+                    className="text-sm text-center p-3"
                 >
                     {selectedAdvert.description}
                 </p>
+            </div>
             </div>
         </div>
     )

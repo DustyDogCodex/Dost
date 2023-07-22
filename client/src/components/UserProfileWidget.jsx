@@ -5,7 +5,7 @@ import { Link } from "react-router-dom"
 function UserProfileWidget({ userId, name, profilePic, numFriends, location, status, views, profile }) {    
     return (
         <div
-            className="p-5 md:w-80 md:h-72 m-3 rounded-lg bg-white dark:bg-slate-800 dark:text-white"
+            className="p-5 md:w-80 md:h-80 m-3 rounded-lg bg-white dark:bg-slate-800 dark:text-white"
         >
             {/* top of widget: username + profilePic + friends */}
             <Link
