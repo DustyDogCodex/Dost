@@ -2,7 +2,7 @@ const Post = require("../models/Posts")
 const User = require("../models/Users")
 const asyncHandler = require('express-async-handler')
 
-/* ------- Create new post -------- */
+/* ------- Create new post --------------------------- */
 
 const createNewPost = asyncHandler(
     async(req,res) => {
@@ -31,4 +31,32 @@ const createNewPost = asyncHandler(
     }
 )
 
-module.exports = { createNewPost }
+/* ------------ Update a Post ------------------------- */
+
+const updatePost = asyncHandler(
+    async(req,res) => {
+        //get postId from params
+        const { postId } = req.params
+
+        //getting description from req body
+        const { description, newImage } = req.body
+
+        //checking for uploaded image
+        let newImagePath
+
+        if(newImage){
+            newImagePath = req.file.filename
+        } else {
+
+        }
+
+        //find and update post
+        const updatedPost = Post.findByIdAndUpdate(postId,
+                { description, }
+            )
+
+        res.status(200).send(updatedPost)
+    }
+)
+
+module.exports = { createNewPost, updatePost }

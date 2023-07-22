@@ -16,33 +16,84 @@ function EditPost() {
     //variables for tracking user input
     const [ editDescription, setEditDescription ] = useState(null)
     const [ editImagePath, setEditImagePath ] = useState(null)
+    const [ newImage, setNewImage ] = useState(false)
 
     //api call to get post info
     useEffect(() => {
         const getPostInfo = async() => {
             axios.get(`http://localhost:5000/posts/edit/${postId}`)
-            .then(res => console.log(res.data))
+            .then(res => {
+                setEditDescription(res.data.description)
+                setEditImagePath(res.data.imagePath)
+            })
             .catch(err => console.log(err))
         }
         getPostInfo()
     }, [])
+    
+    //api call to update post with new parameters
+    async function updatePost(){
+        const formData = new FormData()
+        formData.append("description", editDescription);
+
+        if(newImage){
+            formData.append("image", newImage);
+            formData.append('newImage', true)
+        }
+
+        //if editImagePath is null that means user has not uploaded an image previously or has deleted the image with the post
+        if(!editImagePath){
+            formData.append('deletePrevImage', true)
+        }
+
+        //sending patch request to update post info on server
+        axios.patch(`http://localhost:5000/posts/update/${postId}`,
+            formData,
+            {
+                headers: { "Content-Type": "multipart/form-data" }
+            },
+            { withCredentials: true } 
+        )
+        .then(res => {
+            if(res){
+                window.location.replace('/homepage')
+            }
+        })
+        .catch(err => console.log(err))
+    }
+
+    //api call to delete entire post from database
+    async function deletePost(){
+        axios.delete(`http://localhost:5000/posts/update/${postId}`)
+        .then(res => {
+            if(res){
+                window.location.replace('/homepage')
+            }
+        })
+        .catch(err => console.log(err))
+    }
 
     return (
         <>
             <Navbar firstName={loggedInUser.firstName} />
             <div
-                className="flex items-center justify-center w-full"
+                className="p-2 flex items-center justify-center w-full h-screen bg-slate-200 dark:bg-black"
             >
                 <div
-                    className="flex flex-col justify-center rounded-lg p-3 bg-slate-200"
+                    className="flex flex-col justify-center rounded-lg p-3 bg-white dark:bg-slate-600"
                 >
-                    <h1 className="text-xl">Edit Post</h1>
+                    <h1 
+                        className="text-2xl text-center dark:text-white mb-5"
+                    >
+                        Edit Post
+                    </h1>
+
                     <div>
                         <textarea 
                             type="text" 
                             value={editDescription}
                             onChange={(e) => setEditDescription(e.target.value)}
-                            className="w-full p-1 rounded-lg"
+                            className="w-full p-1 rounded-lg mb-5 bg-slate-200"
                         />
 
                         {editImagePath && 
@@ -51,7 +102,7 @@ function EditPost() {
                                     className="relative"
                                 >
                                     <img 
-                                        src={`http://localhost:5000/uploads/${imagePath}`} 
+                                        src={`http://localhost:5000/uploads/${editImagePath}`} 
                                         alt="image with post"
                                         className="max-h-[600px] rounded-lg w-fit"
                                     />
@@ -73,7 +124,7 @@ function EditPost() {
                                 <div>
                                     <input 
                                         type="file" 
-                                        onChange={(e) => setEditImagePath(e.target.files[0])}
+                                        onChange={(e) => setNewImage(e.target.files[0])}
                                         className="p-1 border border-blue-400 rounded-lg"
                                     />
                                 </div>
@@ -88,7 +139,13 @@ function EditPost() {
                             >
                                 Save Post
                             </button>
-                                
+                            
+                            <button
+                                className="bg-sky-400 px-3 py-1 rounded-full mt-3 text-white"
+                            >
+                                Cancel
+                            </button>
+
                             <button
                                 className="bg-red-700 px-3 py-1 rounded-full mt-3 text-white"
                             >
