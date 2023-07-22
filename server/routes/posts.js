@@ -92,4 +92,22 @@ Router.post("/:id/comment",
     })
 )
 
+//route for getting info for editting a post
+Router.get("/edit/:postId",
+    asyncHandler(async(req,res) => {
+        //get postId from params
+        const { postId } = req.params
+        
+        //find relevant post
+        const post = await Post.findById(postId)
+
+        //sending post description and imagePath to frontend for editting
+        const description = post.description
+        const imagePath = post.imagePath
+
+        //send description and image path from post to front end
+        res.status(200).send({description, imagePath})
+    })
+)
+
 module.exports = Router

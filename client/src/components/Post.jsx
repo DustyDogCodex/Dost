@@ -16,7 +16,6 @@ function Post({ postId, postUserId, userName, location, description, createdAt, 
     const [ postLikes, setPostLikes ] = useState(likes)
     const [ postComments, setPostComments ] = useState(comments)
     const [ showComments, setShowComments ] = useState(false)
-    const [ showModal, setShowModal ] = useState(false)
 
     //variable for tracking when to reset input to empty after submission
     const [ resetReady, setResetReady ] = useState(false) 

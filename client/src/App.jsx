@@ -7,6 +7,7 @@ import UserProfile from './pages/UserProfile'
 import UserSettings from './pages/UserSettings'
 import { useContext } from 'react'
 import { UserContext } from './LoggedInUserContext'
+import EditPost from './pages/EditPost'
 
 function App() {
     //using context to check for a loggedIn user
@@ -37,6 +38,10 @@ function App() {
                     <Route 
                         path='profile/:userId'
                         element={<UserProfile />}
+                    />
+                    <Route 
+                        path='edit/:postId'
+                        element={loggedInUser ? <EditPost /> : <Login />}
                     />
                 </Routes>
             </BrowserRouter>
