@@ -38,13 +38,14 @@ function EditPost() {
     async function updatePost(){
         const formData = new FormData()
         formData.append("description", editDescription);
-
+        formData.append('prevImagePath', editImagePath)
+        
         if(newImage){
             formData.append("image", newImage);
             formData.append('newImage', true)
         }
 
-        //if editImagePath is null that means user has not uploaded an image previously or has deleted the image with the post
+        //if editImagePath is null that means user has not uploaded an image previously or has deleted the image associated with the post
         if(!editImagePath){
             formData.append('deletePrevImage', true)
         }
