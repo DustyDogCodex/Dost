@@ -47,7 +47,7 @@ const updatePost = asyncHandler(
         if(newImage){
             newImagePath = req.file.filename
         } else {
-
+            newImagePath = ''
         }
 
         //find and update post

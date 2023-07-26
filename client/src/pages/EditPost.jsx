@@ -36,8 +36,9 @@ function EditPost() {
     
     //api call to update post with new parameters
     async function updatePost(){
+        //submitting formData with uploaded image to update post
         const formData = new FormData()
-        formData.append("description", editDescription);
+        formData.append("description", editDescription)
         formData.append('prevImagePath', editImagePath)
         
         if(newImage){
@@ -131,6 +132,11 @@ function EditPost() {
                                         onChange={(e) => setNewImage(e.target.files[0])}
                                         className="p-1 border border-blue-400 rounded-lg"
                                     />
+                                    <FontAwesomeIcon 
+                                        icon={faTrash} 
+                                        style={{color: "#fa0000", height:'25px', width:'25px', cursor:'pointer'}} 
+                                        onClick={() => setEditImagePath(null)}
+                                    /> 
                                 </div>
                             )
                         }

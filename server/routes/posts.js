@@ -117,7 +117,13 @@ Router.delete("/delete/:postId",
         const { postId } = req.params
         
         //find relevant post
-        const post = await Post.findByIdAndDelete(postId)
+        const post = await Post.findById(postId)
+
+        //delete images associated with post
+        const postImage = post.imagePath ? post.imagePath : ''
+        
+        //after images are deleted, delete selected post from database
+        const deletedPost = await Post.findByIdAndDelete(postId)
 
         //send description and image path from post to front end
         res.status(200).send('success')
