@@ -50,10 +50,15 @@ const updatePost = asyncHandler(
             newImagePath = ''
         }
 
-        //find and update post
-        const updatedPost = Post.findByIdAndUpdate(postId,
-                { description, }
-            )
+        //if new image is uploaded, delete prev image from server
+        const post = await Post.findById(postId)
+
+        //find and update post after deleting associated images
+        const updatedPost = await Post.findByIdAndUpdate(
+            postId,
+            { description, imagePath: newImagePath },
+            { new: true }
+        )
 
         res.status(200).send(updatedPost)
     }
