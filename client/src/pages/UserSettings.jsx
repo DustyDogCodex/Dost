@@ -51,6 +51,32 @@ function UserSettings() {
         .catch(err => console.log(err))
     }
 
+    async function updateProfilePic(){
+        //submitting formData with uploaded image to update post
+        const formData = new FormData()
+        
+        formData.append('userId', loggedInUser._id)
+        
+        if(profilePic){
+            formData.append("image", profilePic)
+        }
+
+        //sending patch request to update post info on server
+        axios.put(`http://localhost:5000/settings/profilepic`,
+            formData,
+            {
+                headers: { "Content-Type": "multipart/form-data" }
+            },
+            { withCredentials: true } 
+        )
+        .then(res => {
+            if(res){
+                window.location.reload()
+            }
+        })
+        .catch(err => console.log(err))
+    }
+
     return (
         <div>
             <Navbar firstName={loggedInUser.firstName}/>
@@ -184,6 +210,7 @@ function UserSettings() {
                             <FontAwesomeIcon 
                                 icon={faCheck} 
                                 style={{color: "#05fa2e", cursor:'pointer', marginLeft:'5px'}} 
+                                onClick={updateProfilePic}
                             />
                             <FontAwesomeIcon 
                                 icon={faXmark} 

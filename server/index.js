@@ -13,6 +13,7 @@ const postsRouter = require('./routes/posts')
 const settingsRouter = require('./routes/settings')
 const { createNewPost, updatePost } = require('./controllers/posts')
 const { createAccount } = require('./controllers/auth')
+const updateProfilePic = require('./controllers/settings')
 
 //setup dotenv
 dotenv.config()
@@ -90,6 +91,7 @@ const upload = multer({ storage });
 app.post("/auth/register", upload.single('image'), createAccount)
 app.post("/posts/new", upload.single('image'), createNewPost)
 app.patch("/posts/update/:postId", upload.single('image'), updatePost)
+app.put("/settings/profilepic", upload.single('image'), updateProfilePic)
 
 /* ------------------------------------------------------------------------ */
 
