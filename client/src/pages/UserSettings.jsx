@@ -20,10 +20,20 @@ function UserSettings() {
     const [ editStatus, setEditStatus ] = useState(false)
     const [ editPicture, setEditPicture ] = useState(false)
 
-    //save user settings function
-    async function saveSettings(){
-        axios.patch(`http://localhost:5000/user/settings/${loggedInUser._id}`)
-        .then(res => console.log(res.data))
+    //api calls for updating user settings
+    async function updateLocation(){
+        axios.put(`http://localhost:5000/settings/location`,
+            { userId: loggedInUser._id, location },
+            { withCredentials: true }
+        )
+        .then(res => 
+            {
+                console.log(res)
+                if (res) { 
+                    window.location.reload()
+                }
+            }
+        )
         .catch(err => console.log(err))
     }
 
@@ -70,11 +80,12 @@ function UserSettings() {
                                 type="text"
                                 value={location} 
                                 onChange={(e) => setLocation(e.target.value)}
-                                className="rounded-lg p-1"
+                                className="rounded-lg p-1 dark:text-black"
                             />
                             <FontAwesomeIcon 
                                 icon={faCheck} 
                                 style={{color: "#05fa2e", cursor:'pointer', marginLeft:'5px'}} 
+                                onClick={updateLocation}
                             />
                             <FontAwesomeIcon 
                                 icon={faXmark} 
@@ -111,7 +122,8 @@ function UserSettings() {
                             <input 
                                 type="text"
                                 value={status} 
-                                className="rounded-lg p-1"
+                                onChange={(e) => setStatus(e.target.value)}
+                                className="rounded-lg p-1 dark:text-black"
                             />
                             <FontAwesomeIcon 
                                 icon={faCheck} 
@@ -165,13 +177,6 @@ function UserSettings() {
                             />
                         </div>
                     </div>
-
-                    <button
-                        className="bg-sky-400 mt-5 py-1 px-5 w-fit rounded-lg text-white"
-                        onClick={saveSettings}
-                    >
-                        Save Settings
-                    </button>
                 </div>
             </div>
         </div>

@@ -17,7 +17,7 @@ export const ContextProvider = ({ children }) => {
     //then the user info is passed into our context using setLoggedInUser
     useEffect(() => {
         const getLoggedInUser = async() => {
-            await axios.get(
+            axios.get(
                 'http://localhost:5000/auth/getuser',
                 { withCredentials: true }
             )

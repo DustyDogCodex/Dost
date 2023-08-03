@@ -10,6 +10,7 @@ const passportConfig = require('./passportConfig')
 const authRouter = require('./routes/auth')
 const userRouter = require('./routes/users')
 const postsRouter = require('./routes/posts')
+const settingsRouter = require('./routes/settings')
 const { createNewPost, updatePost } = require('./controllers/posts')
 const { createAccount } = require('./controllers/auth')
 
@@ -85,17 +86,18 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
-//ROUTES INVOLVING FILES
+//ROUTES INVOLVING UPLOADING FILES
 app.post("/auth/register", upload.single('image'), createAccount)
 app.post("/posts/new", upload.single('image'), createNewPost)
 app.patch("/posts/update/:postId", upload.single('image'), updatePost)
 
 /* ------------------------------------------------------------------------ */
 
-/* setting up routes */
+/* routes */
 app.use('/auth', authRouter)
 app.use('/user', userRouter)
 app.use('/posts', postsRouter)
+app.use('/settings', settingsRouter)
 
 const port = process.env.PORT || 5000
 
