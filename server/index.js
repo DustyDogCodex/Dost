@@ -88,7 +88,7 @@ const upload = multer({ storage });
 //ROUTES INVOLVING FILES
 app.post("/auth/register", upload.single('image'), createAccount)
 app.post("/posts/new", upload.single('image'), createNewPost)
-app.post("/posts/update/:postId", upload.single('image'), updatePost)
+app.patch("/posts/update/:postId", upload.single('image'), updatePost)
 
 /* ------------------------------------------------------------------------ */
 

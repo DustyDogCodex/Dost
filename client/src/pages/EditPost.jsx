@@ -46,8 +46,9 @@ function EditPost() {
         const formData = new FormData()
         formData.append("description", editDescription)
         
-        if(newImage){
-            formData.append("image", newImage);
+        if(newImage || !editImagePath){
+            formData.append("image", newImage)
+            formData.append('newImage', true)
         }
 
         //sending patch request to update post info on server
@@ -147,6 +148,7 @@ function EditPost() {
                         >
                             <button
                                 className="bg-green-400 px-3 py-1 rounded-full mt-3 text-white"
+                                onClick={updatePost}
                             >
                                 Save Post
                             </button>
@@ -178,6 +180,7 @@ function EditPost() {
                                     >
                                         <button
                                             className="bg-red-700 px-3 py-1 rounded-full mt-3 text-white"
+                                            onClick={deletePost}
                                         >
                                             Yes
                                         </button>

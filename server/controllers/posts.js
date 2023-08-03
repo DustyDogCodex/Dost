@@ -1,6 +1,7 @@
 const Post = require("../models/Posts")
 const User = require("../models/Users")
 const asyncHandler = require('express-async-handler')
+const fs = require('fs')
 
 /* ------- Create new post --------------------------- */
 
@@ -38,29 +39,39 @@ const updatePost = asyncHandler(
         //get postId from params
         const { postId } = req.params
 
-        //getting description from req body
+        //getting editted description and image from req body
         const { description, newImage } = req.body
-
-        //checking for uploaded image
-        let newImagePath
-
-        if(newImage){
-            newImagePath = req.file.filename
-        } else {
-            newImagePath = ''
-        }
-
-        //if new image is uploaded, delete prev image from server
+        
+        //finding relevant post
         const post = await Post.findById(postId)
 
+        let updatedImagePath = post.imagePath
+        //if new filename is not the same as prev associated imagePath, the prev image can be removed from server
+        if( newImage ){
+            //if there's an image with the post, delete that image. if no image, skip to next step
+            if(post.imagePath){
+                //delete prev image if new image is uploaded
+                fs.unlink('uploadedImages/' + post.imagePath, (err) => {
+                    if (err) {
+                        console.log(err)
+                    }
+                    console.log(`${post.imagePath} was deleted from server!`)
+                })
+            }
+
+            //set updatedImagePath to new image path or empty string if undefined
+            //if req.file is undefined with newImage being true, the user has deleted the associated image 
+            updatedImagePath = req.file ? req.file.filename : ''
+        }
+
         //find and update post after deleting associated images
-        const updatedPost = await Post.findByIdAndUpdate(
+        await Post.findByIdAndUpdate(
             postId,
-            { description, imagePath: newImagePath },
+            { description, imagePath: updatedImagePath },
             { new: true }
         )
 
-        res.status(200).send(updatedPost)
+        res.status(200)
     }
 )
 

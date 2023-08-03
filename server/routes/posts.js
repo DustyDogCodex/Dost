@@ -120,10 +120,18 @@ Router.delete("/delete/:postId",
         const post = await Post.findById(postId)
 
         //delete images associated with post
-        const postImage = post.imagePath ? post.imagePath : ''
+        if(post.imagePath){
+            //delete uploaded images associated with post
+            fs.unlink('uploadedImages/' + post.imagePath, (err) => {
+                if (err) {
+                    console.log(err)
+                }
+                console.log(`${post.imagePath} was deleted from server!`)
+            })
+        }
         
         //after images are deleted, delete selected post from database
-        const deletedPost = await Post.findByIdAndDelete(postId)
+        await Post.findByIdAndDelete(postId)
 
         //send description and image path from post to front end
         res.status(200).send('success')

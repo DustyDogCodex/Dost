@@ -140,11 +140,11 @@ function Post({ postId, postUserId, userName, location, description, createdAt, 
                     (
                         <Link
                             to={`/edit/${postId}`}
-                            className="flex items-center justify-center p-2 rounded-full bg-slate-300 dark:bg-slate-950"
+                            className="flex items-center justify-center px-2 py-1 mt-1 rounded-lg bg-slate-300 dark:bg-slate-950"
                         >
                             <FontAwesomeIcon 
                                 icon={faPenToSquare} 
-                                style={{color: "#25bb07", height:'25px', width:'25px', cursor:'pointer'}} 
+                                style={{color: "#25bb07", height:'20px', width:'20px', cursor:'pointer'}} 
                             /> 
                         </Link>
                     )
