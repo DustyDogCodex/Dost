@@ -28,7 +28,21 @@ function UserSettings() {
         )
         .then(res => 
             {
-                console.log(res)
+                if (res) { 
+                    window.location.reload()
+                }
+            }
+        )
+        .catch(err => console.log(err))
+    }
+
+    async function updateStatus(){
+        axios.put(`http://localhost:5000/settings/status`,
+            { userId: loggedInUser._id, status },
+            { withCredentials: true }
+        )
+        .then(res => 
+            {
                 if (res) { 
                     window.location.reload()
                 }
@@ -127,7 +141,8 @@ function UserSettings() {
                             />
                             <FontAwesomeIcon 
                                 icon={faCheck} 
-                                style={{color: "#05fa2e", cursor:'pointer', marginLeft:'5px'}} 
+                                style={{color: "#05fa2e", cursor:'pointer', marginLeft:'5px'}}
+                                onClick={updateStatus} 
                             />
                             <FontAwesomeIcon 
                                 icon={faXmark} 
