@@ -89,23 +89,4 @@ Router.patch("/:id/:friendId",
     })
 )
 
-//Route for changing user information through user settings page on front-end
-Router.patch('/settings/:userId',
-    asyncHandler(async(req,res) => {
-        //grab userId from req.params
-        const { userid } = req.params
-
-        //grabbing location,status and profilePic from data object
-        const { location, status, profilePic } = req.body.data
-
-        //find relevant user
-        /* const updatedUser = await User.findByIdAndUpdate(userid,
-                { location, status, profilePic },
-                { new: true }
-            ) */
-        
-        res.send(userid)
-    })
-)
-
 module.exports = Router

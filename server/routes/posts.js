@@ -1,5 +1,6 @@
 const express = require('express')
 const asyncHandler = require('express-async-handler')
+const fs = require('fs')
 const Router = express.Router()
 
 //import posts model
@@ -121,20 +122,18 @@ Router.delete("/delete/:postId",
 
         //delete images associated with post
         if(post.imagePath){
-            //delete uploaded images associated with post
+            //delete files from server
             fs.unlink('uploadedImages/' + post.imagePath, (err) => {
                 if (err) {
                     console.log(err)
                 }
-                console.log(`${post.imagePath} was deleted from server!`)
             })
         }
         
         //after images are deleted, delete selected post from database
         await Post.findByIdAndDelete(postId)
 
-        //send description and image path from post to front end
-        res.status(200).send('success')
+        res.status(200)
     })
 )
 

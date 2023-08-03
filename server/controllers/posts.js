@@ -55,7 +55,6 @@ const updatePost = asyncHandler(
                     if (err) {
                         console.log(err)
                     }
-                    console.log(`${post.imagePath} was deleted from server!`)
                 })
             }
 
