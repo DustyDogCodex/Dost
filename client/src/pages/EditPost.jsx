@@ -45,16 +45,9 @@ function EditPost() {
         //submitting formData with uploaded image to update post
         const formData = new FormData()
         formData.append("description", editDescription)
-        formData.append('prevImagePath', editImagePath)
         
         if(newImage){
             formData.append("image", newImage);
-            formData.append('newImage', true)
-        }
-
-        //if editImagePath is null that means user has not uploaded an image previously or has deleted the image associated with the post
-        if(!editImagePath){
-            formData.append('deletePrevImage', true)
         }
 
         //sending patch request to update post info on server
@@ -130,6 +123,7 @@ function EditPost() {
                             )
                         }
 
+                        {/* input element for uploading a new file if user deletes previously uploaded file/did not upload an image with post */}
                         {!editImagePath && 
                             (
                                 <div>
