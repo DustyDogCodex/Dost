@@ -31,7 +31,7 @@ const createNewPost = asyncHandler(
     }
 )
 
-/* ------------ Update a Post ------------------------- */
+/* ------------ Update Post ------------------------- */
 
 const updatePost = asyncHandler(
     async(req,res) => {

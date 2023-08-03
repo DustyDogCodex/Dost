@@ -14,9 +14,9 @@ function EditPost() {
     const { postId } = useParams()
 
     //variables for tracking user input
-    const [ editDescription, setEditDescription ] = useState(null)
-    const [ editImagePath, setEditImagePath ] = useState(null)
-    const [ newImage, setNewImage ] = useState(false)
+    const [ editDescription, setEditDescription ] = useState('')
+    const [ editImagePath, setEditImagePath ] = useState('')
+    const [ newImage, setNewImage ] = useState('')
 
     //delete post modal toggle
     const [ deletePostConfirm, setDeletePostConfirm ] = useState(false)
@@ -33,6 +33,12 @@ function EditPost() {
         }
         getPostInfo()
     }, [])
+
+    //reseting file input to empty 
+    function resetFile() {
+        const file = document.querySelector('#newFile');
+        file.value = '';
+    }
     
     //api call to update post with new parameters
     async function updatePost(){
@@ -117,7 +123,7 @@ function EditPost() {
                                         <FontAwesomeIcon 
                                             icon={faTrash} 
                                             style={{color: "#fa0000", height:'25px', width:'25px', cursor:'pointer'}} 
-                                            onClick={() => setEditImagePath(null)}
+                                            onClick={() => setEditImagePath('')}
                                         /> 
                                     </div>
                                 </div>
@@ -128,6 +134,7 @@ function EditPost() {
                             (
                                 <div>
                                     <input 
+                                        id="newFile"
                                         type="file" 
                                         onChange={(e) => setNewImage(e.target.files[0])}
                                         className="p-1 border border-blue-400 rounded-lg"
@@ -135,7 +142,7 @@ function EditPost() {
                                     <FontAwesomeIcon 
                                         icon={faTrash} 
                                         style={{color: "#fa0000", height:'25px', width:'25px', cursor:'pointer'}} 
-                                        onClick={() => setEditImagePath(null)}
+                                        onClick={resetFile}
                                     /> 
                                 </div>
                             )
