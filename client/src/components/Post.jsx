@@ -106,7 +106,7 @@ function Post({ postId, postUserId, userName, location, description, createdAt, 
                                     style={{color: "#f70258", cursor:'pointer', height:'25px', width:'25px'}} 
                                     onClick={() => likeUnlikePost()}
                                 />
-                                <span className="ml-2 dark:text-white">{ postLikes.length ? postLikes.length : 0 }</span>
+                                <span className="ml-2 dark:text-white">{ postLikes?.length ? postLikes.length : 0 }</span>
                             </div>
                         :
                             <div
@@ -117,7 +117,7 @@ function Post({ postId, postUserId, userName, location, description, createdAt, 
                                     style={{color: "#b3bccc", cursor:'pointer', height:'25px', width:'25px'}} 
                                     onClick={() => likeUnlikePost()}
                                 /> 
-                                <span className="ml-2 dark:text-white">{ postLikes.length ? postLikes.length : 0 }</span>
+                                <span className="ml-2 dark:text-white">{ postLikes?.length ? postLikes.length : 0 }</span>
                             </div>
                     }
                 
@@ -130,7 +130,7 @@ function Post({ postId, postUserId, userName, location, description, createdAt, 
                             style={{color: "#a1aab5", cursor:'pointer', height:'25px', width:'25px'}} 
                             onClick={() => setShowComments(!showComments)}
                         />
-                        <span className="ml-2 dark:text-white">{ postComments.length }</span>
+                        <span className="ml-2 dark:text-white">{ postComments?.length }</span>
                     </div>
                 </div>
 
@@ -164,13 +164,13 @@ function Post({ postId, postUserId, userName, location, description, createdAt, 
                                 <p className="dark:text-white">This post has no comments yet.</p>
                             </div>
                         : 
-                            postComments.map((comment,index) => 
+                            postComments?.map((comment,index) => 
                                 <div
                                     key={index}
                                     className="flex items-center justify-between p-1 my-1 rounded-lg bg-slate-200 dark:bg-slate-400 dark:text-white"
                                 >
-                                   <p>{comment.comment}</p>
-                                   <p className="text-blue-800">by {comment.author}</p>
+                                   <p>{comment?.comment}</p>
+                                   <p className="text-blue-800">by {comment?.author}</p>
                                 </div>    
                             )
                 }
