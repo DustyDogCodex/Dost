@@ -22,13 +22,16 @@ const createAccount = asyncHandler(
             //hashing password
             const hashedPassword = await bcrypt.hash(password, salt)
 
+            //checking for uploaded file. 
+            const profileImage = req.file ? req.file.filename : ''
+
             //passing req info + hashed pasword into User model
             const newUser = new User({
                 firstName,
                 lastName,
                 email,
                 password: hashedPassword,
-                profilePic: req.file.filename,
+                profilePic: profileImage,
                 friendsList: [],
                 location,
                 status: '',

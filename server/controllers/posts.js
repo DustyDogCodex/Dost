@@ -12,6 +12,9 @@ const createNewPost = asyncHandler(
         //find user using userId
         const user = await User.findById(userId)
 
+        //checking for uploaded file. 
+        const postImage = req.file ? req.file.filename : ''
+
         //creating a new post with information from req
         const newPost = new Post({
             userId,
@@ -20,7 +23,7 @@ const createNewPost = asyncHandler(
             location: user.location,
             description,
             userProfilePic: user.profilePic,
-            imagePath: req.file.filename,
+            imagePath: postImage,
             likes: [],
             comments: []
         })
