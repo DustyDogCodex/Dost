@@ -31,21 +31,21 @@ function Homepage() {
                                 className="flex justify-center xl:w-4/5"
                             >
                                 <UserProfileWidget 
-                                    userId={loggedInUser._id}
-                                    name={`${loggedInUser.firstName} ${loggedInUser.lastName}`}
-                                    profilePic={loggedInUser.profilePic}
-                                    numFriends={loggedInUser.friendsList.length}
-                                    location={loggedInUser.location}
-                                    status={loggedInUser.status}
-                                    views={loggedInUser.profileViews}
+                                    userId={loggedInUser?._id}
+                                    name={`${loggedInUser?.firstName} ${loggedInUser?.lastName}`}
+                                    profilePic={loggedInUser?.profilePic}
+                                    numFriends={ loggedInUser.friendsList?.length}
+                                    location={loggedInUser?.location}
+                                    status={loggedInUser?.status}
+                                    views={loggedInUser?.profileViews}
                                 />
                                 
                                 <div
                                     className="w-1/2"
                                 >
                                     <CreatePost 
-                                        userId={loggedInUser._id} 
-                                        profilePic={loggedInUser.profilePic}
+                                        userId={loggedInUser?._id} 
+                                        profilePic={loggedInUser?.profilePic}
                                     />
                                     <PostsDisplay profile={false}/>
                                 </div>
@@ -65,17 +65,17 @@ function Homepage() {
                             className="p-5 bg-slate-200 dark:bg-black"
                         >
                             <UserProfileWidget
-                                userId={loggedInUser._id}
-                                name={`${loggedInUser.firstName} ${loggedInUser.lastName}`}
-                                profilePic={loggedInUser.profilePic}
-                                numFriends={loggedInUser.friendsList.length}
-                                location={loggedInUser.location}
-                                status={loggedInUser.status}
-                                views={loggedInUser.profileViews}
+                                userId={loggedInUser?._id}
+                                name={`${loggedInUser?.firstName} ${loggedInUser?.lastName}`}
+                                profilePic={loggedInUser?.profilePic}
+                                numFriends={loggedInUser.friendsList?.length}
+                                location={loggedInUser?.location}
+                                status={loggedInUser?.status}
+                                views={loggedInUser?.profileViews}
                             />
                             <CreatePost 
-                                userId={loggedInUser._id} 
-                                profilePic={loggedInUser.profilePic}
+                                userId={loggedInUser?._id} 
+                                profilePic={loggedInUser?.profilePic}
                             />
                             <Advert />
                             <PostsDisplay profile={false}/>
