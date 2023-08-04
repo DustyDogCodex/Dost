@@ -101,7 +101,7 @@ function UserSettings() {
                             className={`${editLocation ? 'hidden' : ''} flex items-center justify-around`}
                         >
                             <p 
-                                className="dark:text-white"
+                                className="ml-2 dark:text-white"
                             >
                                 {loggedInUser.location ? loggedInUser.location : 'Off the grid'}
                             </p>
@@ -144,7 +144,7 @@ function UserSettings() {
                             className={`${editStatus ? 'hidden' : ''} flex items-center justify-around`}
                         >
                             <p 
-                                className="dark:text-white"
+                                className="ml-5 dark:text-white"
                             >
                                 {loggedInUser.status ? loggedInUser.status : 'No status'}
                             </p>
