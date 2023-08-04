@@ -96,7 +96,7 @@ function Post({ postId, postUserId, userName, location, description, createdAt, 
                     className="flex"
                 >
                     {
-                    postLikes.includes(loggedInUser._id)
+                    postLikes?.includes(loggedInUser._id)
                         ?
                             <div
                                 className="my-2 mr-2 flex items-center"
@@ -156,7 +156,7 @@ function Post({ postId, postUserId, userName, location, description, createdAt, 
                 className={`${showComments ? '' : 'hidden'}`}
             >
                 {
-                    postComments.length == 0 
+                    postComments?.length == 0 
                         ?
                             <div
                                 className="rounded-lg p-1 dark:bg-slate-500"
