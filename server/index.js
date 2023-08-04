@@ -59,6 +59,9 @@ app.use(function(req, res, next) {
 
 /* ------------------------------------------------------------------------ */
 
+//dist folder with finished production build
+app.use(express.static(path.join(__dirname, 'dist')))
+
 /* -------- SETTING UP A STATIC FOLDER FOR UPLOADED IMAGES --------- */
 
 //storing a route to the root directory for the project
