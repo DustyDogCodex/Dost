@@ -73,7 +73,7 @@ const updatePost = asyncHandler(
             { new: true }
         )
 
-        res.status(200)
+        res.status(200).send('updated')
     }
 )
 
