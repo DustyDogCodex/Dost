@@ -12,7 +12,7 @@ function FriendBox({ friendId, userName, userProfilePic, status }) {
     const { loggedInUser, friends, dispatch } = useContext(UserContext)
     
     //checking if user is already in friendsList
-    const friendOrNah = friends.find(id => id === friendId)
+    const friendOrNah = friends?.find(id => id === friendId)
     
     //adding or removing friend from friendsList depending on whether user is already a friend or not
     const addFriend = async() =>{
