@@ -5,6 +5,7 @@ const dotenv = require('dotenv')
 const session = require('express-session')
 const passport = require('passport')
 const multer = require('multer')
+const path = require('path')
 /* all imported files/routes */
 const passportConfig = require('./passportConfig')
 const authRouter = require('./routes/auth')
