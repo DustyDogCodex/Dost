@@ -16,7 +16,7 @@ function FriendBox({ friendId, userName, userProfilePic, status }) {
     
     //adding or removing friend from friendsList depending on whether user is already a friend or not
     const addFriend = async() =>{
-        axios.patch(`http://localhost:5000/user/${loggedInUser._id}/${friendId}`)
+        axios.patch(`https://dost-production.up.railway.app/user/${loggedInUser._id}/${friendId}`)
         .then(res => dispatch({ type: 'REFRESH_FRIENDSLIST', payload: res.data }))
         .catch(err => console.log(err))
     }
@@ -33,7 +33,7 @@ function FriendBox({ friendId, userName, userProfilePic, status }) {
                     userProfilePic 
                     ?   
                         <img 
-                            src={`http://localhost:5000/uploads/${userProfilePic}`}
+                            src={`https://dost-production.up.railway.app/uploads/${userProfilePic}`}
                             alt="user profile picture" 
                             className="w-14 h-14 rounded-full"
                         />

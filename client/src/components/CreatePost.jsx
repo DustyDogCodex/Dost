@@ -30,7 +30,7 @@ function CreatePost({ userId, profilePic }) {
         }
 
         //axios post request to create a new post
-        axios.post('http://localhost:5000/posts/new',
+        axios.post('https://dost-production.up.railway.app/posts/new',
             formData,
             {
                 headers: { "Content-Type": "multipart/form-data" }
@@ -60,7 +60,7 @@ function CreatePost({ userId, profilePic }) {
                     {profilePic 
                         ? 
                             <img 
-                                src={`http://localhost:5000/uploads/${profilePic}`} 
+                                src={`https://dost-production.up.railway.app/uploads/${profilePic}`} 
                                 alt={'profile picture'} 
                                 className="w-14 h-14 rounded-full"
                             />

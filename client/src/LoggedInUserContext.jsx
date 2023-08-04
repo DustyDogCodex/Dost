@@ -18,7 +18,7 @@ export const ContextProvider = ({ children }) => {
     useEffect(() => {
         const getLoggedInUser = async() => {
             axios.get(
-                'http://localhost:5000/auth/getuser',
+                'https://dost-production.up.railway.app/auth/getuser',
                 { withCredentials: true }
             )
             .then(res => {

@@ -11,9 +11,7 @@ import EditPost from './pages/EditPost'
 
 function App() {
     //using context to check for a loggedIn user
-    const { loggedInUser, friends } = useContext(UserContext) 
-    console.log('logged in user',loggedInUser)
-    console.log('friends list', friends)
+    const { loggedInUser } = useContext(UserContext) 
     
     return (
         <div>

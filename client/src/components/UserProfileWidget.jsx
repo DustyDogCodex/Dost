@@ -16,7 +16,7 @@ function UserProfileWidget({ userId, name, profilePic, numFriends, location, sta
                 {profilePic 
                     ? 
                         <img 
-                            src={`http://localhost:5000/uploads/${profilePic}`} 
+                            src={`https://dost-production.up.railway.app/uploads/${profilePic}`} 
                             alt={`${name}'s profile picture`} 
                             className="w-16 h-16 rounded-full"
                         />

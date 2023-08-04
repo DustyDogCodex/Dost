@@ -20,7 +20,7 @@ function UserProfile() {
     //making an API call to fetch users data from our database
     useEffect(() => {
         const getUserInfo = async() => {
-            axios.get(`http://localhost:5000/user/${userId}`)
+            axios.get(`https://dost-production.up.railway.app/user/${userId}`)
             .then(res => setUser(res.data))
             .catch(err => console.log(err))
         }

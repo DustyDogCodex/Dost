@@ -24,7 +24,7 @@ function EditPost() {
     //api call to get post info
     useEffect(() => {
         const getPostInfo = async() => {
-            axios.get(`http://localhost:5000/posts/edit/${postId}`)
+            axios.get(`https://dost-production.up.railway.app/posts/edit/${postId}`)
             .then(res => {
                 setEditDescription(res.data.description)
                 setEditImagePath(res.data.imagePath)
@@ -52,7 +52,7 @@ function EditPost() {
         }
 
         //sending patch request to update post info on server
-        axios.patch(`http://localhost:5000/posts/update/${postId}`,
+        axios.patch(`https://dost-production.up.railway.app/posts/update/${postId}`,
             formData,
             {
                 headers: { "Content-Type": "multipart/form-data" }
@@ -69,7 +69,7 @@ function EditPost() {
 
     //api call to delete entire post from database
     async function deletePost(){
-        axios.delete(`http://localhost:5000/posts/delete/${postId}`)
+        axios.delete(`https://dost-production.up.railway.app/posts/delete/${postId}`)
         .then(res => {
             if(res){
                 window.location.replace('/homepage')
@@ -107,7 +107,7 @@ function EditPost() {
                                     className="relative"
                                 >
                                     <img 
-                                        src={`http://localhost:5000/uploads/${editImagePath}`} 
+                                        src={`https://dost-production.up.railway.app/uploads/${editImagePath}`} 
                                         alt="image with post"
                                         className="max-h-[600px] rounded-lg w-fit"
                                     />

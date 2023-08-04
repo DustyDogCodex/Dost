@@ -22,7 +22,7 @@ function UserSettings() {
 
     //api calls for updating user settings
     async function updateLocation(){
-        axios.put(`http://localhost:5000/settings/location`,
+        axios.put(`https://dost-production.up.railway.app/settings/location`,
             { userId: loggedInUser._id, location },
             { withCredentials: true }
         )
@@ -37,7 +37,7 @@ function UserSettings() {
     }
 
     async function updateStatus(){
-        axios.put(`http://localhost:5000/settings/status`,
+        axios.put(`https://dost-production.up.railway.app/settings/status`,
             { userId: loggedInUser._id, status },
             { withCredentials: true }
         )
@@ -62,7 +62,7 @@ function UserSettings() {
         }
 
         //sending patch request to update post info on server
-        axios.put(`http://localhost:5000/settings/profilepic`,
+        axios.put(`https://dost-production.up.railway.app/settings/profilepic`,
             formData,
             {
                 headers: { "Content-Type": "multipart/form-data" }
@@ -187,7 +187,7 @@ function UserSettings() {
                             className={`${editPicture ? 'hidden' : ''} flex items-center justify-around`}
                         >
                             <img 
-                                src={`http://localhost:5000/uploads/${loggedInUser.profilePic}`} 
+                                src={`https://dost-production.up.railway.app/uploads/${loggedInUser.profilePic}`} 
                                 alt="user profile picture" 
                                 className="w-48 h-48 rounded-lg ml-10"
                             />

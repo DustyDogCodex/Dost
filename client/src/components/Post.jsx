@@ -29,7 +29,7 @@ function Post({ postId, postUserId, userName, location, description, createdAt, 
 
     //making a patch request to update post when a user likes/unlikes the post
     const likeUnlikePost = async() => {
-        await axios.patch(`http://localhost:5000/posts/${postId}/like`,
+        await axios.patch(`https://dost-production.up.railway.app/posts/${postId}/like`,
             { userId : loggedInUser._id }
         )
         .then(res => setPostLikes([ ...res.data.likes ]))
@@ -38,7 +38,7 @@ function Post({ postId, postUserId, userName, location, description, createdAt, 
 
     //making a post request to add new comments on a post
     const addComment = async(data) => {
-        await axios.post(`http://localhost:5000/posts/${postId}/comment`,
+        await axios.post(`https://dost-production.up.railway.app/posts/${postId}/comment`,
             { author: `${loggedInUser.firstName} ${loggedInUser.lastName}`, data }
         )
         .then(res =>  { 
@@ -81,7 +81,7 @@ function Post({ postId, postUserId, userName, location, description, createdAt, 
                     className="flex items-center justify-center rounded-lg bg-slate-500 dark:bg-slate-900"
                 >
                     <img 
-                        src={`http://localhost:5000/uploads/${imagePath}`} 
+                        src={`https://dost-production.up.railway.app/uploads/${imagePath}`} 
                         alt="post image"
                         className="max-h-[600px] rounded-lg w-fit" 
                     />

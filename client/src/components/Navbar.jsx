@@ -21,7 +21,7 @@ function Navbar({ firstName }) {
 
     //API call to logout user
     const logoutUser = async() => {
-        axios.get('http://localhost:5000/auth/logout',
+        axios.get('https://dost-production.up.railway.app/auth/logout',
             { withCredentials: true }
         )
         .then(res => {

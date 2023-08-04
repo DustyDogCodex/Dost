@@ -16,7 +16,7 @@ function Login() {
 
     //function to submit login data
     async function submitLogin(){
-        axios.post("http://localhost:5000/auth/login",
+        axios.post("https://dost-production.up.railway.app/auth/login",
             { email: watchEmail, password: watchPassword },
             { withCredentials: true }
         ).then(res => {

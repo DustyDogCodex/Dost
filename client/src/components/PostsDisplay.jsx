@@ -11,7 +11,7 @@ function PostsDisplay({ userId, profile }) {
     //function to fetch all posts from server
     //this will be called if component is present in a user homepage
     const getAllPosts = async() => {
-        axios.get('http://localhost:5000/posts/')
+        axios.get('https://dost-production.up.railway.app/posts/')
         .then(res => setPosts([ ...res.data ]))
         .catch(err => console.log(err))
     } 
@@ -19,7 +19,7 @@ function PostsDisplay({ userId, profile }) {
     //function to fetch all posts from server
     //this will be called if component is present in a user homepage
     const getUserPosts = async() => {
-        axios.get(`http://localhost:5000/posts/${userId}`)
+        axios.get(`https://dost-production.up.railway.app/posts/${userId}`)
         .then(res => setPosts([ ...res.data ]))
         .catch(err => console.log(err))
     } 

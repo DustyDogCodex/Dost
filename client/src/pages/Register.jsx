@@ -33,7 +33,7 @@ function Register() {
         }
 
         //axios post request to submit formdata and create new user account 
-        axios.post('http://localhost:5000/auth/register',
+        axios.post('https://dost-production.up.railway.app/auth/register',
             formData,
             {
                 headers: { "Content-Type": "multipart/form-data" }
