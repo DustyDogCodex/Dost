@@ -1,6 +1,6 @@
 import FriendBox from "./FriendBox"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faHeart, faComments, faPenToSquare, faCircleXmark, faTrash } from "@fortawesome/free-solid-svg-icons"
+import { faHeart, faComments, faPenToSquare } from "@fortawesome/free-solid-svg-icons"
 import axios from "axios"
 import { useContext, useState, useEffect } from "react"
 import { UserContext } from "../LoggedInUserContext"
@@ -106,7 +106,7 @@ function Post({ postId, postUserId, userName, location, description, createdAt, 
                                     style={{color: "#f70258", cursor:'pointer', height:'25px', width:'25px'}} 
                                     onClick={() => likeUnlikePost()}
                                 />
-                                <span className="ml-2 dark:text-white">{ postLikes?.length ? postLikes.length : 0 }</span>
+                                <span className="ml-2 dark:text-white">{ postLikes?.length ? postLikes?.length : 0 }</span>
                             </div>
                         :
                             <div
@@ -117,7 +117,7 @@ function Post({ postId, postUserId, userName, location, description, createdAt, 
                                     style={{color: "#b3bccc", cursor:'pointer', height:'25px', width:'25px'}} 
                                     onClick={() => likeUnlikePost()}
                                 /> 
-                                <span className="ml-2 dark:text-white">{ postLikes?.length ? postLikes.length : 0 }</span>
+                                <span className="ml-2 dark:text-white">{ postLikes?.length ? postLikes?.length : 0 }</span>
                             </div>
                     }
                 

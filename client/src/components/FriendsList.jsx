@@ -6,9 +6,11 @@ import FriendBox from "./FriendBox"
 import { UserContext } from "../LoggedInUserContext"
 
 function FriendsList({ userId, profile }) {
+    //grabbing updated friends list from context
+    const { friends } = useContext(UserContext)
+
     //state variable to store friendsList
     const [ friendsList, setFriendsList ] = useState([])
-    const { friends } = useContext(UserContext)
 
     //get request to get an up-to date friendsList including any recent additions/deletions by the user
     //added friends from context into dependency array so friendsList refreshes everytime a new friend is added/removed to fetch the relevant friends user info to populate the FriendBox component
@@ -32,7 +34,7 @@ function FriendsList({ userId, profile }) {
             </h3>
             <div>
                 {
-                    friendsList.length 
+                    friendsList?.length 
                     ? 
                         friendsList.map(friend => 
                             <FriendBox 

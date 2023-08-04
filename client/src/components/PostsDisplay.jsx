@@ -17,7 +17,7 @@ function PostsDisplay({ userId, profile }) {
     } 
     
     //function to fetch all posts from server
-    //this will be called if component is present in a user homepage
+    //this will be called if component is present in the user profile page
     const getUserPosts = async() => {
         axios.get(`https://dost-production.up.railway.app/posts/${userId}`)
         .then(res => setPosts([ ...res.data ]))
@@ -34,7 +34,7 @@ function PostsDisplay({ userId, profile }) {
         <div
             className="p-2 m-2 flex flex-col items-center justify-center"
         >
-            {posts.length == 0 
+            {posts?.length == 0 
                 ? 
                     <div>
                         <p
