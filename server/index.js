@@ -63,6 +63,17 @@ app.use(function(req, res, next) {
 //dist folder with finished production build
 app.use(express.static(path.join(__dirname, 'dist')))
 
+app.get('/*', (req,res) => {
+    res.sendFile(
+        path.join(__dirname, 'build', 'index.html'),
+        function(err){
+            if(err){
+                res.status(500).send(err)
+            }
+        }
+    )
+})
+
 /* -------- SETTING UP A STATIC FOLDER FOR UPLOADED IMAGES --------- */
 
 //storing a route to the root directory for the project
