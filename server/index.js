@@ -5,7 +5,6 @@ const dotenv = require('dotenv')
 const session = require('express-session')
 const passport = require('passport')
 const multer = require('multer')
-const path = require('path')
 /* all imported files/routes */
 const passportConfig = require('./passportConfig')
 const authRouter = require('./routes/auth')
@@ -29,7 +28,7 @@ const app = express()
 
 app.use(cors(
     {
-        origin: ['https://dost-production.up.railway.app/'],
+        origin: ['https://stupendous-meerkat-ae0dee.netlify.app/', 'http://localhost:5173/'],
         credentials: true 
     }
 ))
@@ -59,20 +58,6 @@ app.use(function(req, res, next) {
 });
 
 /* ------------------------------------------------------------------------ */
-
-//dist folder with finished production build
-app.use(express.static(path.join(__dirname, 'dist')))
-
-app.get('/*', (req,res) => {
-    res.sendFile(
-        path.join(__dirname, 'dist', 'index.html'),
-        function(err){
-            if(err){
-                res.status(500).send(err)
-            }
-        }
-    )
-})
 
 /* -------- SETTING UP A STATIC FOLDER FOR UPLOADED IMAGES --------- */
 
