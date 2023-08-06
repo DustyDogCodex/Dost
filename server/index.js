@@ -51,7 +51,7 @@ app.use(session({
     },
     store: MongoStore.create({ 
         mongoUrl: process.env.MONGO_URL,
-        dbName: test,
+        dbName: 'test',
         touchAfter: 24 * 3600 // lazy update unless somethings was changed in session data, time period in seconds
     })
 }));
