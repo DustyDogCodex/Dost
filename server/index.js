@@ -5,6 +5,7 @@ const dotenv = require('dotenv')
 const session = require('express-session')
 const passport = require('passport')
 const multer = require('multer')
+const MongoStore = require('connect-mongo')
 /* all imported files/routes */
 const passportConfig = require('./passportConfig')
 const authRouter = require('./routes/auth')
@@ -44,10 +45,15 @@ app.use(session({
     resave: false, 
     saveUninitialized: true,
     cookie: { 
-        sameSite: "lax",
+        sameSite: "none",
         secure: "auto",  //for dev environment
         maxAge: 24 * 60 * 60 * 1000 //one day 
-    }
+    },
+    store: MongoStore.create({ 
+        mongoUrl: process.env.MONGO_URL,
+        dbName: test,
+        touchAfter: 24 * 3600 // lazy update unless somethings was changed in session data, time period in seconds
+    })
 }));
 app.use(passport.initialize());
 app.use(passport.session());
