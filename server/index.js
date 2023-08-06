@@ -28,7 +28,7 @@ const app = express()
 
 app.use(cors(
     {
-        origin: ['https://stupendous-meerkat-ae0dee.netlify.app/', 'http://localhost:5173/'],
+        origin: ['https://stupendous-meerkat-ae0dee.netlify.app', 'http://localhost:5173'],
         credentials: true 
     }
 ))

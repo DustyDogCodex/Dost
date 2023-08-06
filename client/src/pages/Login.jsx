@@ -26,11 +26,11 @@ function Login() {
         })
         .catch(err => {
             console.log(err)
-            //this will toggle an alert and then remove the alert after 4seconds
+            //this will toggle an alert and then remove the alert after 5 seconds
             setIncorrectLogin(true)
             setTimeout(() => {
                 setIncorrectLogin(false)
-            }, 4000)
+            }, 5000)
         })
     }
 
