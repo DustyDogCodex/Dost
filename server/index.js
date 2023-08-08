@@ -29,7 +29,7 @@ const app = express()
 
 app.use(cors(
     {
-        origin: ['https://stupendous-meerkat-ae0dee.netlify.app', 'http://localhost:5173'],
+        origin: ['https://stupendous-meerkat-ae0dee.netlify.app', 'http://localhost:5173', 'https://dost-client-production.up.railway.app/'],
         methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
         allowedHeaders: ['Content-Type', 'Origin', 'X-Requested-With', 'Accept', 'x-client-key', 'x-client-token', 'x-client-secret', 'Authorization'],
         credentials: true 
@@ -39,7 +39,7 @@ app.use(express.json())
 
 /* ----------------------- PASSPORT INITIALISATION ---------------------- */
 
-//setting up express sessions and initializing passportjs
+//setting up express-session 
 app.use(session({ 
     secret: process.env.SESSION_SECRET,
     resave: false, 
@@ -55,6 +55,8 @@ app.use(session({
         touchAfter: 24 * 3600 // lazy update unless somethings was changed in session data, time period in seconds
     })
 }));
+
+//initializing passportjs
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));

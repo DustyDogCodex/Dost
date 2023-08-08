@@ -18,7 +18,7 @@ function Login() {
     async function submitLogin(){
         await axios.post("https://dost-production.up.railway.app/auth/login",
             { email: watchEmail, password: watchPassword },
-            { withCredentials: true }
+            { withCredentials: true } 
         )
         .then(res => {
             console.log('login res.data',res.data)
