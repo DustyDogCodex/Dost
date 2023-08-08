@@ -26,7 +26,8 @@ passport.use(
             return done(null, false, { message: "Wrong password!" })
           }
         })
-      }).catch(err => {
+      })
+      .catch(err => {
         return done(null, false, { message: err })
       })
   }

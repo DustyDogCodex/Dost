@@ -9,7 +9,7 @@ const User = require('../models/Users')
 //app is small enough to justify not using passport
 Router.post(
     '/login', 
-    passport.authenticate('local', { session: true }),
+    passport.authenticate('local'),
     function(req, res) {
         res.send('Successfully authenticated. Logging in user.')
     }
