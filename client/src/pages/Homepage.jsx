@@ -11,6 +11,7 @@ import useMediaQuery from "../hooks/useMediaQuery"
 function Homepage() {
     //using context to get loggedInUser's info. This will be passed as props to the components on this page
     const { loggedInUser } = useContext(UserContext)
+    console.log('homepage loggedInUser', loggedInUser)
 
     //checking to see if window is above a medium screen with custom hook
     const aboveMedScreens = useMediaQuery("(min-width: 1060px)")

@@ -17,13 +17,14 @@ export const ContextProvider = ({ children }) => {
     //then the user info is passed into our context using setLoggedInUser
     useEffect(() => {
         const getLoggedInUser = async() => {
-            axios.get(
+            await axios.get(
                 'https://dost-production.up.railway.app/auth/getuser',
                 { withCredentials: true }
             )
             .then(res => {
                 setLoggedInUser(res.data)
                 dispatch({ type: 'REFRESH_FRIENDSLIST' , payload: res.data.friendsList })
+                console.log('context loggedInUser',loggedInUser)
             })
             .catch(err => console.log(err))
         }

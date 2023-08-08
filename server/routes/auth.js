@@ -11,7 +11,7 @@ Router.post(
     '/login', 
     passport.authenticate('local', { session: true }),
     function(req, res) {
-        res.send('ok')
+        res.send('Successfully authenticated. Logging in user.')
     }
 );
 
@@ -19,6 +19,7 @@ Router.post(
 Router.get(
     '/getuser',
     (req,res) => {
+        console.log('getuser', 'user info fetched')
         res.send(req.user)
     }
 )
@@ -29,7 +30,7 @@ Router.get(
     (req, res, next) => {
         req.logout(function(err) {
             if (err) return next(err)
-            res.send('success')
+            res.send('successfully logged out user!')
         })
     }
 )

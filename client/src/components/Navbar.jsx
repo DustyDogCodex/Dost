@@ -25,8 +25,8 @@ function Navbar({ firstName }) {
             { withCredentials: true }
         )
         .then(res => {
-            /* upon successful logout, redirect user to home page */
-            if(res.data == 'success'){
+            /* upon successful logout, redirect user to login page */
+            if(res.data == 'successfully logged out user!'){
                 window.location.replace('/')
             }
         })

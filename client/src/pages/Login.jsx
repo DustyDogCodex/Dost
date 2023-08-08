@@ -16,11 +16,13 @@ function Login() {
 
     //function to submit login data
     async function submitLogin(){
-        axios.post("https://dost-production.up.railway.app/auth/login",
+        await axios.post("https://dost-production.up.railway.app/auth/login",
             { email: watchEmail, password: watchPassword },
             { withCredentials: true }
-        ).then(res => {
-            if(res.data == 'ok'){
+        )
+        .then(res => {
+            console.log('login res.data',res.data)
+            if(res.data == 'Successfully authenticated. Logging in user.'){
                 window.location.assign('/homepage')
             }
         })
