@@ -83,8 +83,7 @@ const rootDirectory = dirnameSplit.join('/')
 
 //setting up uploads folder as a static asset
 //now if we access //localhost:5000/uploads/image-file-name.jpg we can view uploaded images
-app.use('/uploads', express.static(path.join(rootDirectory, 'uploadedImages')))
-console.log(rootDirectory + '/uploadedImages')
+app.use('/uploads', express.static('uploadedImages'))
 
 /* ----------------------------------------------------------------- */
 
@@ -97,9 +96,9 @@ const storage = multer.diskStorage({
     },
     filename: function (req, file, cb) {
         //randomizing file name to avoid filename conflicts
-        cb(null, Date.now() + "-" + Math.round((Math.random() * 1E9)) + ".jpg");
-    },
-});
+        cb(null, Date.now() + "-" + Math.round((Math.random() * 1E9)) + ".jpg")
+    }
+})
 const upload = multer({ storage })
 
 //ROUTES INVOLVING UPLOADING FILES
