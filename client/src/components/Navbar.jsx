@@ -35,8 +35,9 @@ function Navbar({ firstName }) {
 
     return (
         <nav
-            className="sticky top-0 flex items-center justify-between py-3 px-10 bg-white dark:bg-slate-800 xl:px-72"
+            className="fixed top-0 flex items-center justify-between py-3 px-10 bg-white dark:bg-slate-800 xl:px-72"
         >
+            <div className="flex items-center justify-between m-auto w-5/6 lg:w-4/6">
             {/* app brand. Will always redirect to user's homepage */}
             <Link
                 to={'/homepage'}
@@ -113,11 +114,14 @@ function Navbar({ firstName }) {
             )}
 
             {/* when user toggles menu for small/mobile screens */}
-                {!aboveSmallScreens && menuToggled && (
-                    <div className="fixed right-0 bottom-0 h-full bg-sky-300 text-white dark:bg-blue-700 w-48">
+                {(
+                    <div 
+                        className={`fixed right-0 bottom-0 h-full w-[250px] bg-sky-300 text-white ease-in-out duration-300 ${ menuToggled ? "translate-x-0" : "translate-x-full" } ${aboveSmallScreens ? 'hidden' : ''} dark:bg-blue-700`}
+                    >
+                        {/* button to close menu */}
                         <div className="flex justify-end p-8">
                             <button 
-                                className="rounded-full p-2 hover:bg-blue-950"
+                                className="rounded-full p-2 hover:bg-blue-950 transition duration-300"
                                 onClick={() => setMenuToggled(!menuToggled)}
                             >
                                 <FontAwesomeIcon 
@@ -126,7 +130,12 @@ function Navbar({ firstName }) {
                                 />
                             </button>
                         </div>
-                        <div className="flex flex-col items-center gap-10">
+
+                        {/* links */}
+                        <div 
+                            className="flex flex-col items-center gap-10"
+                            onClick={() => setMenuToggled(!menuToggled)}
+                        >
                             <p 
                                 className="text-2xl"
                             >
@@ -170,6 +179,7 @@ function Navbar({ firstName }) {
                         </div>
                     </div>
                 )}
+            </div>
         </nav>
     )
 }

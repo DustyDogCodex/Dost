@@ -30,7 +30,7 @@ const app = express()
 
 app.use(cors(
     {
-        origin: ['https://dost-client-production.up.railway.app','http://localhost:5173'],
+        origin: ['https://dost-client-production.up.railway.app'],
         methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
         allowedHeaders: ['Content-Type', 'Origin', 'X-Requested-With', 'Accept', 'x-client-key', 'x-client-token', 'x-client-secret', 'Authorization'],
         credentials: true 
@@ -74,12 +74,6 @@ app.use(function(req, res, next) {
 app.use(express.static(path.join(__dirname, 'public')))
 
 /* -------- SETTING UP A STATIC FOLDER FOR UPLOADED IMAGES --------- */
-
-//storing a route to the root directory for the project
-//this is used to specify a route to /uploadedImages folder 
-const dirnameSplit = __dirname.split('\\')
-dirnameSplit.splice(-1,1)
-const rootDirectory = dirnameSplit.join('/')
 
 //setting up uploads folder as a static asset
 //now if we access //localhost:5000/uploads/image-file-name.jpg we can view uploaded images
