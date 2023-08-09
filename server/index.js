@@ -84,6 +84,7 @@ const rootDirectory = dirnameSplit.join('/')
 //setting up uploads folder as a static asset
 //now if we access //localhost:5000/uploads/image-file-name.jpg we can view uploaded images
 app.use('/uploads', express.static(rootDirectory + '/uploadedImages'))
+console.log(rootDirectory + '/uploadedImages')
 
 /* ----------------------------------------------------------------- */
 
