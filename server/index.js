@@ -6,6 +6,7 @@ const session = require('express-session')
 const passport = require('passport')
 const multer = require('multer')
 const MongoStore = require('connect-mongo')
+const path = require('path')
 /* all imported files/routes */
 const passportConfig = require('./passportConfig')
 const authRouter = require('./routes/auth')
@@ -54,20 +55,23 @@ app.use(session({
         dbName: 'test',
         touchAfter: 24 * 3600 // lazy update unless somethings was changed in session data, time period in seconds
     })
-}));
+}))
 
 //initializing passportjs
-app.use(passport.initialize());
-app.use(passport.session());
-app.use(express.urlencoded({ extended: false }));
+app.use(passport.initialize())
+app.use(passport.session())
+app.use(express.urlencoded({ extended: false }))
 
 //creating local variables for passportJS
 app.use(function(req, res, next) {
-    res.locals.currentUser = req.user;
-    next();
-});
+    res.locals.currentUser = req.user
+    next()
+})
 
 /* ------------------------------------------------------------------------ */
+
+// Serve static files from the vite build that is now stored in the public folder
+app.use(express.static(path.join(__dirname, 'public')))
 
 /* -------- SETTING UP A STATIC FOLDER FOR UPLOADED IMAGES --------- */
 
@@ -95,7 +99,7 @@ const storage = multer.diskStorage({
         cb(null, Date.now() + "-" + Math.round((Math.random() * 1E9)) + ".jpg");
     },
 });
-const upload = multer({ storage });
+const upload = multer({ storage })
 
 //ROUTES INVOLVING UPLOADING FILES
 app.post("/auth/register", upload.single('image'), createAccount)
@@ -110,6 +114,11 @@ app.use('/auth', authRouter)
 app.use('/user', userRouter)
 app.use('/posts', postsRouter)
 app.use('/settings', settingsRouter)
+
+// Route for handling all other requests and serving the React app
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 
 const port = process.env.PORT || 5000
 
