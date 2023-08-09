@@ -24,7 +24,6 @@ export const ContextProvider = ({ children }) => {
             .then(res => {
                 setLoggedInUser(res.data)
                 dispatch({ type: 'REFRESH_FRIENDSLIST' , payload: res.data.friendsList })
-                console.log('context loggedInUser', loggedInUser)
             })
             .catch(err => console.log(err))
         }

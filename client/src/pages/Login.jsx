@@ -21,7 +21,6 @@ function Login() {
             { withCredentials: true } 
         )
         .then(res => {
-            console.log('login res.data',res.data)
             if(res.data == 'Successfully authenticated. Logging in user.'){
                 window.location.assign('/homepage')
             }
@@ -40,6 +39,7 @@ function Login() {
         <div
             className="w-screen h-screen flex items-center justify-center bg-slate-200"
         >
+            {/* left hand side welcome text and invalid login alert display */}
             <div
                 className="p-5 m-5"
             >
@@ -61,6 +61,8 @@ function Login() {
                     </div>
                 }
             </div>
+
+            {/* main login area/form */}
             <div
                 className="flex flex-col items-center justify-center p-10 m-10 bg-white rounded-lg"
             >
@@ -108,6 +110,8 @@ function Login() {
                         Login
                     </button>
                 </form>
+
+                {/* redirect to register page */}
                 <div
                     className="mt-8 flex flex-col items-center"
                 >

@@ -41,20 +41,17 @@ function Register() {
             { withCredentials: true }
         )
         .then(res => {
-            console.log(res)
             if(res.data == 'success'){
                 window.location.replace('/')
             }
         })
         .catch(err => { 
-            if (err.response.data == "failed"){
-                //if failed, post invalid email alert and console.log errr status
-                setInvalidEmail(true)
-                console.log(err)
-                setTimeout(() => {
-                    setInvalidEmail(false)
-                }, 5000) 
-            }
+            console.log(err)
+            //if failed, post invalid email alert and console.log errr status
+            setInvalidEmail(true)
+            setTimeout(() => {
+                setInvalidEmail(false)
+            }, 5000) 
         })
     }
 
@@ -62,7 +59,7 @@ function Register() {
         <div
             className="w-screen h-screen flex items-center justify-center bg-slate-200"
         >
-            {/* left side of page withe welcome text */}
+            {/* left side of page with welcome text */}
             <div
                 className="p-5 m-5"
             >
