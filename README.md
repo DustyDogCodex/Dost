@@ -16,8 +16,6 @@ This project is a responsive full stack Facebook clone built using the MERN stac
 - [Technologies](#technologies)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Screenshots](#screenshots)
-- [Contributing](#contributing)
 - [License](#license)
 
 ## Demo
