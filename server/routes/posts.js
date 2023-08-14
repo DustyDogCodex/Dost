@@ -133,7 +133,7 @@ Router.delete("/delete/:postId",
         //after images are deleted, delete selected post from database
         await Post.findByIdAndDelete(postId)
 
-        res.status(200)
+        res.status(204)
     })
 )
 

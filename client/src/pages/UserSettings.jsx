@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react"
+import { useContext } from "react"
 import Navbar from "../components/Navbar"
 import { UserContext } from "../LoggedInUserContext"
 import axios from "axios"

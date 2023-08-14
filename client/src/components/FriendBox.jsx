@@ -30,7 +30,7 @@ function FriendBox({ friendId, userName, userProfilePic, status }) {
             >   
                 {/* left side of the component that contains userProfilePic, username and status/location */}
                 {
-                    userProfilePic 
+                    userProfilePic
                     ?   
                         <img 
                             src={`https://dost-production.up.railway.app/uploads/${userProfilePic}`}

@@ -39,7 +39,7 @@ const createAccount = asyncHandler(
             }) 
             
             //saving newUser to db
-            const user = await newUser.save()
+            await newUser.save()
 
             //send success status
             res.status(201).send('success') 

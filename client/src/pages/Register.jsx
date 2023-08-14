@@ -17,7 +17,7 @@ function Register() {
     //variable for tracking user file upload
     const [ image, setImage ] = useState('')
 
-    //function to submit login data
+    //function to submit new account data
     async function createAccount(data){
         //setting up formdata for submitting files and user info
         const formData = new FormData()
