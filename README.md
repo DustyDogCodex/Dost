@@ -4,9 +4,8 @@ This project is a responsive full stack Facebook clone built using the MERN stac
 
 <div align='center'>
     <img 
-        src='https://tenor.com/view/did-we-just-become-best-friends-did-we-just-become-best-friends-meme-step-brothers-best-friends-besties-best-friend-gif-23405805.gif'
+        src='https://media.giphy.com/media/WDn21GO1KmpNK/giphy.gif'
         height='180'
-        width='300'
     >
 </div>
 
