@@ -15,7 +15,10 @@ function PostsDisplay({ userId, profile }) {
     //this will be called if component is present in a user homepage
     const getAllPosts = async() => {
         axios.get('https://dost-production.up.railway.app/posts/')
-        .then(res => setPosts([ ...res.data ]))
+        .then(res => { 
+            setPosts([ ...res.data ])
+            setLoading(false)
+        })
         .catch(err => console.log(err))
     } 
     
@@ -45,7 +48,7 @@ function PostsDisplay({ userId, profile }) {
                 /* loading screen with a running pikachu animation :) */
                 (
                     <div 
-                        className="w-full h-full flex justify-center items-center"
+                        className="w-full h-96 flex justify-center items-center"
                     >
                         <img 
                             src={pikachu}
