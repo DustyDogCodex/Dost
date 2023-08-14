@@ -35,7 +35,7 @@ function Navbar({ firstName }) {
 
     return (
         <nav
-            className="w-full fixed top-0 flex items-center justify-between py-3 px-10 bg-white dark:bg-slate-800"
+            className="w-full h-fit sticky top-0 flex items-center justify-between py-3 px-10 bg-white dark:bg-slate-800"
         >
             <div className="flex items-center justify-between m-auto w-5/6 xl:w-4/6">
             {/* app brand. Will always redirect to user's homepage */}
