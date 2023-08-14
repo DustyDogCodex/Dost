@@ -48,7 +48,7 @@ function PostsDisplay({ userId, profile }) {
                 /* loading screen with a running pikachu animation :) */
                 (
                     <div 
-                        className="w-full h-96 flex justify-center items-center"
+                        className="w-full h-full flex justify-center items-center"
                     >
                         <img 
                             src={pikachu}
