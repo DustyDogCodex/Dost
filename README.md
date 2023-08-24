@@ -75,7 +75,7 @@ To run this project locally, follow these steps:
    npm run devstart
    ```
 
-5. Access the app in your browser at `http://localhost:5173`.
+5. Access the app in your browser at `http://localhost:5000`.
 
 ## Usage
 

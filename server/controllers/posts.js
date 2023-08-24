@@ -49,7 +49,8 @@ const updatePost = asyncHandler(
         const post = await Post.findById(postId)
 
         let updatedImagePath = post.imagePath
-        //if new filename is not the same as prev associated imagePath, the prev image can be removed from server
+
+        //if newImage was uploaded or previous image was removed, delete prev image 
         if( newImage ){
             //if there's an image with the post, delete that image. if no image, skip to next step
             if(post.imagePath){

@@ -36,8 +36,8 @@ function EditPost() {
 
     //reseting file input to empty 
     function resetFile() {
-        const file = document.querySelector('#newFile');
-        file.value = '';
+        const file = document.querySelector('#newFile')
+        file.value = ''
     }
     
     //api call to update post with new parameters

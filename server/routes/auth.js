@@ -2,9 +2,6 @@ const express = require('express')
 const passport = require('passport')
 const Router = express.Router()
 
-//importing UserSchema
-const User = require('../models/Users')
-
 //Login existing users. Using bcrypt compare now instead of passport local
 //app is small enough to justify not using passport
 Router.post(
